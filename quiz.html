@@ -536,12 +536,12 @@ error
 
 if (error) {
 
-console.error(error);
+console.error("SUPABASE ERROR:", error);
 
 document
 .getElementById("successMessage")
 .textContent =
-"Something went wrong. Please try again.";
+"Error: " + error.message;
 
 return;
 }

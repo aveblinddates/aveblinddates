@@ -459,29 +459,101 @@ How It Works
 
 </footer>
 
-
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
+
+const SUPABASE_URL = "https://vixyounyimddctlwzmdj.supabase.co";
+const SUPABASE_KEY = "sb_publishable_dSoWkr2kH2oGI96i2zCpdg_Ddi-NQff";
+
+const supabaseClient = supabase.createClient(
+SUPABASE_URL,
+SUPABASE_KEY
+);
+
 
 document
 .getElementById("matchForm")
-.addEventListener("submit", function(event) {
+.addEventListener("submit", async function(event) {
 
 event.preventDefault();
+
+
+const form = event.target;
+
+
+const profile = {
+
+first_name:
+document.getElementById("name").value,
+
+year:
+document.getElementById("year").value,
+
+major:
+document.getElementById("major").value,
+
+personality:
+document.querySelector(
+'input[name="personality"]:checked'
+)?.value,
+
+weekend:
+document.querySelector(
+'input[name="weekend"]:checked'
+)?.value,
+
+music:
+document.getElementById("music").value,
+
+hobbies:
+document.getElementById("hobbies").value,
+
+faith:
+document.querySelector(
+'input[name="faith"]:checked'
+)?.value,
+
+values:
+document.getElementById("values").value,
+
+looking_for:
+document.getElementById("looking").value,
+
+anything_else:
+document.getElementById("anything").value
+
+};
+
+
+const {
+data,
+error
+} = await supabaseClient
+.from("profiles")
+.insert([profile])
+.select();
+
+
+if (error) {
+
+console.error(error);
 
 document
 .getElementById("successMessage")
 .textContent =
-"Thanks! Your answers have been recorded for this demo.";
+"Something went wrong. Please try again.";
 
-window.scrollTo({
-top: document.body.scrollHeight,
-behavior: "smooth"
-});
+return;
+}
+
+
+document
+.getElementById("successMessage")
+.textContent =
+"You're in! Your answers have been submitted.";
+
+form.reset();
 
 });
 
 </script>
-
-</body>
-
-</html>

@@ -444,3 +444,256 @@ font-size: 45px;
 width: 280px;
 }
 }
+/* ==============================
+QUIZ PAGE
+============================== */
+
+.quiz-header {
+background: #173c2b;
+color: white;
+
+text-align: center;
+
+padding: 90px 20px;
+}
+
+.quiz-header h1 {
+font-size: 65px;
+margin-bottom: 25px;
+}
+
+.quiz-header > p:last-child {
+max-width: 650px;
+margin: auto;
+
+font-family: Arial, sans-serif;
+line-height: 1.7;
+
+color: #dce6df;
+}
+
+
+.quiz-container {
+max-width: 800px;
+margin: auto;
+
+padding: 80px 25px;
+}
+
+
+.form-section {
+background: white;
+
+padding: 45px;
+
+margin-bottom: 35px;
+
+box-shadow: 0 5px 25px rgba(0,0,0,.05);
+}
+
+
+.form-section h2 {
+font-size: 38px;
+margin-bottom: 35px;
+}
+
+
+.form-section > label {
+display: block;
+
+font-family: Arial, sans-serif;
+font-weight: bold;
+
+margin-top: 25px;
+margin-bottom: 10px;
+}
+
+
+input[type="text"],
+select,
+textarea {
+width: 100%;
+
+padding: 15px;
+
+border: 1px solid #ccd3cd;
+
+background: #fafafa;
+
+font-family: Arial, sans-serif;
+font-size: 15px;
+
+border-radius: 2px;
+}
+
+
+input[type="text"]:focus,
+select:focus,
+textarea:focus {
+outline: none;
+
+border-color: #9c7438;
+
+background: white;
+}
+
+
+textarea {
+resize: vertical;
+}
+
+
+.choice-group {
+display: grid;
+
+grid-template-columns: 1fr 1fr;
+
+gap: 12px;
+
+margin-top: 10px;
+}
+
+
+.choice {
+display: flex;
+align-items: center;
+
+gap: 10px;
+
+padding: 15px;
+
+background: #f7f3eb;
+
+border: 1px solid transparent;
+
+cursor: pointer;
+
+font-family: Arial, sans-serif;
+
+transition: .2s;
+}
+
+
+.choice:hover {
+border-color: #c89d4c;
+}
+
+
+.choice input {
+accent-color: #173c2b;
+}
+
+
+.privacy-box {
+background: #e7dfd1;
+
+padding: 30px;
+
+margin-bottom: 25px;
+}
+
+
+.privacy-box h3 {
+font-size: 25px;
+
+margin-bottom: 10px;
+}
+
+
+.privacy-box p {
+font-family: Arial, sans-serif;
+
+line-height: 1.6;
+
+color: #536158;
+
+margin-bottom: 20px;
+}
+
+
+.checkbox {
+display: flex;
+
+align-items: flex-start;
+
+gap: 10px;
+
+font-family: Arial, sans-serif;
+
+font-size: 14px;
+
+line-height: 1.5;
+}
+
+
+.checkbox input {
+margin-top: 4px;
+
+accent-color: #173c2b;
+}
+
+
+.submit-button {
+width: 100%;
+
+padding: 19px;
+
+border: none;
+
+background: #c89d4c;
+
+color: #17251d;
+
+font-family: Arial, sans-serif;
+
+font-size: 16px;
+
+font-weight: bold;
+
+cursor: pointer;
+
+transition: .2s;
+}
+
+
+.submit-button:hover {
+background: #e0bd78;
+
+transform: translateY(-2px);
+}
+
+
+.success-message {
+text-align: center;
+
+margin-top: 25px;
+
+color: #286b48;
+
+font-family: Arial, sans-serif;
+
+font-weight: bold;
+}
+
+
+/* MOBILE QUIZ */
+
+@media (max-width: 600px) {
+
+.quiz-header h1 {
+font-size: 45px;
+}
+
+.form-section {
+padding: 28px 20px;
+}
+
+.form-section h2 {
+font-size: 30px;
+}
+
+.choice-group {
+grid-template-columns: 1fr;
+}
+
+}

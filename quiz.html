@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Find Your Match | AM Blind Dating</title>
+
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<!-- Navigation -->
+<nav class="navbar">
+<div class="logo">
+<a href="index.html">AM Blind Dating</a>
+</div>
+
+<div class="nav-links">
+<a href="index.html">Home</a>
+<a href="index.html#how-it-works">How It Works</a>
+</div>
+</nav>
+
+
+<!-- Quiz Header -->
+<section class="quiz-header">
+
+<p class="section-label">STEP 01</p>
+
+<h1>Let's get to know you.</h1>
+
+<p>
+Answer honestly. There are no right or wrong answers.
+Your responses will help us find someone who shares
+some of the things that matter to you.
+</p>
+
+</section>
+
+
+<!-- Quiz -->
+<main class="quiz-container">
+
+<form id="matchForm">
+
+
+<!-- Basic Information -->
+<section class="form-section">
+
+<p class="section-label">ABOUT YOU</p>
+
+<h2>The basics</h2>
+
+
+<label for="name">
+First name
+</label>
+
+<input
+type="text"
+id="name"
+name="name"
+placeholder="Your first name"
+required
+>
+
+
+<label for="year">
+What year are you?
+</label>
+
+<select id="year" name="year" required>
+
+<option value="">
+Select your year
+</option>
+
+<option value="freshman">
+Freshman
+</option>
+
+<option value="sophomore">
+Sophomore
+</option>
+
+<option value="junior">
+Junior
+</option>
+
+<option value="senior">
+Senior
+</option>
+
+<option value="graduate">
+Graduate Student
+</option>
+
+</select>
+
+
+<label for="major">
+What's your major?
+</label>
+
+<input
+type="text"
+id="major"
+name="major"
+placeholder="Your major"
+>
+
+</section>
+
+
+<!-- Personality -->
+<section class="form-section">
+
+<p class="section-label">PERSONALITY</p>
+
+<h2>What are you like?</h2>
+
+
+<label>
+Which sounds more like you?
+</label>
+
+<div class="choice-group">
+
+<label class="choice">
+<input
+type="radio"
+name="personality"
+value="introvert"
+required
+>
+More introverted
+</label>
+
+<label class="choice">
+<input
+type="radio"
+name="personality"
+value="extrovert"
+>
+More extroverted
+</label>
+
+<label class="choice">
+<input
+type="radio"
+name="personality"
+value="both"
+>
+A little of both
+</label>
+
+</div>
+
+
+<label>
+What's your ideal weekend?
+</label>
+
+<div class="choice-group">
+
+<label class="choice">
+<input
+type="radio"
+name="weekend"
+value="adventure"
+required
+>
+Going on an adventure
+</label>
+
+<label class="choice">
+<input
+type="radio"
+name="weekend"
+value="friends"
+>
+Hanging out with friends
+</label>
+
+<label class="choice">
+<input
+type="radio"
+name="weekend"
+value="relaxing"
+>
+Relaxing and recharging
+</label>
+
+<label class="choice">
+<input
+type="radio"
+name="weekend"
+value="productive"
+>
+Getting things done
+</label>
+
+</div>
+
+</section>
+
+
+<!-- Interests -->
+<section class="form-section">
+
+<p class="section-label">INTERESTS</p>
+
+<h2>What do you enjoy?</h2>
+
+
+<label for="music">
+Favorite type of music
+</label>
+
+<select id="music" name="music" required>
+
+<option value="">
+Choose one
+</option>
+
+<option value="country">
+Country
+</option>
+
+<option value="pop">
+Pop
+</option>
+
+<option value="rock">
+Rock
+</option>
+
+<option value="classical">
+Classical
+</option>
+
+<option value="rap">
+Rap / Hip-Hop
+</option>
+
+<option value="christian">
+Christian
+</option>
+
+<option value="other">
+Other
+</option>
+
+</select>
+
+
+<label for="hobbies">
+Tell us about your hobbies
+</label>
+
+<textarea
+id="hobbies"
+name="hobbies"
+rows="4"
+placeholder="Sports, reading, hiking, music, cooking..."
+></textarea>
+
+</section>
+
+
+<!-- Values -->
+<section class="form-section">
+
+<p class="section-label">VALUES</p>
+
+<h2>What matters to you?</h2>
+
+
+<label>
+How important is faith in your life?
+</label>
+
+<div class="choice-group">
+
+<label class="choice">
+<input
+type="radio"
+name="faith"
+value="very-important"
+required
+>
+Very important
+</label>
+
+<label class="choice">
+<input
+type="radio"
+name="faith"
+value="important"
+>
+Important
+</label>
+
+<label class="choice">
+<input
+type="radio"
+name="faith"
+value="somewhat"
+>
+Somewhat important
+</label>
+
+<label class="choice">
+<input
+type="radio"
+name="faith"
+value="personal"
+>
+Personal / private
+</label>
+
+</div>
+
+
+<label for="values">
+What qualities matter most to you in another person?
+</label>
+
+<textarea
+id="values"
+name="values"
+rows="4"
+placeholder="Kindness, humor, faith, ambition, honesty..."
+></textarea>
+
+</section>
+
+
+<!-- Dating -->
+<section class="form-section">
+
+<p class="section-label">DATING</p>
+
+<h2>What are you looking for?</h2>
+
+
+<label for="looking">
+What are you hoping to find?
+</label>
+
+<select id="looking" name="looking" required>
+
+<option value="">
+Choose one
+</option>
+
+<option value="relationship">
+A serious relationship
+</option>
+
+<option value="dating">
+Someone to date and get to know
+</option>
+
+<option value="friendship">
+Friendship first
+</option>
+
+<option value="unsure">
+I'm not sure yet
+</option>
+
+</select>
+
+
+<label for="anything">
+Anything else your match should know?
+</label>
+
+<textarea
+id="anything"
+name="anything"
+rows="5"
+placeholder="Tell us something that makes you, you."
+></textarea>
+
+</section>
+
+
+<!-- Privacy -->
+<section class="privacy-box">
+
+<h3>One last thing.</h3>
+
+<p>
+Please don't include your phone number, home address,
+social media passwords, or other sensitive information
+in your answers.
+</p>
+
+<label class="checkbox">
+
+<input
+type="checkbox"
+id="agree"
+required
+>
+
+I understand and agree to participate respectfully.
+
+</label>
+
+</section>
+
+
+<!-- Submit -->
+<button
+type="submit"
+class="submit-button"
+>
+Submit My Answers →
+</button>
+
+
+<p
+id="successMessage"
+class="success-message"
+>
+</p>
+
+
+</form>
+
+</main>
+
+
+<footer>
+
+<h3>AM BLIND DATING</h3>
+
+<p>
+Made for Ave Maria University students.
+</p>
+
+<div class="footer-links">
+
+<a href="index.html">
+Home
+</a>
+
+<a href="index.html#how-it-works">
+How It Works
+</a>
+
+</div>
+
+</footer>
+
+
+<script>
+
+document
+.getElementById("matchForm")
+.addEventListener("submit", function(event) {
+
+event.preventDefault();
+
+document
+.getElementById("successMessage")
+.textContent =
+"Thanks! Your answers have been recorded for this demo.";
+
+window.scrollTo({
+top: document.body.scrollHeight,
+behavior: "smooth"
+});
+
+});
+
+</script>
+
+</body>
+
+</html>

@@ -1,317 +1,1069 @@
-<!DOCTYPE html> <html lang="en"> <head> <meta charset="UTF-8"> <meta name="viewport" content="width=device-width, initial-scale=1.0"> <title>Find Your Match | Ave Maria Blind Dating</title> <link rel="stylesheet" href="style.css"> </head> <body> <!-- Navigation --> <nav class="navbar"> <div class="logo"> <a href="index.html">Ave Maria Blind Dating</a> </div> <div class="nav-links">
-<a href="index.html">Home</a>
-<a href="index.html#how-it-works"> How It Works </a> </div> </nav> <!-- Quiz Header --> <section class="quiz-header"> <p class="section-label"> STEP 01 </p> <h1> Let's get to know you. </h1> <p> Answer honestly. There are no right or wrong answers. Your responses will help us find someone who shares some of the things that matter to you. </p> </section> <!-- Quiz --> <main class="quiz-container"> <form id="matchForm"> <!-- ============================== BASIC INFORMATION ============================== --> <section class="form-section"> <p class="section-label"> ABOUT YOU </p> <h2> The basics </h2> <label for="name"> First and Last name </label>
-<input
-type="text"
-id="name"
-name="name"
-placeholder="Your first and last name"
-required
-  
-<label> What is your gender? </label> <div class="choice-group"> <label class="choice">
-<input
-type="radio"
-name="gender"
-value="male"
-required
-Male
-</label> <label class="choice">
-<input
-type="radio"
-name="gender"
-value="female"
+<!DOCTYPE html>
+<html lang="en">
 
-Female
-</label> </div>
-<label for="year"> What year are you? </label>
-<select
-id="year"
-name="year"
-required
-<option value=""> Select your year </option> <option value="freshman"> Freshman </option> <option value="sophomore"> Sophomore </option> <option value="junior"> Junior </option> <option value="senior"> Senior </option> <option value="graduate"> Graduate Student </option> </select> <label for="major"> What's your major? </label>
-<input
-type="text"
-id="major"
-name="major"
-placeholder="Your major"
-</section> <!-- ============================== PERSONALITY ============================== --> <section class="form-section"> <p class="section-label"> PERSONALITY </p> <h2> What are you like? </h2> <label> Which sounds more like you? </label> <div class="choice-group"> <label class="choice">
-<input
-type="radio"
-name="personality"
-value="introvert"
-required
-More introverted
-</label> <label class="choice">
-<input
-type="radio"
-name="personality"
-value="extrovert"
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-More extroverted
-</label> <label class="choice">
-<input
-type="radio"
-name="personality"
-value="both"
+    <title>Find Your Match | Ave Maria Blind Dating</title>
 
-A little of both
-</label> </div> <label> What's your ideal weekend? </label> <div class="choice-group"> <label class="choice">
-<input
-type="radio"
-name="weekend"
-value="adventure"
-required
+    <link rel="stylesheet" href="style.css">
+</head>
 
-Going on an adventure
-</label> <label class="choice">
-<input
-type="radio"
-name="weekend"
-value="friends"
+<body>
 
-Hanging out with friends
-</label> <label class="choice">
-<input
-type="radio"
-name="weekend"
-value="relaxing"
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="logo">
+            <a href="index.html">Ave Maria Blind Dating</a>
+        </div>
 
-Relaxing and recharging
-</label> <label class="choice">
-<input
-type="radio"
-name="weekend"
-value="productive"
+        <div class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="index.html#how-it-works">How It Works</a>
+        </div>
+    </nav>
 
-Getting things done
-</label> </div> </section> <!-- ============================== INTERESTS ============================== --> <section class="form-section"> <p class="section-label"> INTERESTS </p> <h2> What do you enjoy? </h2> <label for="music"> Favorite type of music </label>
-<select
-id="music"
-name="music"
-required
 
-<option value=""> Choose one </option> <option value="country"> Country </option> <option value="pop"> Pop </option> <option value="rock"> Rock </option> <option value="classical"> Classical </option> <option value="rap"> Rap / Hip-Hop </option> <option value="christian"> Christian </option> <option value="other"> Other </option> </select> <label for="hobbies"> Tell us about your hobbies </label> <textarea id="hobbies" name="hobbies" rows="4" placeholder="Sports, reading, hiking, music, cooking..." ></textarea> </section> <!-- ============================== VALUES ============================== --> <section class="form-section"> <p class="section-label"> VALUES </p> <h2> What matters to you? </h2> <label> How traditional would you describe yourself? </label> <div class="choice-group traditionality-scale"> <label class="choice">
-<input
-type="radio"
-name="faith"
-value="1"
-required
-1 — Not very traditional
-</label> <label class="choice">
-<input
-type="radio"
-name="faith"
-value="2"
+    <!-- Quiz Header -->
+    <section class="quiz-header">
 
-2 — Slightly traditional
-</label> <label class="choice">
-<input
-type="radio"
-name="faith"
-value="3"
+        <p class="section-label">STEP 01</p>
 
-3 — Moderately traditional
-</label> <label class="choice">
-<input
-type="radio"
-name="faith"
-value="4"
+        <h1>Let's get to know you.</h1>
 
-4 — Very traditional
-</label> <label class="choice">
-<input
-type="radio"
-name="faith"
-value="5"
+        <p>
+            Answer honestly. There are no right or wrong answers.
+            Your responses will help us find someone who shares
+            some of the things that matter to you.
+        </p>
 
-5 — Extremely traditional
-</label> </div> <label for="values"> What qualities matter most to you in another person? </label> <textarea id="values" name="values" rows="4" placeholder="Kindness, humor, faith, ambition, honesty..." ></textarea> </section> <!-- ============================== NEW COMPATIBILITY QUESTIONS ============================== --> <section class="form-section"> <p class="section-label"> COMPATIBILITY </p> <h2> How do you connect? </h2> <!-- Communication --> <label> When there's a disagreement, how do you usually prefer to handle it? </label> <div class="choice-group"> <label class="choice">
-<input
-type="radio"
-name="communication"
-value="immediate"
-required
+    </section>
 
-Talk it out right away
-</label> <label class="choice">
-<input
-type="radio"
-name="communication"
-value="space"
 
-Take some time, then talk it through
-</label> <label class="choice">
-<input
-type="radio"
-name="communication"
-value="written"
+    <!-- Quiz -->
+    <main class="quiz-container">
 
-Write or text about it first
-</label> <label class="choice">
-<input
-type="radio"
-name="communication"
-value="flexible"
+        <form id="matchForm">
 
-I'm flexible depending on the situation
-</label> </div> <!-- Social Lifestyle --> <label> What kind of social life sounds most like you? </label> <div class="choice-group"> <label class="choice">
-<input
-type="radio"
-name="social_lifestyle"
-value="social"
-required
 
-I love being around people and going out often
-</label> <label class="choice">
-<input
-type="radio"
-name="social_lifestyle"
-value="balanced"
+            <!-- ==============================
+            ABOUT YOU
+            ============================== -->
 
-I prefer a balance of social time and quiet time
-</label> <label class="choice">
-<input
-type="radio"
-name="social_lifestyle"
-value="small-groups"
+            <section class="form-section">
 
-I mostly prefer small groups or one-on-one time
-</label> <label class="choice">
-<input
-type="radio"
-name="social_lifestyle"
-value="quiet"
+                <p class="section-label">ABOUT YOU</p>
 
-I prefer a quiet, low-key lifestyle
-</label> </div> <!-- Relationship Pace --> <label> How do you prefer a new relationship to develop? </label> <div class="choice-group"> <label class="choice">
-<input
-type="radio"
-name="relationship_pace"
-value="slow"
-required
+                <h2>The basics</h2>
 
-I like to take things slowly and build a friendship first
-</label> <label class="choice">
-<input
-type="radio"
-name="relationship_pace"
-value="intentional"
 
-I like to date intentionally and see where things go
-</label> <label class="choice">
-<input
-type="radio"
-name="relationship_pace"
-value="quick"
+                <label for="name">
+                    First and Last name
+                </label>
 
-I prefer to know fairly quickly whether there's potential
-</label> <label class="choice">
-<input
-type="radio"
-name="relationship_pace"
-value="flexible"
+                <input
+                    type="text"
+                    id="name"
+                    name="name"
+                    placeholder="Your first and last name"
+                    required
+                >
 
-I'm not sure yet / I'm flexible
-</label> </div> </section> <!-- ============================== DATING ============================== --> <section class="form-section"> <p class="section-label"> DATING </p> <h2> What are you looking for? </h2> <label for="looking"> What are you hoping to find? </label>
-<select
-id="looking"
-name="looking"
-required
 
-<option value=""> Choose one </option> <option value="relationship"> A serious relationship </option> <option value="dating"> Someone to date and get to know </option> <option value="friendship"> Friendship first </option> <option value="unsure"> I'm not sure yet </option> </select> <label for="anything"> Anything else your match should know? </label> <textarea id="anything" name="anything" rows="5" placeholder="Tell us something that makes you, you." ></textarea> </section> <!-- ============================== DEAL BREAKERS & ICKS ============================== --> <section class="form-section dealbreaker-section"> <p class="section-label"> JUST FOR FUN & RESEARCH </p> <h2> Deal Breakers & Icks </h2> <p class="section-description"> This section is primarily for collecting anonymous trends and ideas for another part of the website. Your answers may help us create resources about common dating deal breakers, "icks," dating advice, and things students commonly think about when getting to know someone. </p> <label> Which of these would be a dating deal breaker or major "ick" for you? </label> <p class="selection-note"> Choose up to 3. </p> <div class="checkbox-group"> <label class="checkbox-choice">
-<input
-type="checkbox"
-name="dealbreakers"
-value="poor-communication"
-Poor communication
-</label> <label class="checkbox-choice">
-<input
-type="checkbox"
-name="dealbreakers"
-value="different-faith"
+                <label>
+                    What is your gender?
+                </label>
 
-Very different views on faith
-</label> <label class="checkbox-choice">
-<input
-type="checkbox"
-name="dealbreakers"
-value="different-relationship-goals"
+                <div class="choice-group">
 
-Different relationship goals
-</label> <label class="checkbox-choice">
-<input
-type="checkbox"
-name="dealbreakers"
-value="smoking"
+                    <label class="choice">
+                        <input
+                            type="radio"
+                            name="gender"
+                            value="male"
+                            required
+                        >
+                        Male
+                    </label>
 
-Smoking or vaping
-</label> <label class="checkbox-choice">
-<input
-type="checkbox"
-name="dealbreakers"
-value="drinking"
+                    <label class="choice">
+                        <input
+                            type="radio"
+                            name="gender"
+                            value="female"
+                        >
+                        Female
+                    </label>
 
-Drinking
-</label> <label class="checkbox-choice">
-<input
-type="checkbox"
-name="dealbreakers"
-value="lack-of-ambition"
+                </div>
 
-Lack of ambition
-</label> <label class="checkbox-choice">
-<input
-type="checkbox"
-name="dealbreakers"
-value="doesnt-want-marriage"
 
-Doesn't want marriage
-</label> <label class="checkbox-choice">
-<input
-type="checkbox"
-name="dealbreakers"
-value="doesnt-want-children"
+                <label for="year">
+                    What year are you?
+                </label>
 
-Doesn't want children
-</label> <label class="checkbox-choice">
-<input
-type="checkbox"
-name="dealbreakers"
-value="different-social-life"
+                <select id="year" name="year" required>
 
-Very different social lifestyle
-</label> <label class="checkbox-choice">
-<input
-type="checkbox"
-name="dealbreakers"
-value="rude-to-others"
+                    <option value="">
+                        Select your year
+                    </option>
 
-Being rude to others
-</label> <label class="checkbox-choice">
-<input
-type="checkbox"
-name="dealbreakers"
-value="always-on-phone"
+                    <option value="freshman">
+                        Freshman
+                    </option>
 
-Always being on their phone
-</label> <label class="checkbox-choice">
-<input
-type="checkbox"
-name="dealbreakers"
-value="other"
+                    <option value="sophomore">
+                        Sophomore
+                    </option>
 
-Something else
-</label> </div> <label for="dealbreaker-other"> Anything else you'd consider a deal breaker or "ick"? </label> <textarea id="dealbreaker-other" name="dealbreaker_other" rows="3" placeholder="Optional" ></textarea> </section> <!-- ============================== PRIVACY ============================== --> <section class="privacy-box"> <h3> One last thing. </h3> <p> Please don't include your phone number, home address, social media passwords, or other sensitive information in your answers. </p> <label class="checkbox">
-<input
-type="checkbox"
-id="agree"
-required
+                    <option value="junior">
+                        Junior
+                    </option>
 
-I understand and agree to participate respectfully.
-</label> </section> <!-- ============================== SUBMIT ============================== -->
-<button
-type="submit"
-class="submit-button"
+                    <option value="senior">
+                        Senior
+                    </option>
 
-Submit My Answers →
-</button> <p id="successMessage" class="success-message" > </p> </form> </main> <footer> <h3> AVE MARIA BLIND DATING </h3> <p> Made for Ave Maria University students. </p> <div class="footer-links"> <a href="index.html"> Home </a> <a href="index.html#how-it-works"> How It Works </a> </div> </footer> <!-- SUPABASE --> <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script> <script> const SUPABASE_URL = "https://vixyounyimddctlwzmdj.supabase.co"; const SUPABASE_KEY = "sb_publishable_dSoWkr2kH2oGI96i2zCpdg_Ddi-NQff"; const supabaseClient = window.supabase.createClient( SUPABASE_URL, SUPABASE_KEY ); document .getElementById("matchForm") .addEventListener( "submit", async function(event) { event.preventDefault(); const form = event.target; /* ============================== DEAL BREAKERS ============================== */ const dealbreakerElements = document.querySelectorAll( 'input[name="dealbreakers"]:checked' ); const dealbreakers = Array.from(dealbreakerElements) .map(input => input.value); /* ============================== PROFILE ============================== */ const profile = { name: document.getElementById("name").value, year: document.getElementById("year").value, major: document.getElementById("major").value, personality: document.querySelector( 'input[name="personality"]:checked' )?.value, weekend: document.querySelector( 'input[name="weekend"]:checked' )?.value, music: document.getElementById("music").value, hobbies: document.getElementById("hobbies").value, faith: document.querySelector( 'input[name="faith"]:checked' )?.value, values: document.getElementById("values").value, communication: document.querySelector( 'input[name="communication"]:checked' )?.value, social_lifestyle: document.querySelector( 'input[name="social_lifestyle"]:checked' )?.value, relationship_pace: document.querySelector( 'input[name="relationship_pace"]:checked' )?.value, looking_for: document.getElementById("looking").value, anything_else: document.getElementById("anything").value, dealbreakers: dealbreakers, dealbreaker_other: document.getElementById("dealbreaker-other").value }; console.log( "Submitting profile:", profile ); /* ============================== SUBMIT TO SUPABASE ============================== */ const { error } = await supabaseClient .from("profiles") .insert([profile]); if (error) { console.error( "SUPABASE ERROR:", error ); document .getElementById("successMessage") .textContent = "Error: " + error.message; return; } /* ============================== SUCCESS ============================== */ document .getElementById("successMessage") .textContent = "You're in! Your answers have been submitted."; form.reset(); }); </script> </body> </html>
+                    <option value="graduate">
+                        Graduate Student
+                    </option>
+
+                </select>
+
+
+                <label for="major">
+                    What's your major?
+                </label>
+
+                <input
+                    type="text"
+                    id="major"
+                    name="major"
+                    placeholder="Your major"
+                >
+
+            </section>
+
+
+            <!-- ==============================
+            PERSONALITY
+            ============================== -->
+
+            <section class="form-section">
+
+                <p class="section-label">PERSONALITY</p>
+
+                <h2>What are you like?</h2>
+
+
+                <label>
+                    Which sounds more like you?
+                </label>
+
+                <div class="choice-group">
+
+                    <label class="choice">
+                        <input
+                            type="radio"
+                            name="personality"
+                            value="introvert"
+                            required
+                        >
+                        More introverted
+                    </label>
+
+                    <label class="choice">
+                        <input
+                            type="radio"
+                            name="personality"
+                            value="extrovert"
+                        >
+                        More extroverted
+                    </label>
+
+                    <label class="choice">
+                        <input
+                            type="radio"
+                            name="personality"
+                            value="both"
+                        >
+                        A little of both
+                    </label>
+
+                </div>
+
+
+                <label>
+                    What's your ideal weekend?
+                </label>
+
+                <div class="choice-group">
+
+                    <label class="choice">
+                        <input
+                            type="radio"
+                            name="weekend"
+                            value="adventure"
+                            required
+                        >
+                        Going on an adventure
+                    </label>
+
+                    <label class="choice">
+                        <input
+                            type="radio"
+                            name="weekend"
+                            value="friends"
+                        >
+                        Hanging out with friends
+                    </label>
+
+                    <label class="choice">
+                        <input
+                            type="radio"
+                            name="weekend"
+                            value="relaxing"
+                        >
+                        Relaxing and recharging
+                    </label>
+
+                    <label class="choice">
+                        <input
+                            type="radio"
+                            name="weekend"
+                            value="productive"
+                        >
+                        Getting things done
+                    </label>
+
+                </div>
+
+            </section>
+
+
+            <!-- ==============================
+            INTERESTS
+            ============================== -->
+
+            <section class="form-section">
+
+                <p class="section-label">INTERESTS</p>
+
+                <h2>What do you enjoy?</h2>
+
+
+                <label for="music">
+                    Favorite type of music
+                </label>
+
+                <select id="music" name="music" required>
+
+                    <option value="">
+                        Choose one
+                    </option>
+
+                    <option value="country">
+                        Country
+                    </option>
+
+                    <option value="pop">
+                        Pop
+                    </option>
+
+                    <option value="rock">
+                        Rock
+                    </option>
+
+                    <option value="classical">
+                        Classical
+                    </option>
+
+                    <option value="rap">
+                        Rap / Hip-Hop
+                    </option>
+
+                    <option value="christian">
+                        Christian
+                    </option>
+
+                    <option value="other">
+                        Other
+                    </option>
+
+                </select>
+
+
+                <label for="hobbies">
+                    Tell us about your hobbies
+                </label>
+
+                <textarea
+                    id="hobbies"
+                    name="hobbies"
+                    rows="4"
+                    placeholder="Sports, reading, hiking, music, cooking..."
+                ></textarea>
+
+            </section>
+
+
+            <!-- ==============================
+            VALUES
+            ============================== -->
+
+            <section class="form-section">
+
+                <p class="section-label">VALUES</p>
+
+                <h2>What matters to you?</h2>
+
+
+                <label>
+                    How traditional would you describe yourself?
+                </label>
+
+                <div class="choice-group traditionality-scale">
+
+                    <label class="choice">
+                        <input
+                            type="radio"
+                            name="faith"
+                            value="1"
+                            required
+                        >
+                        1 — Not very traditional
+                    </label>
+
+                    <label class="choice">
+                        <input
+                            type="radio"
+                            name="faith"
+                            value="2"
+                        >
+                        2 — Slightly traditional
+                    </label>
+
+                    <label class="choice">
+                        <input
+                            type="radio"
+                            name="faith"
+                            value="3"
+                        >
+                        3 — Moderately traditional
+                    </label>
+
+                    <label class="choice">
+                        <input
+                            type="radio"
+                            name="faith"
+                            value="4"
+                        >
+                        4 — Very traditional
+                    </label>
+
+                    <label class="choice">
+                        <input
+                            type="radio"
+                            name="faith"
+                            value="5"
+                        >
+                        5 — Extremely traditional
+                    </label>
+
+                </div>
+
+
+                <label for="values">
+                    What qualities matter most to you in another person?
+                </label>
+
+                <textarea
+                    id="values"
+                    name="values"
+                    rows="4"
+                    placeholder="Kindness, humor, faith, ambition, honesty..."
+                ></textarea>
+
+            </section>
+
+
+            <!-- ==============================
+            COMPATIBILITY
+            ============================== -->
+
+            <section class="form-section">
+
+                <p class="section-label">COMPATIBILITY</p>
+
+                <h2>How do you connect?</h2>
+
+
+                <label>
+                    When there's a disagreement, how do you usually prefer to handle it?
+                </label>
+
+                <div class="choice-group">
+
+                    <label class="choice">
+                        <input
+                            type="radio"
+                            name="communication"
+                            value="immediate"
+                            required
+                        >
+                        Talk it out right away
+                    </label>
+
+                    <label class="choice">
+                        <input
+                            type="radio"
+                            name="communication"
+                            value="space"
+                        >
+                        Take some time, then talk it through
+                    </label>
+
+                    <label class="choice">
+                        <input
+                            type="radio"
+                            name="communication"
+                            value="written"
+                        >
+                        Write or text about it first
+                    </label>
+
+                    <label class="choice">
+                        <input
+                            type="radio"
+                            name="communication"
+                            value="flexible"
+                        >
+                        I'm flexible depending on the situation
+                    </label>
+
+                </div>
+
+
+                <label>
+                    What kind of social life sounds most like you?
+                </label>
+
+                <div class="choice-group">
+
+                    <label class="choice">
+                        <input
+                            type="radio"
+                            name="social_lifestyle"
+                            value="social"
+                            required
+                        >
+                        I love being around people and going out often
+                    </label>
+
+                    <label class="choice">
+                        <input
+                            type="radio"
+                            name="social_lifestyle"
+                            value="balanced"
+                        >
+                        I prefer a balance of social time and quiet time
+                    </label>
+
+                    <label class="choice">
+                        <input
+                            type="radio"
+                            name="social_lifestyle"
+                            value="small-groups"
+                        >
+                        I mostly prefer small groups or one-on-one time
+                    </label>
+
+                    <label class="choice">
+                        <input
+                            type="radio"
+                            name="social_lifestyle"
+                            value="quiet"
+                        >
+                        I prefer a quiet, low-key lifestyle
+                    </label>
+
+                </div>
+
+
+                <label>
+                    How do you prefer a new relationship to develop?
+                </label>
+
+                <div class="choice-group">
+
+                    <label class="choice">
+                        <input
+                            type="radio"
+                            name="relationship_pace"
+                            value="slow"
+                            required
+                        >
+                        I like to take things slowly and build a friendship first
+                    </label>
+
+                    <label class="choice">
+                        <input
+                            type="radio"
+                            name="relationship_pace"
+                            value="intentional"
+                        >
+                        I like to date intentionally and see where things go
+                    </label>
+
+                    <label class="choice">
+                        <input
+                            type="radio"
+                            name="relationship_pace"
+                            value="quick"
+                        >
+                        I prefer to know fairly quickly whether there's potential
+                    </label>
+
+                    <label class="choice">
+                        <input
+                            type="radio"
+                            name="relationship_pace"
+                            value="flexible"
+                        >
+                        I'm not sure yet / I'm flexible
+                    </label>
+
+                </div>
+
+            </section>
+
+
+            <!-- ==============================
+            DATING
+            ============================== -->
+
+            <section class="form-section">
+
+                <p class="section-label">DATING</p>
+
+                <h2>What are you looking for?</h2>
+
+
+                <label for="looking">
+                    What are you hoping to find?
+                </label>
+
+                <select
+                    id="looking"
+                    name="looking"
+                    required
+                >
+
+                    <option value="">
+                        Choose one
+                    </option>
+
+                    <option value="relationship">
+                        A serious relationship
+                    </option>
+
+                    <option value="dating">
+                        Someone to date and get to know
+                    </option>
+
+                    <option value="friendship">
+                        Friendship first
+                    </option>
+
+                    <option value="unsure">
+                        I'm not sure yet
+                    </option>
+
+                </select>
+
+
+                <label for="anything">
+                    Anything else your match should know?
+                </label>
+
+                <textarea
+                    id="anything"
+                    name="anything"
+                    rows="5"
+                    placeholder="Tell us something that makes you, you."
+                ></textarea>
+
+            </section>
+
+
+            <!-- ==============================
+            DEAL BREAKERS & ICKS
+            ============================== -->
+
+            <section class="form-section dealbreaker-section">
+
+                <p class="section-label">
+                    JUST FOR FUN & RESEARCH
+                </p>
+
+                <h2>
+                    Deal Breakers & Icks
+                </h2>
+
+                <p class="section-description">
+                    This section is primarily for collecting anonymous
+                    trends and ideas for another part of the website.
+                    Your answers may help us create resources about
+                    common dating deal breakers, "icks," dating advice,
+                    and things students commonly think about when
+                    getting to know someone.
+                </p>
+
+
+                <label>
+                    Which of these would be a dating deal breaker or major "ick" for you?
+                </label>
+
+                <p class="selection-note">
+                    Choose up to 3.
+                </p>
+
+
+                <div class="checkbox-group">
+
+                    <label class="checkbox-choice">
+                        <input
+                            type="checkbox"
+                            name="dealbreakers"
+                            value="poor-communication"
+                        >
+                        Poor communication
+                    </label>
+
+                    <label class="checkbox-choice">
+                        <input
+                            type="checkbox"
+                            name="dealbreakers"
+                            value="different-faith"
+                        >
+                        Very different views on faith
+                    </label>
+
+                    <label class="checkbox-choice">
+                        <input
+                            type="checkbox"
+                            name="dealbreakers"
+                            value="different-relationship-goals"
+                        >
+                        Different relationship goals
+                    </label>
+
+                    <label class="checkbox-choice">
+                        <input
+                            type="checkbox"
+                            name="dealbreakers"
+                            value="smoking"
+                        >
+                        Smoking or vaping
+                    </label>
+
+                    <label class="checkbox-choice">
+                        <input
+                            type="checkbox"
+                            name="dealbreakers"
+                            value="drinking"
+                        >
+                        Drinking
+                    </label>
+
+                    <label class="checkbox-choice">
+                        <input
+                            type="checkbox"
+                            name="dealbreakers"
+                            value="lack-of-ambition"
+                        >
+                        Lack of ambition
+                    </label>
+
+                    <label class="checkbox-choice">
+                        <input
+                            type="checkbox"
+                            name="dealbreakers"
+                            value="doesnt-want-marriage"
+                        >
+                        Doesn't want marriage
+                    </label>
+
+                    <label class="checkbox-choice">
+                        <input
+                            type="checkbox"
+                            name="dealbreakers"
+                            value="doesnt-want-children"
+                        >
+                        Doesn't want children
+                    </label>
+
+                    <label class="checkbox-choice">
+                        <input
+                            type="checkbox"
+                            name="dealbreakers"
+                            value="different-social-life"
+                        >
+                        Very different social lifestyle
+                    </label>
+
+                    <label class="checkbox-choice">
+                        <input
+                            type="checkbox"
+                            name="dealbreakers"
+                            value="rude-to-others"
+                        >
+                        Being rude to others
+                    </label>
+
+                    <label class="checkbox-choice">
+                        <input
+                            type="checkbox"
+                            name="dealbreakers"
+                            value="always-on-phone"
+                        >
+                        Always being on their phone
+                    </label>
+
+                    <label class="checkbox-choice">
+                        <input
+                            type="checkbox"
+                            name="dealbreakers"
+                            value="other"
+                        >
+                        Something else
+                    </label>
+
+                </div>
+
+
+                <label for="dealbreaker-other">
+                    Anything else you'd consider a deal breaker or "ick"?
+                </label>
+
+                <textarea
+                    id="dealbreaker-other"
+                    name="dealbreaker_other"
+                    rows="3"
+                    placeholder="Optional"
+                ></textarea>
+
+            </section>
+
+
+            <!-- ==============================
+            PRIVACY
+            ============================== -->
+
+            <section class="privacy-box">
+
+                <h3>
+                    One last thing.
+                </h3>
+
+                <p>
+                    Please don't include your phone number, home address,
+                    social media passwords, or other sensitive information
+                    in your answers.
+                </p>
+
+                <label class="checkbox">
+
+                    <input
+                        type="checkbox"
+                        id="agree"
+                        required
+                    >
+
+                    I understand and agree to participate respectfully.
+
+                </label>
+
+            </section>
+
+
+            <!-- Submit -->
+
+            <button
+                type="submit"
+                class="submit-button"
+            >
+                Submit My Answers →
+            </button>
+
+
+            <p
+                id="successMessage"
+                class="success-message"
+            ></p>
+
+        </form>
+
+    </main>
+
+
+    <!-- Footer -->
+
+    <footer>
+
+        <h3>
+            AVE MARIA BLIND DATING
+        </h3>
+
+        <p>
+            Made for Ave Maria University students.
+        </p>
+
+        <div class="footer-links">
+
+            <a href="index.html">
+                Home
+            </a>
+
+            <a href="index.html#how-it-works">
+                How It Works
+            </a>
+
+        </div>
+
+    </footer>
+
+
+    <!-- Supabase -->
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+    <script>
+
+        const SUPABASE_URL =
+            "https://vixyounyimddctlwzmdj.supabase.co";
+
+        const SUPABASE_KEY =
+            "sb_publishable_dSoWkr2kH2oGI96i2zCpdg_Ddi-NQff";
+
+
+        const supabaseClient =
+            window.supabase.createClient(
+                SUPABASE_URL,
+                SUPABASE_KEY
+            );
+
+
+        /* ==============================
+        DEAL BREAKER LIMIT
+        ============================== */
+
+        const dealbreakerCheckboxes =
+            document.querySelectorAll(
+                'input[name="dealbreakers"]'
+            );
+
+
+        dealbreakerCheckboxes.forEach(
+            checkbox => {
+
+                checkbox.addEventListener(
+                    "change",
+                    function() {
+
+                        const selected =
+                            document.querySelectorAll(
+                                'input[name="dealbreakers"]:checked'
+                            );
+
+                        if (selected.length > 3) {
+
+                            this.checked = false;
+
+                            alert(
+                                "Please choose no more than 3 deal breakers."
+                            );
+
+                        }
+
+                    }
+                );
+
+            }
+        );
+
+
+        /* ==============================
+        FORM SUBMISSION
+        ============================== */
+
+        document
+            .getElementById("matchForm")
+            .addEventListener(
+                "submit",
+                async function(event) {
+
+                    event.preventDefault();
+
+                    const form = event.target;
+
+
+                    /* Deal Breakers */
+
+                    const dealbreakerElements =
+                        document.querySelectorAll(
+                            'input[name="dealbreakers"]:checked'
+                        );
+
+
+                    const dealbreakers =
+                        Array.from(
+                            dealbreakerElements
+                        ).map(
+                            input => input.value
+                        );
+
+
+                    /* Profile */
+
+                    const profile = {
+
+                        name:
+                            document
+                                .getElementById("name")
+                                .value,
+
+                        gender:
+                            document.querySelector(
+                                'input[name="gender"]:checked'
+                            )?.value,
+
+                        year:
+                            document
+                                .getElementById("year")
+                                .value,
+
+                        major:
+                            document
+                                .getElementById("major")
+                                .value,
+
+                        personality:
+                            document.querySelector(
+                                'input[name="personality"]:checked'
+                            )?.value,
+
+                        weekend:
+                            document.querySelector(
+                                'input[name="weekend"]:checked'
+                            )?.value,
+
+                        music:
+                            document
+                                .getElementById("music")
+                                .value,
+
+                        hobbies:
+                            document
+                                .getElementById("hobbies")
+                                .value,
+
+                        faith:
+                            document.querySelector(
+                                'input[name="faith"]:checked'
+                            )?.value,
+
+                        values:
+                            document
+                                .getElementById("values")
+                                .value,
+
+                        communication:
+                            document.querySelector(
+                                'input[name="communication"]:checked'
+                            )?.value,
+
+                        social_lifestyle:
+                            document.querySelector(
+                                'input[name="social_lifestyle"]:checked'
+                            )?.value,
+
+                        relationship_pace:
+                            document.querySelector(
+                                'input[name="relationship_pace"]:checked'
+                            )?.value,
+
+                        looking_for:
+                            document
+                                .getElementById("looking")
+                                .value,
+
+                        anything_else:
+                            document
+                                .getElementById("anything")
+                                .value,
+
+                        dealbreakers:
+                            dealbreakers,
+
+                        dealbreaker_other:
+                            document
+                                .getElementById("dealbreaker-other")
+                                .value
+
+                    };
+
+
+                    console.log(
+                        "Submitting profile:",
+                        profile
+                    );
+
+
+                    /* Submit to Supabase */
+
+                    const { error } =
+                        await supabaseClient
+                            .from("profiles")
+                            .insert([profile]);
+
+
+                    /* Error */
+
+                    if (error) {
+
+                        console.error(
+                            "SUPABASE ERROR:",
+                            error
+                        );
+
+                        document
+                            .getElementById("successMessage")
+                            .textContent =
+                            "Error: " +
+                            error.message;
+
+                        return;
+
+                    }
+
+
+                    /* Success */
+
+                    document
+                        .getElementById("successMessage")
+                        .textContent =
+                        "You're in! Your answers have been submitted.";
+
+
+                    form.reset();
+
+                }
+            );
+
+    </script>
+
+</body>
+
+</html>

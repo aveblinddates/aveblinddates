@@ -976,3 +976,222 @@ MOBILE
     }
 
 }
+/* ==============================
+DEAL BREAKERS & ICKS
+============================== */
+
+.dealbreaker-section {
+    background: #f1eadf;
+
+    border-top: 4px solid #c89d4c;
+
+    position: relative;
+
+    overflow: hidden;
+}
+
+
+/* Decorative background */
+
+.dealbreaker-section::after {
+    content: "✦";
+
+    position: absolute;
+
+    right: 35px;
+    top: 25px;
+
+    font-size: 85px;
+
+    color: rgba(200, 157, 76, .10);
+
+    pointer-events: none;
+}
+
+
+/* Section heading */
+
+.dealbreaker-section h2 {
+    margin-bottom: 20px;
+}
+
+
+/* Description */
+
+.section-description {
+    max-width: 620px;
+
+    margin: 0 auto 35px;
+
+    font-family: Arial, sans-serif;
+
+    font-size: 14px;
+
+    line-height: 1.7;
+
+    color: #66736b;
+
+    text-align: center;
+}
+
+
+/* "Choose up to 3" */
+
+.selection-note {
+    display: inline-block;
+
+    margin: 5px auto 20px;
+
+    padding: 7px 14px;
+
+    background: #173c2b;
+
+    color: #d6b36a;
+
+    font-family: Arial, sans-serif;
+
+    font-size: 12px;
+
+    font-weight: bold;
+
+    letter-spacing: .5px;
+
+    border-radius: 20px;
+}
+
+
+/* Deal breaker choices */
+
+.checkbox-group {
+    display: grid;
+
+    grid-template-columns: 1fr 1fr;
+
+    gap: 12px;
+
+    margin-top: 15px;
+
+    margin-bottom: 30px;
+}
+
+
+.checkbox-choice {
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+    padding: 16px 18px;
+
+    background: #faf8f4;
+
+    border: 1px solid #ddd5c8;
+
+    border-radius: 3px;
+
+    font-family: Arial, sans-serif;
+
+    font-size: 14px;
+
+    color: #38463e;
+
+    cursor: pointer;
+
+    transition: .2s;
+}
+
+
+/* Hover */
+
+.checkbox-choice:hover {
+    border-color: #c89d4c;
+
+    background: white;
+
+    transform: translateY(-1px);
+
+    box-shadow: 0 3px 10px rgba(0, 0, 0, .04);
+}
+
+
+/* Checkbox */
+
+.checkbox-choice input {
+    width: 17px;
+    height: 17px;
+
+    flex-shrink: 0;
+
+    accent-color: #173c2b;
+
+    cursor: pointer;
+}
+
+
+/* Selected choice */
+
+.checkbox-choice:has(input:checked) {
+    background: #173c2b;
+
+    border-color: #173c2b;
+
+    color: white;
+
+    box-shadow: 0 3px 10px rgba(23, 60, 43, .15);
+}
+
+
+/* Selected checkbox */
+
+.checkbox-choice:has(input:checked) input {
+    accent-color: #c89d4c;
+}
+
+
+/* "Something else" text box */
+
+#dealbreaker-other {
+    background: #faf8f4;
+}
+
+#dealbreaker-other:focus {
+    background: white;
+
+    border-color: #c89d4c;
+
+    box-shadow: 0 0 0 3px rgba(200, 157, 76, .12);
+}
+
+
+/* Label above the text box */
+
+.dealbreaker-section > label[for="dealbreaker-other"] {
+    margin-top: 15px;
+}
+
+
+/* ==============================
+DEAL BREAKER MOBILE
+============================== */
+
+@media (max-width: 600px) {
+
+    .checkbox-group {
+        grid-template-columns: 1fr;
+
+        gap: 10px;
+    }
+
+    .dealbreaker-section {
+        padding: 28px 20px;
+    }
+
+    .dealbreaker-section::after {
+        right: 10px;
+        top: 15px;
+
+        font-size: 60px;
+    }
+
+}

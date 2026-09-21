@@ -8,7 +8,36 @@
 
     <link rel="stylesheet" href="style.css">
 </head>
+<script>
+    const scrollElements =
+        document.querySelectorAll(".scroll-reveal");
 
+    const revealOnScroll = () => {
+
+        scrollElements.forEach(element => {
+
+            const elementTop =
+                element.getBoundingClientRect().top;
+
+            const windowHeight =
+                window.innerHeight;
+
+            if (elementTop < windowHeight - 100) {
+                element.classList.add("visible");
+            }
+
+        });
+
+    };
+
+
+    window.addEventListener(
+        "scroll",
+        revealOnScroll
+    );
+
+    revealOnScroll();
+</script>
 <body>
 
     <!-- Navigation -->
@@ -65,7 +94,7 @@
 
 
     <!-- How It Works -->
-    <section id="how-it-works" class="section">
+    <section id="how-it-works" class="section scroll-reveal">
 
         <p class="section-label">THE PROCESS</p>
 <div class="section-divider"></div>
@@ -106,7 +135,7 @@
 
 
     <!-- About Blind Dating -->
-    <section id="about" class="about">
+    <section id="about" class="about scroll-reveal">
 
         <div class="about-text">
 
@@ -172,7 +201,7 @@
 
 
     <!-- Questions -->
-    <section class="section questions">
+    <section class="section questions scroll-reveal">
 
         <p class="section-label">GET TO KNOW EACH OTHER</p>
 <div class="section-divider"></div>

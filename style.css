@@ -315,28 +315,28 @@ a {
 
 
 /* ==============================
-   MYSTERY PEOPLE ANIMATION
+   MYSTERY PEOPLE → HEART ANIMATION
 ============================== */
 
 .morph-animation {
     position: absolute;
 
-    right: 4%;
+    right: 5%;
     top: 50%;
 
     width: 430px;
-    height: 450px;
+    height: 430px;
 
     transform: translateY(-50%);
 
-    opacity: .16;
+    opacity: .13;
 
     pointer-events: none;
 }
 
 
 /* ==============================
-   PERSON
+   PEOPLE
 ============================== */
 
 .person-shape {
@@ -355,104 +355,56 @@ a {
     opacity: 0;
 
     animation: personCycle 8s infinite;
+
+    transform-origin: center;
 }
 
 
 /* Head */
 
 .person-head {
-    width: 115px;
-    height: 115px;
+    width: 105px;
+    height: 105px;
 
     background: white;
 
     border-radius: 50%;
 
-    margin-bottom: 18px;
+    margin-bottom: 16px;
 }
 
 
 /* Body */
 
 .person-body {
-    width: 245px;
-    height: 235px;
+    width: 225px;
+    height: 205px;
 
     background: white;
 
     border-radius:
-        125px 125px 20px 20px;
+        115px 115px 20px 20px;
 }
 
 
 /* ==============================
-   DIFFERENT PEOPLE
+   PERSON TIMING
 ============================== */
-
-/* Person 1 */
 
 .person-one {
     animation-delay: 0s;
 }
 
-
-/* Person 2 */
-
 .person-two {
-    animation-delay: 2s;
+    animation-delay: 1.4s;
 }
-
-.person-two .person-head {
-    width: 100px;
-    height: 100px;
-}
-
-.person-two .person-body {
-    width: 275px;
-    height: 215px;
-
-    border-radius:
-        140px 140px 15px 15px;
-}
-
-
-/* Person 3 */
 
 .person-three {
-    animation-delay: 4s;
+    animation-delay: 2.8s;
 }
-
-.person-three .person-head {
-    width: 125px;
-    height: 125px;
-}
-
-.person-three .person-body {
-    width: 210px;
-    height: 260px;
-
-    border-radius:
-        110px 110px 20px 20px;
-}
-
-
-/* Person 4 */
 
 .person-four {
-    animation-delay: 6s;
-}
-
-.person-four .person-head {
-    width: 105px;
-    height: 105px;
-}
-
-.person-four .person-body {
-    width: 295px;
-    height: 210px;
-
-    border-radius:
-        150px 150px 20px 20px;
+    animation-delay: 4.2s;
 }
 
 
@@ -462,20 +414,21 @@ a {
 
 @keyframes personCycle {
 
-    /* Start hidden */
-
+    /* Start invisible */
     0% {
         opacity: 0;
 
         transform:
             translateY(35px)
-            scale(.82);
+            scale(.75);
     }
-
 
     /* Slowly appear */
-
     5% {
+        opacity: 0;
+    }
+
+    9% {
         opacity: 1;
 
         transform:
@@ -483,10 +436,8 @@ a {
             scale(1);
     }
 
-
-    /* Stay clearly visible */
-
-    18% {
+    /* Hold */
+    14% {
         opacity: 1;
 
         transform:
@@ -494,31 +445,25 @@ a {
             scale(1);
     }
 
-
-    /* Begin leaving */
-
-    23% {
-        opacity: .8;
+    /* Slight movement before disappearing */
+    17% {
+        opacity: .7;
 
         transform:
-            translateY(-15px)
-            scale(1.05);
+            translateY(-8px)
+            scale(1.03);
     }
-
 
     /* Fade away */
-
-    28% {
+    20% {
         opacity: 0;
 
         transform:
-            translateY(-40px)
-            scale(1.12);
+            translateY(-25px)
+            scale(1.08);
     }
 
-
-    /* Stay hidden until next cycle */
-
+    /* Stay gone */
     100% {
         opacity: 0;
     }
@@ -526,7 +471,76 @@ a {
 
 
 /* ==============================
-   HEART
+   DIFFERENT SILHOUETTES
+============================== */
+
+
+/* Person 1 */
+
+.person-one .person-head {
+    width: 105px;
+    height: 105px;
+}
+
+.person-one .person-body {
+    width: 225px;
+    height: 205px;
+
+    border-radius:
+        115px 115px 20px 20px;
+}
+
+
+/* Person 2 */
+
+.person-two .person-head {
+    width: 90px;
+    height: 90px;
+}
+
+.person-two .person-body {
+    width: 255px;
+    height: 185px;
+
+    border-radius:
+        130px 130px 18px 18px;
+}
+
+
+/* Person 3 */
+
+.person-three .person-head {
+    width: 118px;
+    height: 118px;
+}
+
+.person-three .person-body {
+    width: 190px;
+    height: 230px;
+
+    border-radius:
+        100px 100px 20px 20px;
+}
+
+
+/* Person 4 */
+
+.person-four .person-head {
+    width: 96px;
+    height: 96px;
+}
+
+.person-four .person-body {
+    width: 270px;
+    height: 180px;
+
+    border-radius:
+        140px 140px 20px 20px;
+}
+
+
+/* ==============================
+   GIANT HEART
 ============================== */
 
 .morph-heart {
@@ -547,8 +561,7 @@ a {
 
     opacity: 0;
 
-    text-shadow:
-        0 0 35px rgba(214, 179, 106, .18);
+    transform-origin: center;
 
     animation: heartReveal 8s infinite;
 }
@@ -560,10 +573,9 @@ a {
 
 @keyframes heartReveal {
 
-    /* Hidden while people cycle */
-
+    /* All people are still cycling */
     0%,
-    68% {
+    70% {
         opacity: 0;
 
         transform:
@@ -571,21 +583,26 @@ a {
             rotate(-15deg);
     }
 
+    /* Clear pause before heart */
+    72% {
+        opacity: 0;
 
-    /* Begin appearing */
+        transform:
+            scale(.65)
+            rotate(-10deg);
+    }
 
-    73% {
-        opacity: .25;
+    /* Heart starts appearing */
+    76% {
+        opacity: .3;
 
         transform:
             scale(.75)
-            rotate(-8deg);
+            rotate(-7deg);
     }
 
-
-    /* Big obvious reveal */
-
-    78% {
+    /* Big dramatic reveal */
+    82% {
         opacity: 1;
 
         transform:
@@ -593,21 +610,17 @@ a {
             rotate(5deg);
     }
 
-
     /* Settle */
-
-    84% {
+    88% {
         opacity: 1;
 
         transform:
             scale(1)
             rotate(0deg);
     }
-
 
     /* Hold */
-
-    92% {
+    94% {
         opacity: 1;
 
         transform:
@@ -615,9 +628,7 @@ a {
             rotate(0deg);
     }
 
-
     /* Fade before restarting */
-
     100% {
         opacity: 0;
 
@@ -647,22 +658,23 @@ a {
 
         transform: none;
 
-        opacity: .12;
+        opacity: .11;
     }
 
     .person-head {
-        width: 80px;
-        height: 80px;
+        width: 75px;
+        height: 75px;
     }
 
     .person-body {
-        width: 170px;
-        height: 160px;
+        width: 165px;
+        height: 150px;
     }
 
     .morph-heart {
         font-size: 210px;
     }
+
 }
 
 

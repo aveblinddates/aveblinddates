@@ -14,28 +14,45 @@
 
     <!-- Navigation -->
     <nav class="navbar">
+
         <div class="logo">
-            <a href="index.html">Ave Maria Blind Dating</a>
+            <a href="index.html">
+                Ave Maria Blind Dating
+            </a>
         </div>
 
         <div class="nav-links">
-            <a href="index.html">Home</a>
-            <a href="index.html#how-it-works">How It Works</a>
+
+            <a href="index.html">
+                Home
+            </a>
+
+            <a href="index.html#how-it-works">
+                How It Works
+            </a>
+
         </div>
+
     </nav>
 
 
     <!-- Quiz Header -->
     <section class="quiz-header">
 
-        <p class="section-label">STEP 01</p>
+        <p class="section-label">
+            STEP 01
+        </p>
 
-        <h1>Let's get to know you.</h1>
+        <h1>
+            Let's get to know you.
+        </h1>
 
         <p>
-            Please, please, please answer honestly. There really are no right or wrong answers.
-            Your responses will help us find someone who shares
-            some of the things that matter to you. Basing your answers on the truth, allows us to make pairs that are as compatible as possible!
+            Please, please, please answer honestly. There really are
+            no right or wrong answers. Your responses will help us
+            find someone who shares some of the things that matter
+            to you. Basing your answers on the truth allows us to
+            make pairs that are as compatible as possible.
         </p>
 
     </section>
@@ -53,9 +70,13 @@
 
             <section class="form-section">
 
-                <p class="section-label">ABOUT YOU</p>
+                <p class="section-label">
+                    ABOUT YOU
+                </p>
 
-                <h2>The basics</h2>
+                <h2>
+                    The basics
+                </h2>
 
 
                 <label for="name">
@@ -67,23 +88,32 @@
                     id="name"
                     name="name"
                     placeholder="Your first and last name"
+                    autocomplete="name"
                     required
                 >
-<label for="email">
-    Ave Maria School Email
-</label>
 
-<input
-    type="email"
-    id="email"
-    name="email"
-    placeholder="yourname@avemaria.edu"
-    required
->
-<p class="email-note">
-    We'll only use your Ave Maria email to contact you about the
-    blind dating experience and your match.
-</p>
+
+                <label for="email">
+                    Ave Maria School Email
+                </label>
+
+                <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    placeholder="yourname@avemaria.edu"
+                    autocomplete="email"
+                    pattern="[A-Za-z0-9._%+-]+@avemaria\.edu"
+                    title="Please enter your Ave Maria email address ending in @avemaria.edu"
+                    required
+                >
+
+                <p class="email-note">
+                    You must use your Ave Maria school email.
+                    We'll use it to contact you about the blind
+                    dating experience and your match.
+                </p>
+
 
                 <label>
                     What is your gender?
@@ -92,22 +122,29 @@
                 <div class="choice-group">
 
                     <label class="choice">
+
                         <input
                             type="radio"
                             name="gender"
                             value="male"
                             required
                         >
+
                         Male
+
                     </label>
 
+
                     <label class="choice">
+
                         <input
                             type="radio"
                             name="gender"
                             value="female"
                         >
+
                         Female
+
                     </label>
 
                 </div>
@@ -117,7 +154,11 @@
                     What year are you?
                 </label>
 
-                <select id="year" name="year" required>
+                <select
+                    id="year"
+                    name="year"
+                    required
+                >
 
                     <option value="">
                         Select your year
@@ -166,9 +207,13 @@
 
             <section class="form-section">
 
-                <p class="section-label">PERSONALITY</p>
+                <p class="section-label">
+                    PERSONALITY
+                </p>
 
-                <h2>What are you like?</h2>
+                <h2>
+                    What are you like?
+                </h2>
 
 
                 <label>
@@ -178,31 +223,42 @@
                 <div class="choice-group">
 
                     <label class="choice">
+
                         <input
                             type="radio"
                             name="personality"
                             value="introvert"
                             required
                         >
+
                         More introverted
+
                     </label>
 
+
                     <label class="choice">
+
                         <input
                             type="radio"
                             name="personality"
                             value="extrovert"
                         >
+
                         More extroverted
+
                     </label>
 
+
                     <label class="choice">
+
                         <input
                             type="radio"
                             name="personality"
                             value="both"
                         >
+
                         A little of both
+
                     </label>
 
                 </div>
@@ -215,40 +271,55 @@
                 <div class="choice-group">
 
                     <label class="choice">
+
                         <input
                             type="radio"
                             name="weekend"
                             value="adventure"
                             required
                         >
+
                         Going on an adventure
+
                     </label>
 
+
                     <label class="choice">
+
                         <input
                             type="radio"
                             name="weekend"
                             value="friends"
                         >
+
                         Hanging out with friends
+
                     </label>
 
+
                     <label class="choice">
+
                         <input
                             type="radio"
                             name="weekend"
                             value="relaxing"
                         >
+
                         Relaxing and recharging
+
                     </label>
 
+
                     <label class="choice">
+
                         <input
                             type="radio"
                             name="weekend"
                             value="productive"
                         >
+
                         Getting things done
+
                     </label>
 
                 </div>
@@ -262,16 +333,24 @@
 
             <section class="form-section">
 
-                <p class="section-label">INTERESTS</p>
+                <p class="section-label">
+                    INTERESTS
+                </p>
 
-                <h2>What do you enjoy?</h2>
+                <h2>
+                    What do you enjoy?
+                </h2>
 
 
                 <label for="music">
                     Favorite type of music
                 </label>
 
-                <select id="music" name="music" required>
+                <select
+                    id="music"
+                    name="music"
+                    required
+                >
 
                     <option value="">
                         Choose one
@@ -328,9 +407,13 @@
 
             <section class="form-section">
 
-                <p class="section-label">VALUES</p>
+                <p class="section-label">
+                    VALUES
+                </p>
 
-                <h2>What matters to you?</h2>
+                <h2>
+                    What matters to you?
+                </h2>
 
 
                 <label>
@@ -340,49 +423,68 @@
                 <div class="choice-group traditionality-scale">
 
                     <label class="choice">
+
                         <input
                             type="radio"
                             name="faith"
                             value="1"
                             required
                         >
+
                         1 — Not very traditional
+
                     </label>
 
+
                     <label class="choice">
+
                         <input
                             type="radio"
                             name="faith"
                             value="2"
                         >
+
                         2 — Slightly traditional
+
                     </label>
 
+
                     <label class="choice">
+
                         <input
                             type="radio"
                             name="faith"
                             value="3"
                         >
+
                         3 — Moderately traditional
+
                     </label>
 
+
                     <label class="choice">
+
                         <input
                             type="radio"
                             name="faith"
                             value="4"
                         >
+
                         4 — Very traditional
+
                     </label>
 
+
                     <label class="choice">
+
                         <input
                             type="radio"
                             name="faith"
                             value="5"
                         >
+
                         5 — Extremely traditional
+
                     </label>
 
                 </div>
@@ -408,52 +510,72 @@
 
             <section class="form-section">
 
-                <p class="section-label">COMPATIBILITY</p>
+                <p class="section-label">
+                    COMPATIBILITY
+                </p>
 
-                <h2>How do you connect?</h2>
+                <h2>
+                    How do you connect?
+                </h2>
 
 
                 <label>
-                    When there's a disagreement, how do you usually prefer to handle it?
+                    When there's a disagreement, how do you usually
+                    prefer to handle it?
                 </label>
 
                 <div class="choice-group">
 
                     <label class="choice">
+
                         <input
                             type="radio"
                             name="communication"
                             value="immediate"
                             required
                         >
+
                         Talk it out right away
+
                     </label>
 
+
                     <label class="choice">
+
                         <input
                             type="radio"
                             name="communication"
                             value="space"
                         >
+
                         Take some time, then talk it through
+
                     </label>
 
+
                     <label class="choice">
+
                         <input
                             type="radio"
                             name="communication"
                             value="written"
                         >
+
                         Write or text about it first
+
                     </label>
 
+
                     <label class="choice">
+
                         <input
                             type="radio"
                             name="communication"
                             value="flexible"
                         >
+
                         I'm flexible depending on the situation
+
                     </label>
 
                 </div>
@@ -466,40 +588,55 @@
                 <div class="choice-group">
 
                     <label class="choice">
+
                         <input
                             type="radio"
                             name="social_lifestyle"
                             value="social"
                             required
                         >
+
                         I love being around people and going out often
+
                     </label>
 
+
                     <label class="choice">
+
                         <input
                             type="radio"
                             name="social_lifestyle"
                             value="balanced"
                         >
+
                         I prefer a balance of social time and quiet time
+
                     </label>
 
+
                     <label class="choice">
+
                         <input
                             type="radio"
                             name="social_lifestyle"
                             value="small-groups"
                         >
+
                         I mostly prefer small groups or one-on-one time
+
                     </label>
 
+
                     <label class="choice">
+
                         <input
                             type="radio"
                             name="social_lifestyle"
                             value="quiet"
                         >
+
                         I prefer a quiet, low-key lifestyle
+
                     </label>
 
                 </div>
@@ -512,40 +649,58 @@
                 <div class="choice-group">
 
                     <label class="choice">
+
                         <input
                             type="radio"
                             name="relationship_pace"
                             value="slow"
                             required
                         >
-                        I like to take things slowly and build a friendship first
+
+                        I like to take things slowly and build
+                        a friendship first
+
                     </label>
 
+
                     <label class="choice">
+
                         <input
                             type="radio"
                             name="relationship_pace"
                             value="intentional"
                         >
-                        I like to date intentionally and see where things go
+
+                        I like to date intentionally and see where
+                        things go
+
                     </label>
 
+
                     <label class="choice">
+
                         <input
                             type="radio"
                             name="relationship_pace"
                             value="quick"
                         >
-                        I prefer to know fairly quickly whether there's potential
+
+                        I prefer to know fairly quickly whether
+                        there's potential
+
                     </label>
 
+
                     <label class="choice">
+
                         <input
                             type="radio"
                             name="relationship_pace"
                             value="flexible"
                         >
+
                         I'm not sure yet / I'm flexible
+
                     </label>
 
                 </div>
@@ -556,69 +711,123 @@
             <!-- ==============================
             DATING
             ============================== -->
-<label>
-    What age range are you comfortable dating?
-</label>
 
-<div class="age-range">
-
-    <div>
-        <label for="min_age">
-            Youngest age
-        </label>
-
-        <select
-            id="min_age"
-            name="min_age"
-            required
-        >
-            <option value="">
-                Select age
-            </option>
-
-            <option value="17">17</option>
-            <option value="18">18</option>
-            <option value="19">19</option>
-            <option value="20">20</option>
-            <option value="21">21</option>
-            <option value="22">22</option>
-            <option value="23">23</option>
-            <option value="24">24</option>
-        </select>
-    </div>
-
-
-    <div>
-        <label for="max_age">
-            Oldest age
-        </label>
-
-        <select
-            id="max_age"
-            name="max_age"
-            required
-        >
-            <option value="">
-                Select age
-            </option>
-
-            <option value="17">17</option>
-            <option value="18">18</option>
-            <option value="19">19</option>
-            <option value="20">20</option>
-            <option value="21">21</option>
-            <option value="22">22</option>
-            <option value="23">23</option>
-            <option value="24">24</option>
-        </select>
-    </div>
-
-</div>
             <section class="form-section">
 
-                <p class="section-label">DATING</p>
+                <p class="section-label">
+                    DATING
+                </p>
 
-                <h2>What are you looking for?</h2>
+                <h2>
+                    Who are you comfortable dating?
+                </h2>
+
+
+                <label>
+                    What age range are you comfortable dating?
+                </label>
+
+
+                <div class="age-range">
+
+                    <div>
+
+                        <label for="min_age">
+                            Youngest age
+                        </label>
+
+                        <select
+                            id="min_age"
+                            name="min_age"
+                            required
+                        >
+
+                            <option value="">
+                                Select age
+                            </option>
+
+                            <option value="18">
+                                18
+                            </option>
+
+                            <option value="19">
+                                19
+                            </option>
+
+                            <option value="20">
+                                20
+                            </option>
+
+                            <option value="21">
+                                21
+                            </option>
+
+                            <option value="22">
+                                22
+                            </option>
+
+                            <option value="23">
+                                23
+                            </option>
+
+                            <option value="24">
+                                24
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <div>
+
+                        <label for="max_age">
+                            Oldest age
+                        </label>
+
+                        <select
+                            id="max_age"
+                            name="max_age"
+                            required
+                        >
+
+                            <option value="">
+                                Select age
+                            </option>
+
+                            <option value="18">
+                                18
+                            </option>
+
+                            <option value="19">
+                                19
+                            </option>
+
+                            <option value="20">
+                                20
+                            </option>
+
+                            <option value="21">
+                                21
+                            </option>
+
+                            <option value="22">
+                                22
+                            </option>
+
+                            <option value="23">
+                                23
+                            </option>
+
+                            <option value="24">
+                                24
+                            </option>
+
+                        </select>
+
+                    </div>
+
+                </div>
 
 
                 <label for="looking">
@@ -693,7 +902,8 @@
 
 
                 <label>
-                    Which of these would be a dating deal breaker or major "ick" for you?
+                    Which of these would be a dating deal breaker
+                    or major "ick" for you?
                 </label>
 
                 <p class="selection-note">
@@ -704,118 +914,166 @@
                 <div class="checkbox-group">
 
                     <label class="checkbox-choice">
+
                         <input
                             type="checkbox"
                             name="dealbreakers"
                             value="poor-communication"
                         >
+
                         Poor communication
+
                     </label>
 
+
                     <label class="checkbox-choice">
+
                         <input
                             type="checkbox"
                             name="dealbreakers"
                             value="different-faith"
                         >
+
                         Very different views on faith
+
                     </label>
 
+
                     <label class="checkbox-choice">
+
                         <input
                             type="checkbox"
                             name="dealbreakers"
                             value="different-relationship-goals"
                         >
+
                         Different relationship goals
+
                     </label>
 
+
                     <label class="checkbox-choice">
+
                         <input
                             type="checkbox"
                             name="dealbreakers"
                             value="smoking"
                         >
+
                         Smoking or vaping
+
                     </label>
 
+
                     <label class="checkbox-choice">
+
                         <input
                             type="checkbox"
                             name="dealbreakers"
                             value="drinking"
                         >
+
                         Drinking
+
                     </label>
 
+
                     <label class="checkbox-choice">
+
                         <input
                             type="checkbox"
                             name="dealbreakers"
                             value="lack-of-ambition"
                         >
+
                         Lack of ambition
+
                     </label>
 
+
                     <label class="checkbox-choice">
+
                         <input
                             type="checkbox"
                             name="dealbreakers"
                             value="doesnt-want-marriage"
                         >
+
                         Doesn't want marriage
+
                     </label>
 
+
                     <label class="checkbox-choice">
+
                         <input
                             type="checkbox"
                             name="dealbreakers"
                             value="doesnt-want-children"
                         >
+
                         Doesn't want children
+
                     </label>
 
+
                     <label class="checkbox-choice">
+
                         <input
                             type="checkbox"
                             name="dealbreakers"
                             value="different-social-life"
                         >
+
                         Very different social lifestyle
+
                     </label>
 
+
                     <label class="checkbox-choice">
+
                         <input
                             type="checkbox"
                             name="dealbreakers"
                             value="rude-to-others"
                         >
+
                         Being rude to others
+
                     </label>
 
+
                     <label class="checkbox-choice">
+
                         <input
                             type="checkbox"
                             name="dealbreakers"
                             value="always-on-phone"
                         >
+
                         Always being on their phone
+
                     </label>
 
+
                     <label class="checkbox-choice">
+
                         <input
                             type="checkbox"
                             name="dealbreakers"
                             value="other"
                         >
+
                         Something else
+
                     </label>
 
                 </div>
 
 
                 <label for="dealbreaker-other">
-                    Anything else you'd consider a deal breaker or "ick"?
+                    Anything else you'd consider a deal breaker
+                    or "ick"?
                 </label>
 
                 <textarea
@@ -864,6 +1122,7 @@
             <button
                 type="submit"
                 class="submit-button"
+                id="submitButton"
             >
                 Submit My Answers →
             </button>
@@ -872,6 +1131,8 @@
             <p
                 id="successMessage"
                 class="success-message"
+                role="status"
+                aria-live="polite"
             ></p>
 
         </form>
@@ -889,6 +1150,12 @@
 
         <p>
             Made for Ave Maria University students.
+        </p>
+
+        <p class="footer-disclaimer">
+            Ave Maria Blind Dating is an independent student-created
+            project and is not affiliated with, sponsored by, endorsed
+            by, or administered by Ave Maria University.
         </p>
 
         <div class="footer-links">
@@ -912,6 +1179,10 @@
 
     <script>
 
+        /* ==============================
+        SUPABASE
+        ============================== */
+
         const SUPABASE_URL =
             "https://vixyounyimddctlwzmdj.supabase.co";
 
@@ -924,6 +1195,65 @@
                 SUPABASE_URL,
                 SUPABASE_KEY
             );
+
+
+        /* ==============================
+        ELEMENTS
+        ============================== */
+
+        const form =
+            document.getElementById("matchForm");
+
+        const submitButton =
+            document.getElementById("submitButton");
+
+        const successMessage =
+            document.getElementById("successMessage");
+
+        const emailInput =
+            document.getElementById("email");
+
+        const minAgeInput =
+            document.getElementById("min_age");
+
+        const maxAgeInput =
+            document.getElementById("max_age");
+
+
+        /* ==============================
+        EMAIL VALIDATION
+        ============================== */
+
+        function isAveMariaEmail(email) {
+
+            const normalizedEmail =
+                email.trim().toLowerCase();
+
+            return /^[a-z0-9._%+-]+@avemaria\.edu$/i
+                .test(normalizedEmail);
+
+        }
+
+
+        /* ==============================
+        AGE RANGE VALIDATION
+        ============================== */
+
+        function isValidAgeRange() {
+
+            const minAge =
+                Number(minAgeInput.value);
+
+            const maxAge =
+                Number(maxAgeInput.value);
+
+            if (!minAge || !maxAge) {
+                return false;
+            }
+
+            return minAge <= maxAge;
+
+        }
 
 
         /* ==============================
@@ -948,6 +1278,7 @@
                                 'input[name="dealbreakers"]:checked'
                             );
 
+
                         if (selected.length > 3) {
 
                             this.checked = false;
@@ -966,21 +1297,166 @@
 
 
         /* ==============================
+        DUPLICATE CHECK
+        ============================== */
+
+        async function alreadySubmittedThisMonth(email) {
+
+            const now =
+                new Date();
+
+
+            const startOfMonth =
+                new Date(
+                    now.getFullYear(),
+                    now.getMonth(),
+                    1
+                );
+
+
+            const startOfNextMonth =
+                new Date(
+                    now.getFullYear(),
+                    now.getMonth() + 1,
+                    1
+                );
+
+
+            const {
+                data,
+                error
+            } =
+                await supabaseClient
+                    .from("profiles")
+                    .select("id")
+                    .eq("email", email)
+                    .gte(
+                        "created_at",
+                        startOfMonth.toISOString()
+                    )
+                    .lt(
+                        "created_at",
+                        startOfNextMonth.toISOString()
+                    )
+                    .limit(1);
+
+
+            if (error) {
+
+                console.error(
+                    "DUPLICATE CHECK ERROR:",
+                    error
+                );
+
+                throw error;
+
+            }
+
+
+            return data && data.length > 0;
+
+        }
+
+
+        /* ==============================
         FORM SUBMISSION
         ============================== */
 
-        document
-            .getElementById("matchForm")
-            .addEventListener(
-                "submit",
-                async function(event) {
+        form.addEventListener(
+            "submit",
+            async function(event) {
 
-                    event.preventDefault();
-
-                    const form = event.target;
+                event.preventDefault();
 
 
-                    /* Deal Breakers */
+                successMessage.textContent = "";
+
+
+                /* Browser validation */
+
+                if (!form.checkValidity()) {
+
+                    form.reportValidity();
+
+                    return;
+
+                }
+
+
+                /* Normalize email */
+
+                const email =
+                    emailInput.value
+                        .trim()
+                        .toLowerCase();
+
+
+                /* Ave Maria email */
+
+                if (!isAveMariaEmail(email)) {
+
+                    successMessage.textContent =
+                        "Please use your Ave Maria school email ending in @avemaria.edu.";
+
+                    emailInput.focus();
+
+                    return;
+
+                }
+
+
+                /* Age range */
+
+                if (!isValidAgeRange()) {
+
+                    successMessage.textContent =
+                        "Please make sure your youngest age is not greater than your oldest age.";
+
+                    minAgeInput.focus();
+
+                    return;
+
+                }
+
+
+                /* Disable submission */
+
+                submitButton.disabled = true;
+
+                submitButton.textContent =
+                    "Checking your submission...";
+
+
+                try {
+
+                    /* ==============================
+                    CHECK FOR EXISTING SUBMISSION
+                    ============================== */
+
+                    const duplicate =
+                        await alreadySubmittedThisMonth(
+                            email
+                        );
+
+
+                    if (duplicate) {
+
+                        successMessage.textContent =
+                            "It looks like you've already submitted this month. You can participate again when the next monthly dating pool opens.";
+
+                        submitButton.disabled = false;
+
+                        submitButton.textContent =
+                            "Submit My Answers →";
+
+                        return;
+
+                    }
+
+
+                    /* ==============================
+                    DEAL BREAKERS
+                    ============================== */
 
                     const dealbreakerElements =
                         document.querySelectorAll(
@@ -996,31 +1472,39 @@
                         );
 
 
-                    /* Profile */
+                    /* ==============================
+                    PROFILE
+                    ============================== */
 
                     const profile = {
 
                         name:
                             document
                                 .getElementById("name")
-                                .value,
-email:
-    document
-        .getElementById("email")
-        .value,
+                                .value
+                                .trim(),
+
+                        email:
+                            email,
+
                         gender:
                             document.querySelector(
                                 'input[name="gender"]:checked'
                             )?.value,
-min_age:
-    parseInt(
-        document.getElementById("min_age").value
-    ),
 
-max_age:
-    parseInt(
-        document.getElementById("max_age").value
-    ),
+
+                        min_age:
+                            parseInt(
+                                minAgeInput.value,
+                                10
+                            ),
+
+
+                        max_age:
+                            parseInt(
+                                maxAgeInput.value,
+                                10
+                            ),
 
 
                         year:
@@ -1028,73 +1512,100 @@ max_age:
                                 .getElementById("year")
                                 .value,
 
+
                         major:
                             document
                                 .getElementById("major")
-                                .value,
+                                .value
+                                .trim(),
+
 
                         personality:
                             document.querySelector(
                                 'input[name="personality"]:checked'
                             )?.value,
 
+
                         weekend:
                             document.querySelector(
                                 'input[name="weekend"]:checked'
                             )?.value,
+
 
                         music:
                             document
                                 .getElementById("music")
                                 .value,
 
+
                         hobbies:
                             document
                                 .getElementById("hobbies")
-                                .value,
+                                .value
+                                .trim(),
+
 
                         faith:
                             document.querySelector(
                                 'input[name="faith"]:checked'
                             )?.value,
 
+
                         values:
                             document
                                 .getElementById("values")
-                                .value,
+                                .value
+                                .trim(),
+
 
                         communication:
                             document.querySelector(
                                 'input[name="communication"]:checked'
                             )?.value,
 
+
                         social_lifestyle:
                             document.querySelector(
                                 'input[name="social_lifestyle"]:checked'
                             )?.value,
+
 
                         relationship_pace:
                             document.querySelector(
                                 'input[name="relationship_pace"]:checked'
                             )?.value,
 
+
                         looking_for:
                             document
                                 .getElementById("looking")
                                 .value,
 
+
                         anything_else:
                             document
                                 .getElementById("anything")
-                                .value,
+                                .value
+                                .trim(),
+
+
+                        /*
+                         * Dealbreakers are collected for
+                         * internal research only.
+                         *
+                         * They are NOT intended to be
+                         * used as matching criteria.
+                         */
 
                         dealbreakers:
                             dealbreakers,
+
 
                         dealbreaker_other:
                             document
                                 .getElementById("dealbreaker-other")
                                 .value
+                                .trim()
 
                     };
 
@@ -1105,15 +1616,25 @@ max_age:
                     );
 
 
-                    /* Submit to Supabase */
+                    submitButton.textContent =
+                        "Submitting...";
 
-                    const { error } =
+
+                    /* ==============================
+                    SUPABASE INSERT
+                    ============================== */
+
+                    const {
+                        error
+                    } =
                         await supabaseClient
                             .from("profiles")
                             .insert([profile]);
 
 
-                    /* Error */
+                    /* ==============================
+                    ERROR
+                    ============================== */
 
                     if (error) {
 
@@ -1122,32 +1643,79 @@ max_age:
                             error
                         );
 
-                        document
-                            .getElementById("successMessage")
-                            .textContent =
-                            "Error: " +
-                            error.message;
+
+                        /*
+                         * PostgreSQL unique constraint
+                         * errors can be handled here once
+                         * the monthly database constraint
+                         * is added.
+                         */
+
+                        if (
+                            error.code === "23505"
+                        ) {
+
+                            successMessage.textContent =
+                                "It looks like you've already submitted this month.";
+
+                        } else {
+
+                            successMessage.textContent =
+                                "Something went wrong while submitting your answers. Please try again.";
+
+                        }
+
+
+                        submitButton.disabled = false;
+
+                        submitButton.textContent =
+                            "Submit My Answers →";
 
                         return;
 
                     }
 
 
-                    /* Success */
+                    /* ==============================
+                    SUCCESS
+                    ============================== */
 
-                    document
-                        .getElementById("successMessage")
-                        .textContent =
+                    successMessage.textContent =
                         "You're in! Your answers have been submitted.";
 
 
                     form.reset();
 
+
+                    submitButton.disabled = false;
+
+                    submitButton.textContent =
+                        "Submit My Answers →";
+
+
+                } catch (error) {
+
+                    console.error(
+                        "SUBMISSION ERROR:",
+                        error
+                    );
+
+
+                    successMessage.textContent =
+                        "We couldn't verify your submission right now. Please try again in a moment.";
+
+
+                    submitButton.disabled = false;
+
+                    submitButton.textContent =
+                        "Submit My Answers →";
+
                 }
-            );
+
+            }
+        );
 
     </script>
 
 </body>
-
 </html>

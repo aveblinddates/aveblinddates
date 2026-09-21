@@ -531,7 +531,6 @@ error
 } = await supabaseClient
 .from("profiles")
 .insert([profile])
-.select();
 
 
 if (error) {

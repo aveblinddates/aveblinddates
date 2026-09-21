@@ -2370,3 +2370,833 @@ footer {
 /* ==============================
    END OF STYLE SHEET
 ============================== */
+/* ==============================
+   QUIZ PAGE
+============================== */
+
+.quiz-header {
+    position: relative;
+
+    overflow: hidden;
+
+    padding: 105px 20px 115px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #173c2b 0%,
+            #1d4935 100%
+        );
+
+    color: white;
+
+    text-align: center;
+}
+
+
+/* Decorative circles */
+
+.quiz-header::before {
+    content: "";
+
+    position: absolute;
+
+    width: 320px;
+    height: 320px;
+
+    border:
+        1px solid
+        rgba(214, 179, 106, .18);
+
+    border-radius: 50%;
+
+    right: -100px;
+    top: -120px;
+}
+
+.quiz-header::after {
+    content: "";
+
+    position: absolute;
+
+    width: 200px;
+    height: 200px;
+
+    border:
+        1px solid
+        rgba(214, 179, 106, .10);
+
+    border-radius: 50%;
+
+    left: -80px;
+    bottom: -100px;
+}
+
+.quiz-header > * {
+    position: relative;
+
+    z-index: 1;
+}
+
+
+/* Quiz label */
+
+.quiz-header .section-label {
+    color: #d6b36a;
+
+    margin-bottom: 20px;
+
+    letter-spacing: 5px;
+
+    font-size: 11px;
+}
+
+
+/* Quiz heading */
+
+.quiz-header h1 {
+    font-size:
+        clamp(48px, 6vw, 72px);
+
+    line-height: 1;
+
+    margin-bottom: 28px;
+
+    letter-spacing: -1px;
+}
+
+
+/* Quiz description */
+
+.quiz-header > p:last-child {
+    max-width: 620px;
+
+    margin: auto;
+
+    font-family: Arial, sans-serif;
+
+    font-size: 17px;
+
+    line-height: 1.8;
+
+    color: #dce6df;
+}
+
+
+/* Quiz container */
+
+.quiz-container {
+    max-width: 800px;
+
+    margin: auto;
+
+    padding: 80px 25px;
+}
+
+.quiz-header + .quiz-container {
+    padding-top: 75px;
+}
+
+
+/* Form sections */
+
+.form-section {
+    background: white;
+
+    padding: 45px;
+
+    margin-bottom: 35px;
+
+    box-shadow:
+        0 5px 25px
+        rgba(0, 0, 0, .05);
+}
+
+.form-section h2 {
+    font-size: 38px;
+
+    margin-bottom: 35px;
+}
+
+.form-section > label {
+    display: block;
+
+    font-family: Arial, sans-serif;
+
+    font-weight: bold;
+
+    margin-top: 25px;
+
+    margin-bottom: 10px;
+}
+
+
+/* Inputs */
+
+input[type="text"],
+select,
+textarea {
+    width: 100%;
+
+    padding: 15px;
+
+    border:
+        1px solid #ccd3cd;
+
+    background: #fafafa;
+
+    font-family: Arial, sans-serif;
+
+    font-size: 15px;
+
+    border-radius: 2px;
+
+    transition: .2s;
+}
+
+input[type="text"]:focus,
+select:focus,
+textarea:focus {
+    outline: none;
+
+    border-color: #9c7438;
+
+    background: white;
+}
+
+textarea {
+    resize: vertical;
+}
+
+
+/* ==============================
+   CHOICES
+============================== */
+
+.choice-group {
+    display: grid;
+
+    grid-template-columns:
+        1fr 1fr;
+
+    gap: 12px;
+
+    margin-top: 10px;
+}
+
+.choice {
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    padding: 15px;
+
+    background: #f7f3eb;
+
+    border:
+        1px solid transparent;
+
+    cursor: pointer;
+
+    font-family: Arial, sans-serif;
+
+    transition: .2s;
+}
+
+.choice:hover {
+    border-color: #c89d4c;
+
+    transform: translateY(-1px);
+}
+
+.choice input {
+    accent-color: #173c2b;
+}
+
+.choice:has(input:checked) {
+    background: #173c2b;
+
+    color: white;
+
+    border-color: #173c2b;
+
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 6px 15px
+        rgba(23, 60, 43, .12);
+}
+
+.choice:has(input:checked) input {
+    accent-color: #c89d4c;
+}
+
+
+/* Traditionality scale */
+
+.traditionality-scale {
+    grid-template-columns:
+        repeat(5, 1fr);
+}
+
+.traditionality-scale .choice {
+    flex-direction: column;
+
+    text-align: center;
+
+    justify-content: center;
+
+    min-height: 90px;
+}
+
+.traditionality-scale .choice input {
+    margin-bottom: 5px;
+}
+
+
+/* ==============================
+   PRIVACY
+============================== */
+
+.privacy-box {
+    background: #e7dfd1;
+
+    padding: 30px;
+
+    margin-bottom: 25px;
+}
+
+.privacy-box h3 {
+    font-size: 25px;
+
+    margin-bottom: 10px;
+}
+
+.privacy-box p {
+    font-family: Arial, sans-serif;
+
+    line-height: 1.6;
+
+    color: #536158;
+
+    margin-bottom: 20px;
+}
+
+.checkbox {
+    display: flex;
+
+    align-items: flex-start;
+
+    gap: 10px;
+
+    font-family: Arial, sans-serif;
+
+    font-size: 14px;
+
+    line-height: 1.5;
+}
+
+.checkbox input {
+    margin-top: 4px;
+
+    accent-color: #173c2b;
+}
+
+
+/* ==============================
+   SUBMIT
+============================== */
+
+.submit-button {
+    width: 100%;
+
+    padding: 19px;
+
+    border: none;
+
+    background: #c89d4c;
+
+    color: #17251d;
+
+    font-family: Arial, sans-serif;
+
+    font-size: 16px;
+
+    font-weight: bold;
+
+    cursor: pointer;
+
+    transition: .2s;
+}
+
+.submit-button:hover {
+    background: #e0bd78;
+
+    transform: translateY(-2px);
+}
+
+.success-message {
+    text-align: center;
+
+    margin-top: 25px;
+
+    color: #286b48;
+
+    font-family: Arial, sans-serif;
+
+    font-weight: bold;
+}
+
+
+/* ==============================
+   EMAIL
+============================== */
+
+#email {
+    width: 100%;
+
+    padding: 16px 18px;
+
+    border:
+        1px solid #ccd3cd;
+
+    background: #fafafa;
+
+    font-family: Arial, sans-serif;
+
+    font-size: 15px;
+
+    border-radius: 3px;
+
+    transition: .2s;
+}
+
+#email:focus {
+    outline: none;
+
+    border-color: #c89d4c;
+
+    background: white;
+
+    box-shadow:
+        0 0 0 3px
+        rgba(200, 157, 76, .12);
+}
+
+.email-note {
+    font-family: Arial, sans-serif;
+
+    font-size: 12px;
+
+    line-height: 1.5;
+
+    color: #7a857e;
+
+    margin-top: 8px;
+}
+
+
+/* ==============================
+   AGE RANGE
+============================== */
+
+.age-range {
+    display: grid;
+
+    grid-template-columns:
+        1fr 1fr;
+
+    gap: 20px;
+
+    margin-top: 10px;
+
+    margin-bottom: 10px;
+}
+
+.age-range label {
+    display: block;
+
+    font-family: Arial, sans-serif;
+
+    font-size: 13px;
+
+    font-weight: bold;
+
+    margin-bottom: 8px;
+
+    color: #536158;
+}
+
+.age-range select {
+    width: 100%;
+
+    padding: 16px 18px;
+
+    border:
+        1px solid #ccd3cd;
+
+    background: #fafafa;
+
+    font-family: Arial, sans-serif;
+
+    font-size: 15px;
+
+    border-radius: 3px;
+
+    cursor: pointer;
+
+    transition: .2s;
+}
+
+.age-range select:hover {
+    border-color: #c89d4c;
+}
+
+.age-range select:focus {
+    outline: none;
+
+    border-color: #c89d4c;
+
+    background: white;
+
+    box-shadow:
+        0 0 0 3px
+        rgba(200, 157, 76, .12);
+}
+
+
+/* ==============================
+   DEAL BREAKERS
+============================== */
+
+.dealbreaker-section {
+    background: #f1eadf;
+
+    border-top:
+        4px solid #c89d4c;
+
+    position: relative;
+
+    overflow: hidden;
+}
+
+.dealbreaker-section::after {
+    content: "✦";
+
+    position: absolute;
+
+    right: 35px;
+    top: 25px;
+
+    font-size: 85px;
+
+    color:
+        rgba(200, 157, 76, .10);
+
+    pointer-events: none;
+}
+
+.dealbreaker-section h2 {
+    margin-bottom: 20px;
+}
+
+.section-description {
+    max-width: 620px;
+
+    margin: 0 auto 35px;
+
+    font-family: Arial, sans-serif;
+
+    font-size: 14px;
+
+    line-height: 1.7;
+
+    color: #66736b;
+
+    text-align: center;
+}
+
+.selection-note {
+    display: inline-block;
+
+    margin: 5px auto 20px;
+
+    padding: 7px 14px;
+
+    background: #173c2b;
+
+    color: #d6b36a;
+
+    font-family: Arial, sans-serif;
+
+    font-size: 12px;
+
+    font-weight: bold;
+
+    letter-spacing: .5px;
+
+    border-radius: 20px;
+}
+
+
+/* Deal breaker choices */
+
+.checkbox-group {
+    display: grid;
+
+    grid-template-columns:
+        1fr 1fr;
+
+    gap: 12px;
+
+    margin-top: 15px;
+
+    margin-bottom: 30px;
+}
+
+.checkbox-choice {
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+    padding: 16px 18px;
+
+    background: #faf8f4;
+
+    border:
+        1px solid #ddd5c8;
+
+    border-radius: 3px;
+
+    font-family: Arial, sans-serif;
+
+    font-size: 14px;
+
+    color: #38463e;
+
+    cursor: pointer;
+
+    transition: .2s;
+}
+
+.checkbox-choice:hover {
+    border-color: #c89d4c;
+
+    background: white;
+
+    transform: translateY(-1px);
+
+    box-shadow:
+        0 3px 10px
+        rgba(0, 0, 0, .04);
+}
+
+.checkbox-choice input {
+    width: 17px;
+    height: 17px;
+
+    flex-shrink: 0;
+
+    accent-color: #173c2b;
+
+    cursor: pointer;
+}
+
+.checkbox-choice:has(input:checked) {
+    background: #173c2b;
+
+    border-color: #173c2b;
+
+    color: white;
+
+    box-shadow:
+        0 3px 10px
+        rgba(23, 60, 43, .15);
+}
+
+.checkbox-choice:has(input:checked) input {
+    accent-color: #c89d4c;
+}
+
+#dealbreaker-other {
+    background: #faf8f4;
+}
+
+#dealbreaker-other:focus {
+    background: white;
+
+    border-color: #c89d4c;
+
+    box-shadow:
+        0 0 0 3px
+        rgba(200, 157, 76, .12);
+}
+
+.dealbreaker-section > label[for="dealbreaker-other"] {
+    margin-top: 15px;
+}
+
+
+/* ==============================
+   MOBILE
+============================== */
+
+@media (max-width: 750px) {
+
+    .nav-links {
+        display: none;
+    }
+
+    .hero {
+        padding: 70px 7%;
+
+        min-height: 700px;
+    }
+
+    .hero h1 {
+        font-size: 55px;
+    }
+
+    /*
+       Move animation behind the text
+       and make it slightly subtler
+       on smaller screens.
+    */
+    .morph-animation {
+        right: -55px;
+        top: 62%;
+
+        width: 260px;
+        height: 300px;
+
+        opacity: .09;
+    }
+
+    .steps {
+        grid-template-columns: 1fr;
+    }
+
+    .about {
+        flex-direction: column;
+
+        padding: 80px 7%;
+
+        gap: 55px;
+    }
+
+    .about-text h2 {
+        font-size: 45px;
+    }
+
+    .mystery-card-wrapper {
+        width: 285px;
+        height: 370px;
+    }
+
+    .mystery-symbol {
+        width: 120px;
+        height: 120px;
+    }
+
+    .mystery-symbol span {
+        font-size: 85px;
+    }
+
+    .match-card h3 {
+        font-size: 22px;
+    }
+
+    .question-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .final-cta h2 {
+        font-size: 45px;
+    }
+
+    .match-card {
+        width: 100%;
+    }
+
+    .traditionality-scale {
+        grid-template-columns:
+            1fr 1fr;
+    }
+
+    .checkbox-group {
+        grid-template-columns: 1fr;
+    }
+
+    .dealbreaker-section {
+        padding: 28px 20px;
+    }
+
+    .dealbreaker-section::after {
+        right: 10px;
+        top: 15px;
+
+        font-size: 60px;
+    }
+
+    .age-range {
+        grid-template-columns: 1fr;
+
+        gap: 5px;
+    }
+
+    .quiz-header {
+        padding: 75px 20px 85px;
+    }
+
+    .quiz-header h1 {
+        font-size: 45px;
+    }
+
+    .quiz-header > p:last-child {
+        font-size: 15px;
+    }
+
+    .form-section {
+        padding: 28px 20px;
+    }
+
+    .form-section h2 {
+        font-size: 30px;
+    }
+
+    .choice-group {
+        grid-template-columns: 1fr;
+    }
+}
+
+
+/* ==============================
+   VERY SMALL SCREENS
+============================== */
+
+@media (max-width: 400px) {
+
+    .hero h1 {
+        font-size: 48px;
+    }
+
+    .morph-animation {
+        right: -85px;
+
+        opacity: .07;
+    }
+
+    .mystery-card-wrapper {
+        width: 265px;
+        height: 350px;
+    }
+
+    .traditionality-scale {
+        grid-template-columns: 1fr;
+    }
+}
+

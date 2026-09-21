@@ -8,36 +8,7 @@
 
     <link rel="stylesheet" href="style.css">
 </head>
-<script>
-    const scrollElements =
-        document.querySelectorAll(".scroll-reveal");
 
-    const revealOnScroll = () => {
-
-        scrollElements.forEach(element => {
-
-            const elementTop =
-                element.getBoundingClientRect().top;
-
-            const windowHeight =
-                window.innerHeight;
-
-            if (elementTop < windowHeight - 100) {
-                element.classList.add("visible");
-            }
-
-        });
-
-    };
-
-
-    window.addEventListener(
-        "scroll",
-        revealOnScroll
-    );
-
-    revealOnScroll();
-</script>
 <body>
 
     <!-- Navigation -->
@@ -224,7 +195,7 @@
 
 
     <!-- Final CTA -->
-    <section class="final-cta">
+    <section class="final-cta scroll-reveal">
 
         <h2>Ready to take a chance?</h2>
 
@@ -256,7 +227,36 @@
         </div>
 
     </footer>
+<script>
+    const scrollElements =
+        document.querySelectorAll(".scroll-reveal");
 
+    const revealOnScroll = () => {
+
+        scrollElements.forEach(element => {
+
+            const elementTop =
+                element.getBoundingClientRect().top;
+
+            const windowHeight =
+                window.innerHeight;
+
+            if (elementTop < windowHeight - 100) {
+                element.classList.add("visible");
+            }
+
+        });
+
+    };
+
+
+    window.addEventListener(
+        "scroll",
+        revealOnScroll
+    );
+
+    revealOnScroll();
+</script>
 </body>
 </html>
 

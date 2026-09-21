@@ -249,10 +249,25 @@ HEART
 ------------------------------ */
 
 .heart {
-font-size: 300px;
-color: rgba(255,255,255,.05);
-position: absolute;
-right: 8%;
+    font-size: 300px;
+    color: rgba(255,255,255,.05);
+
+    position: absolute;
+    right: 8%;
+
+    animation: floatingHeart 5s ease-in-out infinite;
+}
+
+@keyframes floatingHeart {
+
+    0%, 100% {
+        transform: translateY(0) rotate(-5deg);
+    }
+
+    50% {
+        transform: translateY(-15px) rotate(5deg);
+    }
+
 }
 
 
@@ -354,20 +369,19 @@ MATCH CARD
 ------------------------------ */
 
 .match-card {
-width: 320px;
-height: 410px;
+    border-radius: 4px;
 
-background: #173c2b;
-color: white;
+    transform: rotate(2deg);
 
-display: flex;
-flex-direction: column;
-align-items: center;
-justify-content: center;
+    transition: transform .3s ease, box-shadow .3s ease;
+}
 
-text-align: center;
+.match-card:hover {
+    transform: rotate(0deg) translateY(-8px);
 
-box-shadow: 20px 20px 0 #c89d4c;
+    box-shadow:
+        20px 20px 0 #c89d4c,
+        0 20px 40px rgba(23, 60, 43, .15);
 }
 
 .match-card p {
@@ -378,10 +392,28 @@ color: #d6b36a;
 }
 
 .question-mark {
-font-size: 130px;
-font-weight: bold;
-color: #d6b36a;
+    font-size: 130px;
+    font-weight: bold;
+    color: #d6b36a;
+
+    animation: mysteryPulse 3s ease-in-out infinite;
 }
+
+@keyframes mysteryPulse {
+
+    0%, 100% {
+        opacity: .65;
+        transform: scale(1);
+    }
+
+    50% {
+        opacity: 1;
+        transform: scale(1.08);
+    }
+
+}
+
+It would 
 
 .match-card h3 {
 font-size: 25px;
@@ -764,7 +796,21 @@ font-family: Arial, sans-serif;
 
 font-weight: bold;
 }
+.choice:has(input:checked) {
+    background: #173c2b;
+    color: white;
 
+    border-color: #173c2b;
+
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 6px 15px rgba(23, 60, 43, .12);
+}
+
+.choice:has(input:checked) input {
+    accent-color: #c89d4c;
+}
 
 /* MOBILE QUIZ */
 
@@ -1311,4 +1357,26 @@ DEAL BREAKER MOBILE
     transform: translateY(-2px);
     
     box-shadow: 0 5px 15px rgba(156, 116, 56, .18);
+}
+body {
+    background-color: #f7f3eb;
+
+    background-image:
+        radial-gradient(
+            rgba(23, 60, 43, 0.035) 1px,
+            transparent 1px
+        );
+
+    background-size: 18px 18px;
+}
+.section-label::before {
+    content: "✦";
+    color: #c89d4c;
+    margin-right: 10px;
+}
+
+.section-label::after {
+    content: "✦";
+    color: #c89d4c;
+    margin-left: 10px;
 }

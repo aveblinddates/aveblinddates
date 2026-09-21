@@ -1285,3 +1285,30 @@ DEAL BREAKER MOBILE
     }
 
 }
+/* NAVIGATION CTA */
+
+.nav-cta {
+    padding: 11px 18px !important;
+
+    background: #c89d4c;
+
+    color: #17251d !important;
+
+    font-weight: bold;
+
+    transition: all .2s ease !important;
+}
+
+.nav-cta::after {
+    display: none;
+}
+
+.nav-cta:hover {
+    background: #e0bd78;
+
+    color: #17251d !important;
+
+    transform: translateY(-2px);
+    
+    box-shadow: 0 5px 15px rgba(156, 116, 56, .18);
+}

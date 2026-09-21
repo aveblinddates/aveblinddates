@@ -1326,21 +1326,13 @@ footer p {
     color: #d6b36a;
 }
 
-
 /* ==============================
+QUIZ HEADER
    QUIZ PAGE
 ============================== */
 
 .quiz-header {
-    position: relative;
-
-    overflow: hidden;
-
-    padding: 105px 20px 115px;
-
-    background:
-        linear-gradient(
-            135deg,
+@@ -1227,10 +1344,14 @@ QUIZ HEADER
             #173c2b 0%,
             #1d4935 100%
         );
@@ -1351,16 +1343,16 @@ footer p {
 }
 
 
+/* Decorative gold circle */
 /* Decorative circles */
 
 .quiz-header::before {
     content: "";
-
-    position: absolute;
-
+@@ -1240,17 +1361,16 @@ QUIZ HEADER
     width: 320px;
     height: 320px;
 
+    border: 1px solid rgba(214, 179, 106, .18);
     border:
         1px solid
         rgba(214, 179, 106, .18);
@@ -1371,14 +1363,17 @@ footer p {
     top: -120px;
 }
 
+
+/* Second decorative circle */
+
 .quiz-header::after {
     content: "";
 
-    position: absolute;
-
+@@ -1259,24 +1379,24 @@ QUIZ HEADER
     width: 200px;
     height: 200px;
 
+    border: 1px solid rgba(214, 179, 106, .10);
     border:
         1px solid
         rgba(214, 179, 106, .10);
@@ -1389,6 +1384,9 @@ footer p {
     bottom: -100px;
 }
 
+
+/* Keep header content above decorations */
+
 .quiz-header > * {
     position: relative;
 
@@ -1396,33 +1394,30 @@ footer p {
 }
 
 
+/* STEP 01 */
 /* Quiz label */
 
 .quiz-header .section-label {
     color: #d6b36a;
-
-    margin-bottom: 20px;
-
-    letter-spacing: 5px;
-
-    font-size: 11px;
+@@ -1289,10 +1409,11 @@ QUIZ HEADER
 }
 
 
+/* Main quiz heading */
 /* Quiz heading */
 
 .quiz-header h1 {
+    font-size: clamp(48px, 6vw, 72px);
     font-size:
         clamp(48px, 6vw, 72px);
 
     line-height: 1;
 
-    margin-bottom: 28px;
-
-    letter-spacing: -1px;
+@@ -1302,11 +1423,15 @@ QUIZ HEADER
 }
 
 
+/* Header description */
 /* Quiz description */
 
 .quiz-header > p:last-child {
@@ -1435,35 +1430,56 @@ footer p {
     font-size: 17px;
 
     line-height: 1.8;
-
-    color: #dce6df;
+@@ -1315,721 +1440,745 @@ QUIZ HEADER
 }
 
 
+/* ==============================
+QUIZ TOP NAVIGATION
+============================== */
+
+.quiz-header + .quiz-container {
+    padding-top: 75px;
+}
 /* Quiz container */
 
 .quiz-container {
     max-width: 800px;
 
+/* Make logo slightly more polished */
     margin: auto;
 
+.navbar .logo a {
+    transition: .2s;
     padding: 80px 25px;
 }
 
+.navbar .logo a:hover {
+    color: #9c7438;
 .quiz-header + .quiz-container {
     padding-top: 75px;
 }
 
 
+/* ==============================
+EMAIL HELPER TEXT
+============================== */
+
+.email-note {
+    font-family: Arial, sans-serif;
 /* Form sections */
 
+    font-size: 12px;
 .form-section {
     background: white;
 
+    line-height: 1.5;
     padding: 45px;
 
+    color: #7a857e;
     margin-bottom: 35px;
 
+    margin-top: 8px;
     box-shadow:
         0 5px 25px
         rgba(0, 0, 0, .05);
@@ -1472,22 +1488,52 @@ footer p {
 .form-section h2 {
     font-size: 38px;
 
+/* ==============================
+MOBILE
+============================== */
+
+@media (max-width: 600px) {
+
+    .age-range {
+        grid-template-columns: 1fr;
     margin-bottom: 35px;
 }
 
+        gap: 5px;
+    }
 .form-section > label {
     display: block;
 
+    .quiz-header {
+        padding: 75px 20px 85px;
+    }
     font-family: Arial, sans-serif;
 
+    .quiz-header h1 {
+        font-size: 45px;
+    }
     font-weight: bold;
 
+    .quiz-header > p:last-child {
+        font-size: 15px;
+    }
     margin-top: 25px;
 
     margin-bottom: 10px;
 }
+/* ==============================
+DEAL BREAKERS & ICKS
+============================== */
 
+.dealbreaker-section {
+    background: #f1eadf;
 
+    border-top: 4px solid #c89d4c;
+
+    position: relative;
+
+    overflow: hidden;
+}
 /* Inputs */
 
 input[type="text"],
@@ -1495,19 +1541,28 @@ select,
 textarea {
     width: 100%;
 
+/* Decorative background */
     padding: 15px;
 
+.dealbreaker-section::after {
+    content: "✦";
     border:
         1px solid #ccd3cd;
 
+    position: absolute;
     background: #fafafa;
 
+    right: 35px;
+    top: 25px;
     font-family: Arial, sans-serif;
 
+    font-size: 85px;
     font-size: 15px;
 
+    color: rgba(200, 157, 76, .10);
     border-radius: 2px;
 
+    pointer-events: none;
     transition: .2s;
 }
 
@@ -1516,8 +1571,11 @@ select:focus,
 textarea:focus {
     outline: none;
 
+/* Section heading */
     border-color: #9c7438;
 
+.dealbreaker-section h2 {
+    margin-bottom: 20px;
     background: white;
 }
 
@@ -1525,46 +1583,69 @@ textarea {
     resize: vertical;
 }
 
+/* Description */
 
+.section-description {
+    max-width: 620px;
+
+    margin: 0 auto 35px;
+
+    font-family: Arial, sans-serif;
 /* ==============================
    CHOICES
 ============================== */
 
+    font-size: 14px;
 .choice-group {
     display: grid;
 
+    line-height: 1.7;
     grid-template-columns:
         1fr 1fr;
 
+    color: #66736b;
     gap: 12px;
 
+    text-align: center;
     margin-top: 10px;
 }
 
 .choice {
     display: flex;
 
+/* "Choose up to 3" */
     align-items: center;
 
+.selection-note {
+    display: inline-block;
     gap: 10px;
 
+    margin: 5px auto 20px;
     padding: 15px;
 
+    padding: 7px 14px;
     background: #f7f3eb;
 
+    background: #173c2b;
     border:
         1px solid transparent;
 
+    color: #d6b36a;
     cursor: pointer;
 
     font-family: Arial, sans-serif;
 
+    font-size: 12px;
+
+    font-weight: bold;
     transition: .2s;
 }
 
+    letter-spacing: .5px;
 .choice:hover {
     border-color: #c89d4c;
 
+    border-radius: 20px;
     transform: translateY(-1px);
 }
 
@@ -1572,133 +1653,188 @@ textarea {
     accent-color: #173c2b;
 }
 
+/* Deal breaker choices */
 .choice:has(input:checked) {
     background: #173c2b;
 
+.checkbox-group {
+    display: grid;
     color: white;
 
+    grid-template-columns: 1fr 1fr;
     border-color: #173c2b;
 
+    gap: 12px;
     transform: translateY(-2px);
 
+    margin-top: 15px;
     box-shadow:
         0 6px 15px
         rgba(23, 60, 43, .12);
 }
 
+    margin-bottom: 30px;
 .choice:has(input:checked) input {
     accent-color: #c89d4c;
 }
 
 
+.checkbox-choice {
+    display: flex;
 /* Traditionality scale */
 
+    align-items: center;
 .traditionality-scale {
     grid-template-columns:
         repeat(5, 1fr);
 }
 
+    gap: 12px;
 .traditionality-scale .choice {
     flex-direction: column;
 
+    padding: 16px 18px;
     text-align: center;
 
+    background: #faf8f4;
     justify-content: center;
 
+    border: 1px solid #ddd5c8;
     min-height: 90px;
 }
 
+    border-radius: 3px;
 .traditionality-scale .choice input {
     margin-bottom: 5px;
 }
 
+    font-family: Arial, sans-serif;
 
+    font-size: 14px;
 /* ==============================
    PRIVACY
 ============================== */
 
+    color: #38463e;
 .privacy-box {
     background: #e7dfd1;
 
+    cursor: pointer;
     padding: 30px;
 
+    transition: .2s;
     margin-bottom: 25px;
 }
 
 .privacy-box h3 {
     font-size: 25px;
 
+/* Hover */
     margin-bottom: 10px;
 }
 
+.checkbox-choice:hover {
+    border-color: #c89d4c;
 .privacy-box p {
     font-family: Arial, sans-serif;
 
+    background: white;
     line-height: 1.6;
 
+    transform: translateY(-1px);
     color: #536158;
 
+    box-shadow: 0 3px 10px rgba(0, 0, 0, .04);
     margin-bottom: 20px;
 }
 
 .checkbox {
     display: flex;
 
+/* Checkbox */
     align-items: flex-start;
 
+.checkbox-choice input {
+    width: 17px;
+    height: 17px;
     gap: 10px;
 
+    flex-shrink: 0;
     font-family: Arial, sans-serif;
 
+    accent-color: #173c2b;
     font-size: 14px;
 
+    cursor: pointer;
     line-height: 1.5;
 }
 
 .checkbox input {
     margin-top: 4px;
 
+/* Selected choice */
     accent-color: #173c2b;
 }
 
+.checkbox-choice:has(input:checked) {
+    background: #173c2b;
 
+    border-color: #173c2b;
 /* ==============================
    SUBMIT
 ============================== */
 
+    color: white;
 .submit-button {
     width: 100%;
 
+    box-shadow: 0 3px 10px rgba(23, 60, 43, .15);
+}
     padding: 19px;
 
     border: none;
 
+/* Selected checkbox */
     background: #c89d4c;
 
+.checkbox-choice:has(input:checked) input {
+    accent-color: #c89d4c;
+}
     color: #17251d;
 
     font-family: Arial, sans-serif;
 
+/* "Something else" text box */
     font-size: 16px;
 
+#dealbreaker-other {
+    background: #faf8f4;
+}
     font-weight: bold;
 
+#dealbreaker-other:focus {
+    background: white;
     cursor: pointer;
 
+    border-color: #c89d4c;
     transition: .2s;
 }
 
 .submit-button:hover {
     background: #e0bd78;
 
+    box-shadow: 0 0 0 3px rgba(200, 157, 76, .12);
     transform: translateY(-2px);
 }
 
 .success-message {
     text-align: center;
 
+/* Label above the text box */
     margin-top: 25px;
 
+.dealbreaker-section > label[for="dealbreaker-other"] {
+    margin-top: 15px;
     color: #286b48;
 
     font-family: Arial, sans-serif;
@@ -1708,129 +1844,240 @@ textarea {
 
 
 /* ==============================
+DEAL BREAKER MOBILE
    EMAIL
 ============================== */
 
+@media (max-width: 600px) {
+
+    .checkbox-group {
+        grid-template-columns: 1fr;
 #email {
     width: 100%;
 
+        gap: 10px;
+    }
     padding: 16px 18px;
 
+    .dealbreaker-section {
+        padding: 28px 20px;
+    }
     border:
         1px solid #ccd3cd;
 
+    .dealbreaker-section::after {
+        right: 10px;
+        top: 15px;
     background: #fafafa;
 
+        font-size: 60px;
+    }
     font-family: Arial, sans-serif;
 
+}
+/* NAVIGATION CTA */
     font-size: 15px;
 
+.nav-cta {
+    padding: 11px 18px !important;
     border-radius: 3px;
 
+    background: #c89d4c;
     transition: .2s;
 }
 
+    color: #17251d !important;
 #email:focus {
     outline: none;
 
+    font-weight: bold;
     border-color: #c89d4c;
 
+    transition: all .2s ease !important;
+}
     background: white;
 
+.nav-cta::after {
+    display: none;
     box-shadow:
         0 0 0 3px
         rgba(200, 157, 76, .12);
 }
 
+.nav-cta:hover {
+    background: #e0bd78;
 .email-note {
     font-family: Arial, sans-serif;
 
+    color: #17251d !important;
     font-size: 12px;
 
+    transform: translateY(-2px);
+    
+    box-shadow: 0 5px 15px rgba(156, 116, 56, .18);
+}
+body {
+    background-color: #f7f3eb;
     line-height: 1.5;
 
+    background-image:
+        radial-gradient(
+            rgba(23, 60, 43, 0.035) 1px,
+            transparent 1px
+        );
     color: #7a857e;
 
+    background-size: 18px 18px;
+}
+.section-label::before {
+    content: "✦";
+    color: #c89d4c;
+    margin-right: 10px;
     margin-top: 8px;
 }
 
+.section-label::after {
+    content: "✦";
+    color: #c89d4c;
+    margin-left: 10px;
+}
+.about {
+    position: relative;
+    overflow: hidden;
+}
 
+.about::before {
+    content: "❧";
 /* ==============================
    AGE RANGE
 ============================== */
 
+    position: absolute;
 .age-range {
     display: grid;
 
+    left: 3%;
+    top: 15%;
     grid-template-columns:
         1fr 1fr;
 
+    font-size: 150px;
     gap: 20px;
 
+    color: rgba(23, 60, 43, .06);
     margin-top: 10px;
 
+    transform: rotate(-20deg);
     margin-bottom: 10px;
 }
+.primary-button {
+    position: relative;
 
+    overflow: hidden;
 .age-range label {
     display: block;
 
+    background: #c89d4c;
     font-family: Arial, sans-serif;
 
+    box-shadow: 0 5px 15px rgba(156, 116, 56, .15);
+}
     font-size: 13px;
 
+.primary-button::before {
+    content: "";
     font-weight: bold;
 
+    position: absolute;
     margin-bottom: 8px;
 
+    top: 0;
+    left: -100%;
     color: #536158;
 }
 
 .age-range select {
     width: 100%;
+    height: 100%;
 
+    background: rgba(255,255,255,.2);
     padding: 16px 18px;
 
+    transform: skewX(-20deg);
     border:
         1px solid #ccd3cd;
 
+    transition: left .5s ease;
+}
     background: #fafafa;
 
+.primary-button:hover::before {
+    left: 120%;
+}
     font-family: Arial, sans-serif;
 
+.section-divider {
+    width: 80px;
+    height: 1px;
     font-size: 15px;
 
+    background: #c89d4c;
     border-radius: 3px;
 
+    margin: 0 auto 35px;
     cursor: pointer;
 
+    position: relative;
     transition: .2s;
 }
 
+.section-divider {
+    width: 70px;
+    height: 2px;
 .age-range select:hover {
     border-color: #c89d4c;
 }
 
+    background: #c89d4c;
 .age-range select:focus {
     outline: none;
 
+    margin: 0 auto 35px;
     border-color: #c89d4c;
 
+    opacity: .7;
+}
+}
+.step {
+    opacity: 0;
+    transform: translateY(25px);
     background: white;
 
+    animation: revealStep .8s ease forwards;
     box-shadow:
         0 0 0 3px
         rgba(200, 157, 76, .12);
 }
 
+.step:nth-child(2) {
+    animation-delay: .15s;
+}
 
+.step:nth-child(3) {
+    animation-delay: .3s;
+}
 /* ==============================
    DEAL BREAKERS
 ============================== */
 
+@keyframes revealStep {
 .dealbreaker-section {
     background: #f1eadf;
 
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
     border-top:
         4px solid #c89d4c;
 
@@ -1838,20 +2085,40 @@ textarea {
 
     overflow: hidden;
 }
+body {
+    background-color: #f7f3eb;
 
+    background-image:
+        radial-gradient(
+            rgba(23, 60, 43, 0.035) 1px,
+            transparent 1px
+        );
 .dealbreaker-section::after {
     content: "✦";
 
+    background-size: 18px 18px;
+}
+/* ==============================
+   SUBTLE SCROLL REVEAL
+============================== */
     position: absolute;
 
+.scroll-reveal {
+    opacity: 0;
     right: 35px;
     top: 25px;
 
+    filter: blur(2px);
     font-size: 85px;
 
+    transform: translateY(15px);
     color:
         rgba(200, 157, 76, .10);
 
+    transition:
+        opacity 0.7s ease,
+        filter 0.7s ease,
+        transform 0.7s ease;
     pointer-events: none;
 }
 
@@ -1859,278 +2126,36 @@ textarea {
     margin-bottom: 20px;
 }
 
+.scroll-reveal.visible {
+    opacity: 1;
 .section-description {
     max-width: 620px;
 
+    filter: blur(0);
     margin: 0 auto 35px;
 
+    transform: translateY(0);
+}
     font-family: Arial, sans-serif;
 
     font-size: 14px;
 
+/* Subtle stagger */
     line-height: 1.7;
 
+.steps .step:nth-child(1) {
+    transition-delay: 0s;
+}
     color: #66736b;
 
+.steps .step:nth-child(2) {
+    transition-delay: 0.08s;
     text-align: center;
 }
 
-.selection-note {
-    display: inline-block;
-
-    margin: 5px auto 20px;
-
-    padding: 7px 14px;
-
-    background: #173c2b;
-
-    color: #d6b36a;
-
-    font-family: Arial, sans-serif;
-
-    font-size: 12px;
-
-    font-weight: bold;
-
-    letter-spacing: .5px;
-
-    border-radius: 20px;
+.steps .step:nth-child(3) {
+    transition-delay: 0.16s;
 }
-
-
-/* Deal breaker choices */
-
-.checkbox-group {
-    display: grid;
-
-    grid-template-columns:
-        1fr 1fr;
-
-    gap: 12px;
-
-    margin-top: 15px;
-
-    margin-bottom: 30px;
-}
-
-.checkbox-choice {
-    display: flex;
-
-    align-items: center;
-
-    gap: 12px;
-
-    padding: 16px 18px;
-
-    background: #faf8f4;
-
-    border:
-        1px solid #ddd5c8;
-
-    border-radius: 3px;
-
-    font-family: Arial, sans-serif;
-
-    font-size: 14px;
-
-    color: #38463e;
-
-    cursor: pointer;
-
-    transition: .2s;
-}
-
-.checkbox-choice:hover {
-    border-color: #c89d4c;
-
-    background: white;
-
-    transform: translateY(-1px);
-
-    box-shadow:
-        0 3px 10px
-        rgba(0, 0, 0, .04);
-}
-
-.checkbox-choice input {
-    width: 17px;
-    height: 17px;
-
-    flex-shrink: 0;
-
-    accent-color: #173c2b;
-
-    cursor: pointer;
-}
-
-.checkbox-choice:has(input:checked) {
-    background: #173c2b;
-
-    border-color: #173c2b;
-
-    color: white;
-
-    box-shadow:
-        0 3px 10px
-        rgba(23, 60, 43, .15);
-}
-
-.checkbox-choice:has(input:checked) input {
-    accent-color: #c89d4c;
-}
-
-#dealbreaker-other {
-    background: #faf8f4;
-}
-
-#dealbreaker-other:focus {
-    background: white;
-
-    border-color: #c89d4c;
-
-    box-shadow:
-        0 0 0 3px
-        rgba(200, 157, 76, .12);
-}
-
-.dealbreaker-section > label[for="dealbreaker-other"] {
-    margin-top: 15px;
-}
-
-
-/* ==============================
-   MOBILE
-============================== */
-
-@media (max-width: 750px) {
-
-    .nav-links {
-        display: none;
-    }
-
-    .hero {
-        padding: 70px 7%;
-
-        min-height: 700px;
-    }
-
-    .hero h1 {
-        font-size: 55px;
-    }
-
-    /*
-       Move animation behind the text
-       and make it slightly subtler
-       on smaller screens.
-    */
-    .morph-animation {
-        right: -55px;
-        top: 62%;
-
-        width: 260px;
-        height: 300px;
-
-        opacity: .09;
-    }
-
-    .steps {
-        grid-template-columns: 1fr;
-    }
-
-    .about {
-        flex-direction: column;
-
-        padding: 80px 7%;
-
-        gap: 55px;
-    }
-
-    .about-text h2 {
-        font-size: 45px;
-    }
-
-    .mystery-card-wrapper {
-        width: 285px;
-        height: 370px;
-    }
-
-    .mystery-symbol {
-        width: 120px;
-        height: 120px;
-    }
-
-    .mystery-symbol span {
-        font-size: 85px;
-    }
-
-    .match-card h3 {
-        font-size: 22px;
-    }
-
-    .question-grid {
-        grid-template-columns: 1fr;
-    }
-
-    .final-cta h2 {
-        font-size: 45px;
-    }
-
-    .match-card {
-        width: 100%;
-    }
-
-    .traditionality-scale {
-        grid-template-columns:
-            1fr 1fr;
-    }
-
-    .checkbox-group {
-        grid-template-columns: 1fr;
-    }
-
-    .dealbreaker-section {
-        padding: 28px 20px;
-    }
-
-    .dealbreaker-section::after {
-        right: 10px;
-        top: 15px;
-
-        font-size: 60px;
-    }
-
-    .age-range {
-        grid-template-columns: 1fr;
-
-        gap: 5px;
-    }
-
-    .quiz-header {
-        padding: 75px 20px 85px;
-    }
-
-    .quiz-header h1 {
-        font-size: 45px;
-    }
-
-    .quiz-header > p:last-child {
-        font-size: 15px;
-    }
-
-    .form-section {
-        padding: 28px 20px;
-    }
-
-    .form-section h2 {
-        font-size: 30px;
-    }
-
-    .choice-group {
-        grid-template-columns: 1fr;
-    }
-}
-
-
 /* ==============================
    VERY SMALL SCREENS
 ============================== */

@@ -364,67 +364,358 @@ margin-bottom: 20px;
 }
 
 
-/* ------------------------------
-MATCH CARD
------------------------------- */
+/* ==============================
+   MYSTERY MATCH CARD
+============================== */
+
+.mystery-card-wrapper {
+    width: 340px;
+    height: 430px;
+
+    position: relative;
+
+    flex-shrink: 0;
+
+    animation: mysteryFloat 5s ease-in-out infinite;
+}
+
+
+/* Back card */
+
+.mystery-card-back {
+    position: absolute;
+
+    width: 100%;
+    height: 100%;
+
+    top: 14px;
+    left: 14px;
+
+    background: #c89d4c;
+
+    transform: rotate(4deg);
+
+    border-radius: 3px;
+}
+
+
+/* Main card */
 
 .match-card {
-    border-radius: 4px;
+    position: relative;
 
-    transform: rotate(2deg);
+    width: 100%;
+    height: 100%;
 
-    transition: transform .3s ease, box-shadow .3s ease;
-}
+    padding: 40px 30px;
 
-.match-card:hover {
-    transform: rotate(0deg) translateY(-8px);
+    background:
+        linear-gradient(
+            145deg,
+            #173c2b,
+            #123326
+        );
+
+    color: white;
+
+    display: flex;
+    flex-direction: column;
+
+    align-items: center;
+    justify-content: center;
+
+    text-align: center;
+
+    border: 1px solid rgba(214, 179, 106, .35);
+
+    border-radius: 3px;
+
+    overflow: hidden;
 
     box-shadow:
-        20px 20px 0 #c89d4c,
-        0 20px 40px rgba(23, 60, 43, .15);
+        0 20px 45px rgba(23, 60, 43, .20);
+
+    transition:
+        transform .35s ease,
+        box-shadow .35s ease;
 }
 
-.match-card p {
-font-family: Arial, sans-serif;
-font-size: 11px;
-letter-spacing: 3px;
-color: #d6b36a;
+
+/* Hover */
+
+.mystery-card-wrapper:hover {
+    animation-play-state: paused;
 }
 
-.question-mark {
-    font-size: 130px;
+.mystery-card-wrapper:hover .match-card {
+    transform: translateY(-8px) rotate(-1deg);
+
+    box-shadow:
+        0 30px 60px rgba(23, 60, 43, .28);
+}
+
+
+/* Decorative circle */
+
+.match-card::before {
+    content: "";
+
+    position: absolute;
+
+    width: 270px;
+    height: 270px;
+
+    border: 1px solid rgba(214, 179, 106, .12);
+
+    border-radius: 50%;
+
+    top: -115px;
+    right: -90px;
+}
+
+
+/* Second decorative circle */
+
+.match-card::after {
+    content: "";
+
+    position: absolute;
+
+    width: 190px;
+    height: 190px;
+
+    border: 1px solid rgba(214, 179, 106, .08);
+
+    border-radius: 50%;
+
+    bottom: -90px;
+    left: -80px;
+}
+
+
+/* Make card content sit above decorations */
+
+.match-card > * {
+    position: relative;
+
+    z-index: 2;
+}
+
+
+/* Mystery Match label */
+
+.match-label {
+    font-family: Arial, sans-serif;
+
+    font-size: 11px;
+
     font-weight: bold;
+
+    letter-spacing: 4px;
+
     color: #d6b36a;
+
+    margin-bottom: 20px;
+}
+
+
+/* Mystery symbol */
+
+.mystery-symbol {
+    width: 145px;
+    height: 145px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    margin-bottom: 18px;
+
+    border: 1px solid rgba(214, 179, 106, .35);
+
+    border-radius: 50%;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(200, 157, 76, .16),
+            rgba(200, 157, 76, .03)
+        );
+
+    box-shadow:
+        0 0 35px rgba(200, 157, 76, .08);
 
     animation: mysteryPulse 3s ease-in-out infinite;
 }
 
-@keyframes mysteryPulse {
+
+/* Question mark */
+
+.mystery-symbol span {
+    font-family: Georgia, "Times New Roman", serif;
+
+    font-size: 105px;
+
+    line-height: 1;
+
+    color: #d6b36a;
+
+    font-weight: bold;
+
+    transform: translateY(-5px);
+}
+
+
+/* Divider */
+
+.card-divider {
+    width: 90px;
+
+    height: 1px;
+
+    background: rgba(214, 179, 106, .4);
+
+    margin: 8px 0 20px;
+
+    position: relative;
+}
+
+
+/* Heart on divider */
+
+.card-divider span {
+    position: absolute;
+
+    left: 50%;
+    top: 50%;
+
+    transform: translate(-50%, -50%);
+
+    padding: 0 10px;
+
+    background: #173c2b;
+
+    color: #d6b36a;
+
+    font-size: 16px;
+}
+
+
+/* Card title */
+
+.match-card h3 {
+    font-size: 25px;
+
+    line-height: 1.2;
+
+    margin-bottom: 9px;
+
+    font-weight: normal;
+}
+
+
+/* Subtitle */
+
+.match-question {
+    font-family: Arial, sans-serif;
+
+    font-size: 13px;
+
+    color: #aebdb4;
+
+    letter-spacing: .5px;
+}
+
+
+/* Decorative stars */
+
+.card-decoration {
+    position: absolute;
+
+    color: #d6b36a;
+
+    opacity: .5;
+
+    font-size: 18px;
+}
+
+
+.card-decoration-top {
+    top: 28px;
+    left: 30px;
+}
+
+
+.card-decoration-bottom {
+    bottom: 25px;
+    right: 30px;
+
+    transform: rotate(25deg);
+}
+
+
+/* ==============================
+   ANIMATIONS
+============================== */
+
+@keyframes mysteryFloat {
 
     0%, 100% {
-        opacity: .65;
-        transform: scale(1);
+        transform: translateY(0) rotate(2deg);
     }
 
     50% {
-        opacity: 1;
-        transform: scale(1.08);
+        transform: translateY(-10px) rotate(1deg);
     }
 
 }
 
-It would 
 
-.match-card h3 {
-font-size: 25px;
-margin-bottom: 10px;
+@keyframes mysteryPulse {
+
+    0%, 100% {
+        transform: scale(1);
+
+        box-shadow:
+            0 0 25px rgba(200, 157, 76, .06);
+    }
+
+    50% {
+        transform: scale(1.04);
+
+        box-shadow:
+            0 0 40px rgba(200, 157, 76, .15);
+    }
+
 }
 
-.match-card span {
-font-family: Arial, sans-serif;
-color: #b7c5bc;
-}
 
+/* ==============================
+   MOBILE
+============================== */
+
+@media (max-width: 600px) {
+
+    .mystery-card-wrapper {
+        width: 285px;
+        height: 370px;
+    }
+
+    .mystery-symbol {
+        width: 120px;
+        height: 120px;
+    }
+
+    .mystery-symbol span {
+        font-size: 85px;
+    }
+
+    .match-card h3 {
+        font-size: 22px;
+    }
+
+}
 
 /* ------------------------------
 QUESTIONS

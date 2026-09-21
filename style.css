@@ -2600,7 +2600,943 @@ textarea:focus-visible {
     .mystery-card-wrapper {
         animation: none;
     }
+/* ============================================================
+   NEW PAGES
+   COUNTDOWN / STATS / ADVICE / REVIEWS
+============================================================ */
 
+
+/* ==============================
+   SHARED PAGE HEADER
+============================== */
+
+.page-header {
+    position: relative;
+    overflow: hidden;
+
+    padding: 100px 20px 105px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #173c2b 0%,
+            #1d4935 100%
+        );
+
+    color: white;
+
+    text-align: center;
+}
+
+.page-header::before {
+    content: "";
+
+    position: absolute;
+
+    width: 340px;
+    height: 340px;
+
+    right: -120px;
+    top: -150px;
+
+    border:
+        1px solid
+        rgba(214, 179, 106, .16);
+
+    border-radius: 50%;
+}
+
+.page-header::after {
+    content: "";
+
+    position: absolute;
+
+    width: 220px;
+    height: 220px;
+
+    left: -100px;
+    bottom: -130px;
+
+    border:
+        1px solid
+        rgba(214, 179, 106, .10);
+
+    border-radius: 50%;
+}
+
+.page-header > * {
+    position: relative;
+    z-index: 1;
+}
+
+.page-header .section-label {
+    color: #d6b36a;
+
+    margin-bottom: 20px;
+
+    letter-spacing: 5px;
+
+    font-size: 11px;
+}
+
+.page-header h1 {
+    font-size:
+        clamp(48px, 6vw, 72px);
+
+    line-height: 1;
+
+    margin-bottom: 25px;
+
+    letter-spacing: -1px;
+}
+
+.page-header p:last-child {
+    max-width: 650px;
+
+    margin: auto;
+
+    font-family: Arial, sans-serif;
+
+    font-size: 17px;
+
+    line-height: 1.8;
+
+    color: #dce6df;
+}
+
+
+/* ==============================
+   PAGE CONTENT
+============================== */
+
+.page-content {
+    max-width: 1100px;
+
+    margin: auto;
+
+    padding: 90px 25px;
+}
+
+.page-content.narrow {
+    max-width: 850px;
+}
+
+.page-intro {
+    max-width: 700px;
+
+    margin: 0 auto 55px;
+
+    text-align: center;
+
+    font-family: Arial, sans-serif;
+
+    font-size: 17px;
+
+    line-height: 1.8;
+
+    color: #66736b;
+}
+
+
+/* ==============================
+   COUNTDOWN PAGE
+============================== */
+
+.countdown-section {
+    text-align: center;
+}
+
+.countdown-label {
+    font-family: Arial, sans-serif;
+
+    font-size: 12px;
+
+    font-weight: bold;
+
+    letter-spacing: 4px;
+
+    color: #9c7438;
+
+    margin-bottom: 15px;
+}
+
+.countdown-title {
+    font-size: 48px;
+
+    margin-bottom: 15px;
+}
+
+.countdown-description {
+    max-width: 650px;
+
+    margin: 0 auto 45px;
+
+    font-family: Arial, sans-serif;
+
+    line-height: 1.7;
+
+    color: #66736b;
+}
+
+
+/* Countdown boxes */
+
+.countdown-grid {
+    max-width: 850px;
+
+    margin: 0 auto 55px;
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(4, 1fr);
+
+    gap: 15px;
+}
+
+.countdown-box {
+    padding: 30px 15px;
+
+    background: white;
+
+    border-top:
+        3px solid #c89d4c;
+
+    box-shadow:
+        0 8px 25px
+        rgba(23, 60, 43, .07);
+}
+
+.countdown-number {
+    display: block;
+
+    font-size: 55px;
+
+    line-height: 1;
+
+    color: #173c2b;
+
+    margin-bottom: 10px;
+}
+
+.countdown-unit {
+    font-family: Arial, sans-serif;
+
+    font-size: 11px;
+
+    font-weight: bold;
+
+    letter-spacing: 3px;
+
+    text-transform: uppercase;
+
+    color: #9c7438;
+}
+
+
+/* Next matching date */
+
+.next-matching-card {
+    max-width: 650px;
+
+    margin: auto;
+
+    padding: 35px;
+
+    background: #e7dfd1;
+
+    border-left:
+        4px solid #c89d4c;
+
+    text-align: center;
+}
+
+.next-matching-card h2 {
+    font-size: 32px;
+
+    margin-bottom: 12px;
+}
+
+.next-matching-card p {
+    font-family: Arial, sans-serif;
+
+    line-height: 1.7;
+
+    color: #536158;
+}
+
+
+/* Countdown status */
+
+.countdown-status {
+    display: inline-block;
+
+    margin-top: 20px;
+
+    padding: 9px 17px;
+
+    background: #173c2b;
+
+    color: #d6b36a;
+
+    border-radius: 20px;
+
+    font-family: Arial, sans-serif;
+
+    font-size: 12px;
+
+    font-weight: bold;
+
+    letter-spacing: .5px;
+}
+
+
+/* ==============================
+   STATS PAGE
+============================== */
+
+.stats-grid {
+    max-width: 1000px;
+
+    margin: 0 auto 60px;
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    gap: 20px;
+}
+
+.stat-card {
+    padding: 35px 25px;
+
+    background: white;
+
+    text-align: center;
+
+    border-top:
+        3px solid #c89d4c;
+
+    box-shadow:
+        0 7px 25px
+        rgba(23, 60, 43, .06);
+
+    transition:
+        transform .2s ease,
+        box-shadow .2s ease;
+}
+
+.stat-card:hover {
+    transform: translateY(-4px);
+
+    box-shadow:
+        0 12px 30px
+        rgba(23, 60, 43, .10);
+}
+
+.stat-number {
+    display: block;
+
+    font-size: 52px;
+
+    line-height: 1;
+
+    color: #173c2b;
+
+    margin-bottom: 12px;
+}
+
+.stat-label {
+    font-family: Arial, sans-serif;
+
+    font-size: 13px;
+
+    line-height: 1.5;
+
+    color: #66736b;
+}
+
+
+/* Stats information cards */
+
+.stats-section {
+    margin-bottom: 60px;
+}
+
+.stats-section h2 {
+    font-size: 38px;
+
+    text-align: center;
+
+    margin-bottom: 15px;
+}
+
+.stats-section > p {
+    max-width: 700px;
+
+    margin: 0 auto 35px;
+
+    font-family: Arial, sans-serif;
+
+    line-height: 1.7;
+
+    text-align: center;
+
+    color: #66736b;
+}
+
+.stats-list {
+    max-width: 850px;
+
+    margin: auto;
+
+    display: grid;
+
+    gap: 12px;
+}
+
+.stats-list-item {
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 20px;
+
+    padding: 20px 24px;
+
+    background: white;
+
+    border-left:
+        4px solid #c89d4c;
+
+    font-family: Arial, sans-serif;
+}
+
+.stats-list-item span:last-child {
+    font-weight: bold;
+
+    color: #173c2b;
+}
+
+
+/* Privacy note */
+
+.data-note {
+    max-width: 800px;
+
+    margin: 50px auto 0;
+
+    padding: 25px;
+
+    background: #e7dfd1;
+
+    font-family: Arial, sans-serif;
+
+    font-size: 13px;
+
+    line-height: 1.7;
+
+    color: #536158;
+}
+
+
+/* ==============================
+   ADVICE PAGE
+============================== */
+
+.advice-grid {
+    max-width: 1050px;
+
+    margin: auto;
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, 1fr);
+
+    gap: 25px;
+}
+
+.advice-card {
+    padding: 35px;
+
+    background: white;
+
+    border-top:
+        3px solid #c89d4c;
+
+    box-shadow:
+        0 7px 25px
+        rgba(23, 60, 43, .06);
+
+    transition:
+        transform .2s ease,
+        box-shadow .2s ease;
+}
+
+.advice-card:hover {
+    transform: translateY(-4px);
+
+    box-shadow:
+        0 12px 30px
+        rgba(23, 60, 43, .10);
+}
+
+.advice-number {
+    display: block;
+
+    font-family: Arial, sans-serif;
+
+    font-size: 13px;
+
+    font-weight: bold;
+
+    letter-spacing: 2px;
+
+    color: #b28742;
+
+    margin-bottom: 18px;
+}
+
+.advice-card h2 {
+    font-size: 30px;
+
+    line-height: 1.15;
+
+    margin-bottom: 15px;
+}
+
+.advice-card p {
+    font-family: Arial, sans-serif;
+
+    font-size: 14px;
+
+    line-height: 1.75;
+
+    color: #66736b;
+}
+
+.advice-card ul {
+    margin-top: 18px;
+
+    padding-left: 20px;
+
+    font-family: Arial, sans-serif;
+
+    font-size: 14px;
+
+    line-height: 1.8;
+
+    color: #536158;
+}
+
+.advice-card li {
+    margin-bottom: 8px;
+}
+
+
+/* Featured advice */
+
+.advice-feature {
+    max-width: 900px;
+
+    margin: 0 auto 50px;
+
+    padding: 45px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #173c2b,
+            #1d4935
+        );
+
+    color: white;
+
+    text-align: center;
+}
+
+.advice-feature .section-label {
+    color: #d6b36a;
+}
+
+.advice-feature h2 {
+    font-size: 42px;
+
+    margin-bottom: 18px;
+}
+
+.advice-feature p {
+    max-width: 650px;
+
+    margin: auto;
+
+    font-family: Arial, sans-serif;
+
+    line-height: 1.8;
+
+    color: #dce6df;
+}
+
+
+/* ==============================
+   REVIEWS PAGE
+============================== */
+
+.review-grid {
+    max-width: 1000px;
+
+    margin: auto;
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, 1fr);
+
+    gap: 20px;
+}
+
+.review-card {
+    position: relative;
+
+    padding: 35px;
+
+    background: white;
+
+    border-left:
+        4px solid #c89d4c;
+
+    box-shadow:
+        0 7px 25px
+        rgba(23, 60, 43, .06);
+}
+
+.review-card::before {
+    content: "“";
+
+    position: absolute;
+
+    top: 5px;
+    right: 20px;
+
+    font-size: 70px;
+
+    line-height: 1;
+
+    color:
+        rgba(200, 157, 76, .18);
+
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+}
+
+.review-card p {
+    font-family: Arial, sans-serif;
+
+    font-size: 15px;
+
+    line-height: 1.8;
+
+    color: #536158;
+
+    position: relative;
+
+    z-index: 1;
+}
+
+.review-author {
+    display: block;
+
+    margin-top: 20px;
+
+    font-family: Arial, sans-serif;
+
+    font-size: 12px;
+
+    font-weight: bold;
+
+    letter-spacing: 1px;
+
+    text-transform: uppercase;
+
+    color: #9c7438;
+}
+
+
+/* Review submission */
+
+.review-submit {
+    max-width: 750px;
+
+    margin: 60px auto 0;
+
+    padding: 45px;
+
+    background: #e7dfd1;
+
+    text-align: center;
+}
+
+.review-submit h2 {
+    font-size: 35px;
+
+    margin-bottom: 15px;
+}
+
+.review-submit p {
+    font-family: Arial, sans-serif;
+
+    line-height: 1.7;
+
+    color: #536158;
+
+    margin-bottom: 25px;
+}
+
+
+/* ==============================
+   RESOURCE CARDS
+============================== */
+
+.resource-grid {
+    max-width: 1050px;
+
+    margin: auto;
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    gap: 20px;
+}
+
+.resource-card {
+    display: flex;
+
+    flex-direction: column;
+
+    padding: 32px;
+
+    background: white;
+
+    border-top:
+        3px solid #c89d4c;
+
+    box-shadow:
+        0 7px 25px
+        rgba(23, 60, 43, .06);
+
+    transition:
+        transform .2s ease,
+        box-shadow .2s ease;
+}
+
+.resource-card:hover {
+    transform: translateY(-5px);
+
+    box-shadow:
+        0 14px 30px
+        rgba(23, 60, 43, .11);
+}
+
+.resource-number {
+    font-family: Arial, sans-serif;
+
+    font-size: 12px;
+
+    font-weight: bold;
+
+    letter-spacing: 2px;
+
+    color: #b28742;
+
+    margin-bottom: 20px;
+}
+
+.resource-card h3 {
+    font-size: 28px;
+
+    margin-bottom: 14px;
+}
+
+.resource-card p {
+    font-family: Arial, sans-serif;
+
+    font-size: 14px;
+
+    line-height: 1.7;
+
+    color: #66736b;
+
+    margin-bottom: 25px;
+}
+
+.resource-link {
+    margin-top: auto;
+
+    font-family: Arial, sans-serif;
+
+    font-size: 13px;
+
+    font-weight: bold;
+
+    color: #173c2b;
+}
+
+
+/* ==============================
+   BACK TO HOME
+============================== */
+
+.back-home {
+    display: block;
+
+    width: fit-content;
+
+    margin: 45px auto 0;
+
+    font-family: Arial, sans-serif;
+
+    font-size: 13px;
+
+    font-weight: bold;
+
+    color: #536158;
+
+    transition: .2s;
+}
+
+.back-home:hover {
+    color: #173c2b;
+
+    transform: translateY(-1px);
+}
+
+
+/* ==============================
+   MOBILE — NEW PAGES
+============================== */
+
+@media (max-width: 750px) {
+
+    .page-header {
+        padding: 75px 20px 85px;
+    }
+
+    .page-header h1 {
+        font-size: 45px;
+    }
+
+    .page-header p:last-child {
+        font-size: 15px;
+    }
+
+    .page-content {
+        padding: 65px 20px;
+    }
+
+    .countdown-title {
+        font-size: 38px;
+    }
+
+    .countdown-grid {
+        grid-template-columns:
+            1fr 1fr;
+
+        gap: 12px;
+    }
+
+    .countdown-box {
+        padding: 25px 10px;
+    }
+
+    .countdown-number {
+        font-size: 42px;
+    }
+
+    .stats-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .stats-section h2 {
+        font-size: 32px;
+    }
+
+    .stats-list-item {
+        padding: 17px;
+
+        font-size: 13px;
+    }
+
+    .advice-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .advice-card {
+        padding: 28px 23px;
+    }
+
+    .advice-feature {
+        padding: 35px 23px;
+    }
+
+    .advice-feature h2 {
+        font-size: 34px;
+    }
+
+    .review-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .review-card {
+        padding: 28px 23px;
+    }
+
+    .review-submit {
+        padding: 35px 23px;
+    }
+
+    .review-submit h2 {
+        font-size: 30px;
+    }
+
+    .resource-grid {
+        grid-template-columns: 1fr;
+    }
+
+}
+
+
+/* ==============================
+   VERY SMALL SCREENS
+============================== */
+
+@media (max-width: 400px) {
+
+    .page-header h1 {
+        font-size: 39px;
+    }
+
+    .countdown-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .countdown-number {
+        font-size: 48px;
+    }
+
+    .page-content {
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+
+}
     .mystery-symbol {
         animation: none;
     }

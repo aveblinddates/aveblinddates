@@ -321,26 +321,23 @@ a {
 .morph-animation {
     position: absolute;
 
-    right: 6%;
+    right: 4%;
     top: 50%;
 
-    width: 330px;
-    height: 360px;
+    width: 430px;
+    height: 450px;
 
     transform: translateY(-50%);
 
-    /*
-       More visible than before,
-       but still subtle enough
-       to stay behind the hero text.
-    */
     opacity: .16;
 
     pointer-events: none;
 }
 
 
-/* Individual people */
+/* ==============================
+   PERSON
+============================== */
 
 .person-shape {
     position: absolute;
@@ -348,217 +345,182 @@ a {
     inset: 0;
 
     display: flex;
-
     flex-direction: column;
 
     align-items: center;
-
     justify-content: center;
 
     color: white;
 
-    /*
-       Each silhouette gets the same
-       cycle, but the delays make them
-       appear one after another.
-    */
-    animation:
-        personCycle 4.8s infinite;
+    opacity: 0;
 
-    filter:
-        drop-shadow(0 0 18px rgba(255,255,255,.08));
+    animation: personCycle 8s infinite;
 }
 
 
 /* Head */
 
 .person-head {
-    width: 82px;
-    height: 82px;
+    width: 115px;
+    height: 115px;
 
     background: white;
 
     border-radius: 50%;
 
-    margin-bottom: 13px;
-
-    transition: all .3s ease;
+    margin-bottom: 18px;
 }
 
 
 /* Body */
 
 .person-body {
-    width: 175px;
-    height: 175px;
+    width: 245px;
+    height: 235px;
 
     background: white;
 
     border-radius:
-        90px 90px 15px 15px;
+        125px 125px 20px 20px;
 }
 
 
-/* ------------------------------
-   PERSON 1
------------------------------- */
+/* ==============================
+   DIFFERENT PEOPLE
+============================== */
+
+/* Person 1 */
 
 .person-one {
     animation-delay: 0s;
 }
 
-.person-one .person-head {
-    width: 82px;
-    height: 82px;
-}
 
-.person-one .person-body {
-    width: 175px;
-    height: 175px;
-
-    border-radius:
-        90px 90px 15px 15px;
-}
-
-
-/* ------------------------------
-   PERSON 2
------------------------------- */
+/* Person 2 */
 
 .person-two {
-    animation-delay: 1.2s;
+    animation-delay: 2s;
 }
 
 .person-two .person-head {
-    width: 67px;
-    height: 67px;
+    width: 100px;
+    height: 100px;
 }
 
 .person-two .person-body {
-    width: 215px;
-    height: 150px;
+    width: 275px;
+    height: 215px;
 
     border-radius:
-        110px 110px 15px 15px;
+        140px 140px 15px 15px;
 }
 
 
-/* ------------------------------
-   PERSON 3
------------------------------- */
+/* Person 3 */
 
 .person-three {
-    animation-delay: 2.4s;
+    animation-delay: 4s;
 }
 
 .person-three .person-head {
-    width: 96px;
-    height: 96px;
+    width: 125px;
+    height: 125px;
 }
 
 .person-three .person-body {
-    width: 150px;
-    height: 195px;
+    width: 210px;
+    height: 260px;
 
     border-radius:
-        80px 80px 15px 15px;
+        110px 110px 20px 20px;
 }
 
 
-/* ------------------------------
-   PERSON 4
------------------------------- */
+/* Person 4 */
 
 .person-four {
-    animation-delay: 3.6s;
+    animation-delay: 6s;
 }
 
 .person-four .person-head {
-    width: 76px;
-    height: 76px;
+    width: 105px;
+    height: 105px;
 }
 
 .person-four .person-body {
-    width: 225px;
-    height: 145px;
+    width: 295px;
+    height: 210px;
 
     border-radius:
-        115px 115px 15px 15px;
+        150px 150px 20px 20px;
 }
 
 
 /* ==============================
-   SILHOUETTE ANIMATION
+   SLOWER, MORE OBVIOUS TRANSITION
 ============================== */
 
 @keyframes personCycle {
 
-    /*
-       Start invisible and slightly
-       smaller.
-    */
+    /* Start hidden */
+
     0% {
         opacity: 0;
 
         transform:
-            translate(0, 20px)
-            scale(.78);
+            translateY(35px)
+            scale(.82);
     }
 
-    /*
-       Person pops into view.
-    */
+
+    /* Slowly appear */
+
     5% {
         opacity: 1;
 
         transform:
-            translate(0, 0)
+            translateY(0)
             scale(1);
     }
 
-    /*
-       Hold long enough to clearly
-       see the silhouette.
-    */
-    17% {
+
+    /* Stay clearly visible */
+
+    18% {
         opacity: 1;
 
         transform:
-            translate(0, 0)
+            translateY(0)
             scale(1);
     }
 
-    /*
-       Small movement before disappearing.
-    */
-    21% {
+
+    /* Begin leaving */
+
+    23% {
         opacity: .8;
 
         transform:
-            translate(8px, -8px)
-            scale(1.04);
+            translateY(-15px)
+            scale(1.05);
     }
 
-    /*
-       Fade out.
-    */
-    26% {
+
+    /* Fade away */
+
+    28% {
         opacity: 0;
 
         transform:
-            translate(18px, -18px)
-            scale(1.10);
+            translateY(-40px)
+            scale(1.12);
     }
 
-    /*
-       Stay hidden until the next cycle.
-    */
+
+    /* Stay hidden until next cycle */
+
     100% {
         opacity: 0;
-
-        transform:
-            translate(18px, -18px)
-            scale(1.10);
     }
 }
 
@@ -577,53 +539,64 @@ a {
     align-items: center;
     justify-content: center;
 
-    font-size: 180px;
+    font-size: 300px;
+
+    line-height: 1;
 
     color: #d6b36a;
 
     opacity: 0;
 
-    filter:
-        drop-shadow(
-            0 0 25px
-            rgba(214, 179, 106, .25)
-        );
+    text-shadow:
+        0 0 35px rgba(214, 179, 106, .18);
 
-    animation:
-        heartReveal 4.8s infinite;
+    animation: heartReveal 8s infinite;
 }
 
 
-/* Heart appears after silhouettes */
+/* ==============================
+   HEART REVEAL
+============================== */
 
 @keyframes heartReveal {
 
+    /* Hidden while people cycle */
+
     0%,
-    72% {
+    68% {
         opacity: 0;
 
         transform:
-            scale(.65)
-            rotate(-12deg);
+            scale(.55)
+            rotate(-15deg);
     }
 
-    76% {
-        opacity: .3;
+
+    /* Begin appearing */
+
+    73% {
+        opacity: .25;
 
         transform:
-            scale(.78)
-            rotate(-6deg);
+            scale(.75)
+            rotate(-8deg);
     }
 
-    80% {
+
+    /* Big obvious reveal */
+
+    78% {
         opacity: 1;
 
         transform:
-            scale(1.08)
+            scale(1.12)
             rotate(5deg);
     }
 
-    87% {
+
+    /* Settle */
+
+    84% {
         opacity: 1;
 
         transform:
@@ -631,20 +604,64 @@ a {
             rotate(0deg);
     }
 
-    94% {
+
+    /* Hold */
+
+    92% {
         opacity: 1;
 
         transform:
-            scale(1.03)
+            scale(1)
             rotate(0deg);
     }
+
+
+    /* Fade before restarting */
 
     100% {
         opacity: 0;
 
         transform:
             scale(.9)
-            rotate(0deg);
+            rotate(-5deg);
+    }
+}
+
+
+/* ==============================
+   MOBILE
+============================== */
+
+@media (max-width: 750px) {
+
+    .morph-animation {
+        position: relative;
+
+        right: auto;
+        top: auto;
+
+        width: 300px;
+        height: 300px;
+
+        margin: 50px auto 0;
+
+        transform: none;
+
+        opacity: .12;
+    }
+
+    .person-head {
+        width: 80px;
+        height: 80px;
+    }
+
+    .person-body {
+        width: 170px;
+        height: 160px;
+    }
+
+    .morph-heart {
+        font-size: 210px;
     }
 }
 

@@ -460,99 +460,71 @@ How It Works
 </footer>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
 <script>
 
 const SUPABASE_URL = "https://vixyounyimddctlwzmdj.supabase.co";
 const SUPABASE_KEY = "sb_publishable_dSoWkr2kH2oGI96i2zCpdg_Ddi-NQff";
 
-const supabaseClient = supabase.createClient(
-SUPABASE_URL,
-SUPABASE_KEY
+const supabaseClient = window.supabase.createClient(
+    SUPABASE_URL,
+    SUPABASE_KEY
 );
 
-
 document
-.getElementById("matchForm")
-.addEventListener("submit", async function(event) {
+    .getElementById("matchForm")
+    .addEventListener("submit", async function(event) {
 
-event.preventDefault();
+        event.preventDefault();
 
+        const form = event.target;
 
-const form = event.target;
+        const profile = {
+            name: document.getElementById("name").value,
+            year: document.getElementById("year").value,
+            major: document.getElementById("major").value,
 
+            personality: document.querySelector(
+                'input[name="personality"]:checked'
+            )?.value,
 
-const profile = {
+            weekend: document.querySelector(
+                'input[name="weekend"]:checked'
+            )?.value,
 
-name:
-document.getElementById("name").value,
+            music: document.getElementById("music").value,
+            hobbies: document.getElementById("hobbies").value,
 
-year:
-document.getElementById("year").value,
+            faith: document.querySelector(
+                'input[name="faith"]:checked'
+            )?.value,
 
-major:
-document.getElementById("major").value,
+            values: document.getElementById("values").value,
+            looking_for: document.getElementById("looking").value,
+            anything_else: document.getElementById("anything").value
+        };
 
-personality:
-document.querySelector(
-'input[name="personality"]:checked'
-)?.value,
+        console.log("Submitting profile:", profile);
 
-weekend:
-document.querySelector(
-'input[name="weekend"]:checked'
-)?.value,
+        const { error } = await supabaseClient
+            .from("profiles")
+            .insert([profile]);
 
-music:
-document.getElementById("music").value,
+        if (error) {
 
-hobbies:
-document.getElementById("hobbies").value,
+            console.error("SUPABASE ERROR:", error);
 
-faith:
-document.querySelector(
-'input[name="faith"]:checked'
-)?.value,
+            document.getElementById("successMessage").textContent =
+                "Error: " + error.message;
 
-values:
-document.getElementById("values").value,
+            return;
+        }
 
-looking_for:
-document.getElementById("looking").value,
+        document.getElementById("successMessage").textContent =
+            "You're in! Your answers have been submitted.";
 
-anything_else:
-document.getElementById("anything").value
+        form.reset();
 
-};
-
-
-const {
-data,
-error
-} = await supabaseClient
-.from("profiles")
-.insert([profile])
-
-
-if (error) {
-
-console.error("SUPABASE ERROR:", error);
-
-document
-.getElementById("successMessage")
-.textContent =
-"Error: " + error.message;
-
-return;
-}
-
-
-document
-.getElementById("successMessage")
-.textContent =
-"You're in! Your answers have been submitted.";
-
-form.reset();
-
-});
+    });
 
 </script>

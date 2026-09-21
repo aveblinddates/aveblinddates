@@ -1733,27 +1733,16 @@ body {
     position: relative;
 }
 
-.section-divider::before,
-.section-divider::after {
-    content: "✦";
+.section-divider {
+    width: 70px;
+    height: 2px;
 
-    position: absolute;
+    background: #c89d4c;
 
-    top: 50%;
+    margin: 0 auto 35px;
 
-    transform: translateY(-50%);
-
-    color: #c89d4c;
-
-    font-size: 12px;
+    opacity: .7;
 }
-
-.section-divider::before {
-    left: -25px;
-}
-
-.section-divider::after {
-    right: -25px;
 }
 .step {
     opacity: 0;

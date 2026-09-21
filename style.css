@@ -24,11 +24,28 @@ body {
         );
 
     background-size: 18px 18px;
+
+    line-height: 1.5;
 }
 
 a {
     text-decoration: none;
     color: inherit;
+}
+
+button,
+input,
+select,
+textarea {
+    font: inherit;
+}
+
+button,
+a,
+input,
+select,
+textarea {
+    -webkit-tap-highlight-color: transparent;
 }
 
 
@@ -37,7 +54,7 @@ a {
 ============================== */
 
 .navbar {
-    height: 82px;
+    min-height: 82px;
     padding: 0 7%;
 
     display: flex;
@@ -65,6 +82,10 @@ a {
     color: #173c2b;
 
     position: relative;
+}
+
+.logo a {
+    display: inline-block;
 }
 
 .logo::after {
@@ -259,6 +280,8 @@ a {
     font-size: 14px;
     font-weight: bold;
 
+    cursor: pointer;
+
     transition: .2s;
 }
 
@@ -414,7 +437,6 @@ a {
 
 @keyframes personCycle {
 
-    /* Start invisible */
     0% {
         opacity: 0;
 
@@ -423,7 +445,6 @@ a {
             scale(.75);
     }
 
-    /* Slowly appear */
     5% {
         opacity: 0;
     }
@@ -436,7 +457,6 @@ a {
             scale(1);
     }
 
-    /* Hold */
     14% {
         opacity: 1;
 
@@ -445,7 +465,6 @@ a {
             scale(1);
     }
 
-    /* Slight movement before disappearing */
     17% {
         opacity: .7;
 
@@ -454,7 +473,6 @@ a {
             scale(1.03);
     }
 
-    /* Fade away */
     20% {
         opacity: 0;
 
@@ -463,7 +481,6 @@ a {
             scale(1.08);
     }
 
-    /* Stay gone */
     100% {
         opacity: 0;
     }
@@ -473,9 +490,6 @@ a {
 /* ==============================
    DIFFERENT SILHOUETTES
 ============================== */
-
-
-/* Person 1 */
 
 .person-one .person-head {
     width: 105px;
@@ -491,8 +505,6 @@ a {
 }
 
 
-/* Person 2 */
-
 .person-two .person-head {
     width: 90px;
     height: 90px;
@@ -507,8 +519,6 @@ a {
 }
 
 
-/* Person 3 */
-
 .person-three .person-head {
     width: 118px;
     height: 118px;
@@ -522,8 +532,6 @@ a {
         100px 100px 20px 20px;
 }
 
-
-/* Person 4 */
 
 .person-four .person-head {
     width: 96px;
@@ -573,7 +581,6 @@ a {
 
 @keyframes heartReveal {
 
-    /* All people are still cycling */
     0%,
     70% {
         opacity: 0;
@@ -583,7 +590,6 @@ a {
             rotate(-15deg);
     }
 
-    /* Clear pause before heart */
     72% {
         opacity: 0;
 
@@ -592,7 +598,6 @@ a {
             rotate(-10deg);
     }
 
-    /* Heart starts appearing */
     76% {
         opacity: .3;
 
@@ -601,7 +606,6 @@ a {
             rotate(-7deg);
     }
 
-    /* Big dramatic reveal */
     82% {
         opacity: 1;
 
@@ -610,7 +614,6 @@ a {
             rotate(5deg);
     }
 
-    /* Settle */
     88% {
         opacity: 1;
 
@@ -619,7 +622,6 @@ a {
             rotate(0deg);
     }
 
-    /* Hold */
     94% {
         opacity: 1;
 
@@ -628,7 +630,6 @@ a {
             rotate(0deg);
     }
 
-    /* Fade before restarting */
     100% {
         opacity: 0;
 
@@ -636,45 +637,6 @@ a {
             scale(.9)
             rotate(-5deg);
     }
-}
-
-
-/* ==============================
-   MOBILE
-============================== */
-
-@media (max-width: 750px) {
-
-    .morph-animation {
-        position: relative;
-
-        right: auto;
-        top: auto;
-
-        width: 300px;
-        height: 300px;
-
-        margin: 50px auto 0;
-
-        transform: none;
-
-        opacity: .11;
-    }
-
-    .person-head {
-        width: 75px;
-        height: 75px;
-    }
-
-    .person-body {
-        width: 165px;
-        height: 150px;
-    }
-
-    .morph-heart {
-        font-size: 210px;
-    }
-
 }
 
 
@@ -705,11 +667,10 @@ a {
 .section h2 {
     font-size: 52px;
 
+    line-height: 1.05;
+
     margin-bottom: 60px;
 }
-
-
-/* Clean section divider */
 
 .section-divider {
     width: 70px;
@@ -876,9 +837,6 @@ a {
         mysteryFloat 5s ease-in-out infinite;
 }
 
-
-/* Back card */
-
 .mystery-card-back {
     position: absolute;
 
@@ -894,9 +852,6 @@ a {
 
     border-radius: 3px;
 }
-
-
-/* Main card */
 
 .match-card {
     position: relative;
@@ -942,9 +897,6 @@ a {
         box-shadow .35s ease;
 }
 
-
-/* Hover */
-
 .mystery-card-wrapper:hover {
     animation-play-state: paused;
 }
@@ -958,9 +910,6 @@ a {
         0 30px 60px
         rgba(23, 60, 43, .28);
 }
-
-
-/* Decorative circles */
 
 .match-card::before {
     content: "";
@@ -998,17 +947,11 @@ a {
     left: -80px;
 }
 
-
-/* Card content above decorations */
-
 .match-card > * {
     position: relative;
 
     z-index: 2;
 }
-
-
-/* Mystery label */
 
 .match-label {
     font-family: Arial, sans-serif;
@@ -1023,9 +966,6 @@ a {
 
     margin-bottom: 20px;
 }
-
-
-/* Mystery symbol */
 
 .mystery-symbol {
     width: 145px;
@@ -1059,9 +999,6 @@ a {
         mysteryPulse 3s ease-in-out infinite;
 }
 
-
-/* Question mark */
-
 .mystery-symbol span {
     font-family:
         Georgia,
@@ -1079,9 +1016,6 @@ a {
     transform: translateY(-5px);
 }
 
-
-/* Card divider */
-
 .card-divider {
     width: 90px;
 
@@ -1094,9 +1028,6 @@ a {
 
     position: relative;
 }
-
-
-/* Heart */
 
 .card-divider span {
     position: absolute;
@@ -1116,9 +1047,6 @@ a {
     font-size: 16px;
 }
 
-
-/* Card title */
-
 .match-card h3 {
     font-size: 25px;
 
@@ -1129,9 +1057,6 @@ a {
     font-weight: normal;
 }
 
-
-/* Subtitle */
-
 .match-question {
     font-family: Arial, sans-serif;
 
@@ -1141,9 +1066,6 @@ a {
 
     letter-spacing: .5px;
 }
-
-
-/* Card decorations */
 
 .card-decoration {
     position: absolute;
@@ -1301,6 +1223,8 @@ a {
 .final-cta h2 {
     font-size: 60px;
 
+    line-height: 1.05;
+
     margin-bottom: 20px;
 }
 
@@ -1329,6 +1253,8 @@ footer {
 
 footer h3 {
     margin-bottom: 10px;
+
+    letter-spacing: .5px;
 }
 
 footer p {
@@ -1337,6 +1263,18 @@ footer p {
     color: #9eafa4;
 
     margin-bottom: 20px;
+}
+
+.footer-disclaimer {
+    max-width: 720px;
+
+    margin: 0 auto 25px;
+
+    font-size: 12px;
+
+    line-height: 1.6;
+
+    color: #7f9387;
 }
 
 .footer-links {
@@ -1351,11 +1289,13 @@ footer p {
     font-size: 13px;
 }
 
+.footer-links a {
+    transition: color .2s ease;
+}
+
 .footer-links a:hover {
     color: #d6b36a;
 }
-
-
 /* ==============================
    QUIZ PAGE
 ============================== */
@@ -1469,10 +1409,14 @@ footer p {
 }
 
 
-/* Quiz container */
+/* ==============================
+   QUIZ CONTAINER
+============================== */
 
 .quiz-container {
-    max-width: 800px;
+    width: 100%;
+
+    max-width: 850px;
 
     margin: auto;
 
@@ -1484,7 +1428,9 @@ footer p {
 }
 
 
-/* Form sections */
+/* ==============================
+   FORM SECTIONS
+============================== */
 
 .form-section {
     background: white;
@@ -1493,13 +1439,23 @@ footer p {
 
     margin-bottom: 35px;
 
+    border:
+        1px solid
+        rgba(23, 60, 43, .06);
+
     box-shadow:
         0 5px 25px
         rgba(0, 0, 0, .05);
 }
 
+.form-section .section-label {
+    margin-bottom: 12px;
+}
+
 .form-section h2 {
     font-size: 38px;
+
+    line-height: 1.1;
 
     margin-bottom: 35px;
 }
@@ -1511,15 +1467,20 @@ footer p {
 
     font-weight: bold;
 
+    line-height: 1.5;
+
     margin-top: 25px;
 
     margin-bottom: 10px;
 }
 
 
-/* Inputs */
+/* ==============================
+   FORM INPUTS
+============================== */
 
 input[type="text"],
+input[type="email"],
 select,
 textarea {
     width: 100%;
@@ -1531,27 +1492,105 @@ textarea {
 
     background: #fafafa;
 
+    color: #17251d;
+
     font-family: Arial, sans-serif;
 
     font-size: 15px;
 
-    border-radius: 2px;
+    border-radius: 3px;
 
-    transition: .2s;
+    transition:
+        border-color .2s ease,
+        background .2s ease,
+        box-shadow .2s ease;
+}
+
+input[type="text"]::placeholder,
+input[type="email"]::placeholder,
+textarea::placeholder {
+    color: #9aa49e;
+}
+
+input[type="text"]:hover,
+input[type="email"]:hover,
+select:hover,
+textarea:hover {
+    border-color: #b8c2bb;
 }
 
 input[type="text"]:focus,
+input[type="email"]:focus,
 select:focus,
 textarea:focus {
     outline: none;
 
-    border-color: #9c7438;
+    border-color: #c89d4c;
 
     background: white;
+
+    box-shadow:
+        0 0 0 3px
+        rgba(200, 157, 76, .12);
 }
 
 textarea {
     resize: vertical;
+
+    min-height: 100px;
+
+    line-height: 1.6;
+}
+
+
+/* ==============================
+   EMAIL
+============================== */
+
+#email {
+    width: 100%;
+
+    padding: 16px 18px;
+
+    border:
+        1px solid #ccd3cd;
+
+    background: #fafafa;
+
+    font-family: Arial, sans-serif;
+
+    font-size: 15px;
+
+    border-radius: 3px;
+
+    transition:
+        border-color .2s ease,
+        background .2s ease,
+        box-shadow .2s ease;
+}
+
+#email:focus {
+    outline: none;
+
+    border-color: #c89d4c;
+
+    background: white;
+
+    box-shadow:
+        0 0 0 3px
+        rgba(200, 157, 76, .12);
+}
+
+.email-note {
+    font-family: Arial, sans-serif;
+
+    font-size: 12px;
+
+    line-height: 1.5;
+
+    color: #7a857e;
+
+    margin-top: 8px;
 }
 
 
@@ -1588,17 +1627,33 @@ textarea {
 
     font-family: Arial, sans-serif;
 
-    transition: .2s;
+    line-height: 1.4;
+
+    transition:
+        background .2s ease,
+        border-color .2s ease,
+        color .2s ease,
+        transform .2s ease,
+        box-shadow .2s ease;
 }
 
 .choice:hover {
     border-color: #c89d4c;
 
     transform: translateY(-1px);
+
+    background: #fbf8f2;
 }
 
 .choice input {
+    width: 16px;
+    height: 16px;
+
+    flex-shrink: 0;
+
     accent-color: #173c2b;
+
+    cursor: pointer;
 }
 
 .choice:has(input:checked) {
@@ -1620,7 +1675,9 @@ textarea {
 }
 
 
-/* Traditionality scale */
+/* ==============================
+   TRADITIONALITY SCALE
+============================== */
 
 .traditionality-scale {
     grid-template-columns:
@@ -1634,153 +1691,13 @@ textarea {
 
     justify-content: center;
 
-    min-height: 90px;
+    min-height: 100px;
+
+    padding: 12px 8px;
 }
 
 .traditionality-scale .choice input {
     margin-bottom: 5px;
-}
-
-
-/* ==============================
-   PRIVACY
-============================== */
-
-.privacy-box {
-    background: #e7dfd1;
-
-    padding: 30px;
-
-    margin-bottom: 25px;
-}
-
-.privacy-box h3 {
-    font-size: 25px;
-
-    margin-bottom: 10px;
-}
-
-.privacy-box p {
-    font-family: Arial, sans-serif;
-
-    line-height: 1.6;
-
-    color: #536158;
-
-    margin-bottom: 20px;
-}
-
-.checkbox {
-    display: flex;
-
-    align-items: flex-start;
-
-    gap: 10px;
-
-    font-family: Arial, sans-serif;
-
-    font-size: 14px;
-
-    line-height: 1.5;
-}
-
-.checkbox input {
-    margin-top: 4px;
-
-    accent-color: #173c2b;
-}
-
-
-/* ==============================
-   SUBMIT
-============================== */
-
-.submit-button {
-    width: 100%;
-
-    padding: 19px;
-
-    border: none;
-
-    background: #c89d4c;
-
-    color: #17251d;
-
-    font-family: Arial, sans-serif;
-
-    font-size: 16px;
-
-    font-weight: bold;
-
-    cursor: pointer;
-
-    transition: .2s;
-}
-
-.submit-button:hover {
-    background: #e0bd78;
-
-    transform: translateY(-2px);
-}
-
-.success-message {
-    text-align: center;
-
-    margin-top: 25px;
-
-    color: #286b48;
-
-    font-family: Arial, sans-serif;
-
-    font-weight: bold;
-}
-
-
-/* ==============================
-   EMAIL
-============================== */
-
-#email {
-    width: 100%;
-
-    padding: 16px 18px;
-
-    border:
-        1px solid #ccd3cd;
-
-    background: #fafafa;
-
-    font-family: Arial, sans-serif;
-
-    font-size: 15px;
-
-    border-radius: 3px;
-
-    transition: .2s;
-}
-
-#email:focus {
-    outline: none;
-
-    border-color: #c89d4c;
-
-    background: white;
-
-    box-shadow:
-        0 0 0 3px
-        rgba(200, 157, 76, .12);
-}
-
-.email-note {
-    font-family: Arial, sans-serif;
-
-    font-size: 12px;
-
-    line-height: 1.5;
-
-    color: #7a857e;
-
-    margin-top: 8px;
 }
 
 
@@ -1799,6 +1716,10 @@ textarea {
     margin-top: 10px;
 
     margin-bottom: 10px;
+}
+
+.age-range > div {
+    min-width: 0;
 }
 
 .age-range label {
@@ -1833,7 +1754,10 @@ textarea {
 
     cursor: pointer;
 
-    transition: .2s;
+    transition:
+        border-color .2s ease,
+        background .2s ease,
+        box-shadow .2s ease;
 }
 
 .age-range select:hover {
@@ -1949,6 +1873,8 @@ textarea {
 
     gap: 12px;
 
+    min-height: 54px;
+
     padding: 16px 18px;
 
     background: #faf8f4;
@@ -1962,11 +1888,18 @@ textarea {
 
     font-size: 14px;
 
+    line-height: 1.4;
+
     color: #38463e;
 
     cursor: pointer;
 
-    transition: .2s;
+    transition:
+        border-color .2s ease,
+        background .2s ease,
+        color .2s ease,
+        transform .2s ease,
+        box-shadow .2s ease;
 }
 
 .checkbox-choice:hover {
@@ -2028,17 +1961,257 @@ textarea {
 
 
 /* ==============================
+   PRIVACY BOX
+============================== */
+
+.privacy-box {
+    background: #e7dfd1;
+
+    padding: 30px;
+
+    margin-bottom: 25px;
+
+    border-left:
+        4px solid #c89d4c;
+}
+
+.privacy-box h3 {
+    font-size: 25px;
+
+    line-height: 1.2;
+
+    margin-bottom: 10px;
+}
+
+.privacy-box p {
+    font-family: Arial, sans-serif;
+
+    line-height: 1.6;
+
+    color: #536158;
+
+    margin-bottom: 20px;
+}
+
+.checkbox {
+    display: flex;
+
+    align-items: flex-start;
+
+    gap: 10px;
+
+    font-family: Arial, sans-serif;
+
+    font-size: 14px;
+
+    line-height: 1.5;
+
+    cursor: pointer;
+}
+
+.checkbox input {
+    width: 16px;
+    height: 16px;
+
+    flex-shrink: 0;
+
+    margin-top: 4px;
+
+    accent-color: #173c2b;
+
+    cursor: pointer;
+}
+
+
+/* ==============================
+   SUBMIT
+============================== */
+
+.submit-button {
+    width: 100%;
+
+    padding: 19px;
+
+    border: none;
+
+    background: #c89d4c;
+
+    color: #17251d;
+
+    font-family: Arial, sans-serif;
+
+    font-size: 16px;
+
+    font-weight: bold;
+
+    cursor: pointer;
+
+    transition:
+        background .2s ease,
+        transform .2s ease,
+        box-shadow .2s ease,
+        opacity .2s ease;
+}
+
+.submit-button:hover:not(:disabled) {
+    background: #e0bd78;
+
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 7px 18px
+        rgba(156, 116, 56, .15);
+}
+
+.submit-button:active:not(:disabled) {
+    transform: translateY(0);
+}
+
+.submit-button:disabled {
+    cursor: wait;
+
+    opacity: .65;
+
+    transform: none;
+
+    box-shadow: none;
+}
+
+.success-message {
+    min-height: 22px;
+
+    text-align: center;
+
+    margin-top: 25px;
+
+    color: #286b48;
+
+    font-family: Arial, sans-serif;
+
+    font-size: 14px;
+
+    font-weight: bold;
+
+    line-height: 1.5;
+}
+
+
+/* ==============================
+   VALIDATION STATES
+============================== */
+
+input:invalid:not(:placeholder-shown),
+select:invalid:not(:focus),
+textarea:invalid:not(:placeholder-shown) {
+    /* Keep browser validation subtle rather than
+       aggressively coloring the entire form. */
+}
+
+input:focus:invalid,
+select:focus:invalid,
+textarea:focus:invalid {
+    border-color: #b28742;
+}
+
+
+/* ==============================
+   FOOTER / QUIZ SPACING
+============================== */
+
+.quiz-container + footer {
+    margin-top: 0;
+}
+
+
+/* ==============================
+   RESPONSIVE — TABLET
+============================== */
+
+@media (max-width: 900px) {
+
+    .navbar {
+        padding-left: 5%;
+        padding-right: 5%;
+    }
+
+    .hero {
+        padding-left: 7%;
+        padding-right: 7%;
+    }
+
+    .morph-animation {
+        right: -40px;
+
+        width: 360px;
+        height: 360px;
+    }
+
+    .about {
+        padding-left: 7%;
+        padding-right: 7%;
+
+        gap: 50px;
+    }
+
+    .mystery-card-wrapper {
+        width: 300px;
+        height: 390px;
+    }
+
+    .section {
+        padding-left: 7%;
+        padding-right: 7%;
+    }
+
+    .quiz-container {
+        max-width: 800px;
+
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+
+    .form-section {
+        padding: 38px;
+    }
+
+    .traditionality-scale {
+        grid-template-columns:
+            repeat(3, 1fr);
+    }
+}
+
+
+/* ==============================
    MOBILE
 ============================== */
 
 @media (max-width: 750px) {
 
+    /* Navigation */
+
+    .navbar {
+        min-height: 72px;
+
+        padding:
+            0 7%;
+    }
+
+    .logo {
+        font-size: 17px;
+
+        letter-spacing: .7px;
+    }
+
     .nav-links {
         display: none;
     }
 
+
+    /* Hero */
+
     .hero {
-        padding: 70px 7%;
+        padding:
+            70px 7%;
 
         min-height: 700px;
     }
@@ -2047,11 +2220,23 @@ textarea {
         font-size: 55px;
     }
 
-    /*
-       Move animation behind the text
-       and make it slightly subtler
-       on smaller screens.
-    */
+    .hero-text {
+        font-size: 16px;
+    }
+
+    .buttons {
+        gap: 10px;
+    }
+
+    .primary-button,
+    .secondary-button {
+        padding:
+            14px 21px;
+    }
+
+
+    /* Hero animation */
+
     .morph-animation {
         right: -55px;
         top: 62%;
@@ -2062,14 +2247,51 @@ textarea {
         opacity: .09;
     }
 
+    .person-head {
+        width: 75px;
+        height: 75px;
+    }
+
+    .person-body {
+        width: 165px;
+        height: 150px;
+    }
+
+    .morph-heart {
+        font-size: 210px;
+    }
+
+
+    /* Sections */
+
+    .section {
+        padding:
+            80px 7%;
+    }
+
+    .section h2 {
+        font-size: 42px;
+
+        margin-bottom: 45px;
+    }
+
+
+    /* Steps */
+
     .steps {
         grid-template-columns: 1fr;
+
+        gap: 40px;
     }
+
+
+    /* About */
 
     .about {
         flex-direction: column;
 
-        padding: 80px 7%;
+        padding:
+            80px 7%;
 
         gap: 55px;
     }
@@ -2096,29 +2318,130 @@ textarea {
         font-size: 22px;
     }
 
+
+    /* Questions */
+
     .question-grid {
         grid-template-columns: 1fr;
+    }
+
+
+    /* CTA */
+
+    .final-cta {
+        padding:
+            90px 20px;
     }
 
     .final-cta h2 {
         font-size: 45px;
     }
 
-    .match-card {
-        width: 100%;
+
+    /* Footer */
+
+    footer {
+        padding:
+            45px 7%;
     }
+
+    .footer-disclaimer {
+        max-width: 500px;
+    }
+
+
+    /* ==========================
+       QUIZ MOBILE
+    ========================== */
+
+    .quiz-header {
+        padding:
+            75px 20px 85px;
+    }
+
+    .quiz-header h1 {
+        font-size: 45px;
+    }
+
+    .quiz-header > p:last-child {
+        font-size: 15px;
+
+        line-height: 1.7;
+    }
+
+    .quiz-container {
+        padding:
+            55px 15px;
+    }
+
+    .quiz-header + .quiz-container {
+        padding-top: 55px;
+    }
+
+    .form-section {
+        padding:
+            28px 20px;
+
+        margin-bottom: 25px;
+    }
+
+    .form-section h2 {
+        font-size: 30px;
+
+        margin-bottom: 28px;
+    }
+
+    .form-section > label {
+        margin-top: 23px;
+    }
+
+
+    /* Choice groups */
+
+    .choice-group {
+        grid-template-columns: 1fr;
+
+        gap: 10px;
+    }
+
+    .choice {
+        padding:
+            14px;
+    }
+
+
+    /* Traditionality */
 
     .traditionality-scale {
         grid-template-columns:
             1fr 1fr;
     }
 
+    .traditionality-scale .choice {
+        min-height: 80px;
+    }
+
+
+    /* Age range */
+
+    .age-range {
+        grid-template-columns: 1fr;
+
+        gap: 5px;
+    }
+
+
+    /* Deal breakers */
+
     .checkbox-group {
         grid-template-columns: 1fr;
+
+        gap: 10px;
     }
 
     .dealbreaker-section {
-        padding: 28px 20px;
+        padding:
+            28px 20px;
     }
 
     .dealbreaker-section::after {
@@ -2128,34 +2451,29 @@ textarea {
         font-size: 60px;
     }
 
-    .age-range {
-        grid-template-columns: 1fr;
+    .section-description {
+        font-size: 13px;
 
-        gap: 5px;
+        text-align: left;
     }
 
-    .quiz-header {
-        padding: 75px 20px 85px;
+
+    /* Privacy */
+
+    .privacy-box {
+        padding:
+            25px 20px;
     }
 
-    .quiz-header h1 {
-        font-size: 45px;
+    .privacy-box h3 {
+        font-size: 23px;
     }
 
-    .quiz-header > p:last-child {
-        font-size: 15px;
-    }
 
-    .form-section {
-        padding: 28px 20px;
-    }
+    /* Submit */
 
-    .form-section h2 {
-        font-size: 30px;
-    }
-
-    .choice-group {
-        grid-template-columns: 1fr;
+    .submit-button {
+        padding: 18px 15px;
     }
 }
 
@@ -2166,8 +2484,16 @@ textarea {
 
 @media (max-width: 400px) {
 
+    .logo {
+        font-size: 15px;
+    }
+
     .hero h1 {
         font-size: 48px;
+    }
+
+    .hero {
+        min-height: 650px;
     }
 
     .morph-animation {
@@ -2184,6 +2510,56 @@ textarea {
     .traditionality-scale {
         grid-template-columns: 1fr;
     }
+
+    .quiz-header {
+        padding:
+            65px 17px 75px;
+    }
+
+    .quiz-header h1 {
+        font-size: 39px;
+    }
+
+    .quiz-container {
+        padding:
+            45px 10px;
+    }
+
+    .form-section {
+        padding:
+            25px 17px;
+    }
+
+    .form-section h2 {
+        font-size: 28px;
+    }
+
+    .privacy-box {
+        padding:
+            22px 17px;
+    }
+
+    .checkbox-choice {
+        padding:
+            14px;
+    }
+}
+
+
+/* ==============================
+   ACCESSIBILITY / FOCUS
+============================== */
+
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+    outline:
+        3px solid
+        rgba(200, 157, 76, .55);
+
+    outline-offset: 3px;
 }
 
 
@@ -2201,13 +2577,31 @@ textarea {
     *::before,
     *::after {
         animation-duration: 0.01ms !important;
+
         animation-iteration-count: 1 !important;
+
         transition-duration: 0.01ms !important;
     }
 
     .scroll-reveal {
         opacity: 1;
+
         filter: none;
+
         transform: none;
+    }
+
+    .step {
+        opacity: 1;
+
+        transform: none;
+    }
+
+    .mystery-card-wrapper {
+        animation: none;
+    }
+
+    .mystery-symbol {
+        animation: none;
     }
 }

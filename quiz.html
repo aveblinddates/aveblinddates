@@ -553,7 +553,64 @@
             <!-- ==============================
             DATING
             ============================== -->
+<label>
+    What age range are you comfortable dating?
+</label>
 
+<div class="age-range">
+
+    <div>
+        <label for="min_age">
+            Youngest age
+        </label>
+
+        <select
+            id="min_age"
+            name="min_age"
+            required
+        >
+            <option value="">
+                Select age
+            </option>
+
+            <option value="17">17</option>
+            <option value="18">18</option>
+            <option value="19">19</option>
+            <option value="20">20</option>
+            <option value="21">21</option>
+            <option value="22">22</option>
+            <option value="23">23</option>
+            <option value="24">24</option>
+        </select>
+    </div>
+
+
+    <div>
+        <label for="max_age">
+            Oldest age
+        </label>
+
+        <select
+            id="max_age"
+            name="max_age"
+            required
+        >
+            <option value="">
+                Select age
+            </option>
+
+            <option value="17">17</option>
+            <option value="18">18</option>
+            <option value="19">19</option>
+            <option value="20">20</option>
+            <option value="21">21</option>
+            <option value="22">22</option>
+            <option value="23">23</option>
+            <option value="24">24</option>
+        </select>
+    </div>
+
+</div>
             <section class="form-section">
 
                 <p class="section-label">DATING</p>
@@ -952,6 +1009,16 @@ email:
                             document.querySelector(
                                 'input[name="gender"]:checked'
                             )?.value,
+min_age:
+    parseInt(
+        document.getElementById("min_age").value
+    ),
+
+max_age:
+    parseInt(
+        document.getElementById("max_age").value
+    ),
+
 
                         year:
                             document

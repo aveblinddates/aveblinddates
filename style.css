@@ -1789,3 +1789,23 @@ body {
 
     background-size: 18px 18px;
 }
+/* ==============================
+   SCROLL REVEAL EFFECT
+============================== */
+
+.scroll-reveal {
+    opacity: 0;
+    filter: blur(8px);
+    transform: translateY(35px);
+
+    transition:
+        opacity 0.8s ease,
+        filter 0.8s ease,
+        transform 0.8s ease;
+}
+
+.scroll-reveal.visible {
+    opacity: 1;
+    filter: blur(0);
+    transform: translateY(0);
+}

@@ -697,3 +697,20 @@ grid-template-columns: 1fr;
 }
 
 }
+/* TRADITIONALITY SCALE */
+
+.traditionality-scale {
+    grid-template-columns: repeat(5, 1fr);
+}
+
+.traditionality-scale .choice {
+    flex-direction: column;
+    text-align: center;
+    justify-content: center;
+    min-height: 90px;
+}
+
+.traditionality-scale .choice input {
+    margin-bottom: 5px;
+}
+

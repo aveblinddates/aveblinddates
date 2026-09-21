@@ -1380,3 +1380,121 @@ body {
     color: #c89d4c;
     margin-left: 10px;
 }
+.about {
+    position: relative;
+    overflow: hidden;
+}
+
+.about::before {
+    content: "❧";
+
+    position: absolute;
+
+    left: 3%;
+    top: 15%;
+
+    font-size: 150px;
+
+    color: rgba(23, 60, 43, .06);
+
+    transform: rotate(-20deg);
+}
+.primary-button {
+    position: relative;
+
+    overflow: hidden;
+
+    background: #c89d4c;
+
+    box-shadow: 0 5px 15px rgba(156, 116, 56, .15);
+}
+
+.primary-button::before {
+    content: "";
+
+    position: absolute;
+
+    top: 0;
+    left: -100%;
+
+    width: 100%;
+    height: 100%;
+
+    background: rgba(255,255,255,.2);
+
+    transform: skewX(-20deg);
+
+    transition: left .5s ease;
+}
+
+.primary-button:hover::before {
+    left: 120%;
+}
+
+.section-divider {
+    width: 80px;
+    height: 1px;
+
+    background: #c89d4c;
+
+    margin: 0 auto 35px;
+
+    position: relative;
+}
+
+.section-divider::before,
+.section-divider::after {
+    content: "✦";
+
+    position: absolute;
+
+    top: 50%;
+
+    transform: translateY(-50%);
+
+    color: #c89d4c;
+
+    font-size: 12px;
+}
+
+.section-divider::before {
+    left: -25px;
+}
+
+.section-divider::after {
+    right: -25px;
+}
+.step {
+    opacity: 0;
+    transform: translateY(25px);
+
+    animation: revealStep .8s ease forwards;
+}
+
+.step:nth-child(2) {
+    animation-delay: .15s;
+}
+
+.step:nth-child(3) {
+    animation-delay: .3s;
+}
+
+@keyframes revealStep {
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+}
+body {
+    background-color: #f7f3eb;
+
+    background-image:
+        radial-gradient(
+            rgba(23, 60, 43, 0.035) 1px,
+            transparent 1px
+        );
+
+    background-size: 18px 18px;
+}

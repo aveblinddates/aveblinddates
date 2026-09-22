@@ -4313,3 +4313,879 @@ textarea {
         transform: none;
     }
 }
+/* ==========================================================
+   DATING ADVICE PAGE
+   Matches existing Ave Maria Blind Dating design
+========================================================== */
+
+
+/* ==============================
+   ADVICE HEADER
+============================== */
+
+.advice-header {
+    position: relative;
+    overflow: hidden;
+
+    padding: 110px 10% 100px;
+
+    background: #173c2b;
+    color: white;
+}
+
+
+/* Subtle decorative circles */
+
+.advice-header::before {
+    content: "";
+
+    position: absolute;
+
+    width: 500px;
+    height: 500px;
+
+    right: -180px;
+    top: -220px;
+
+    border: 1px solid rgba(214, 179, 106, .12);
+    border-radius: 50%;
+}
+
+.advice-header::after {
+    content: "";
+
+    position: absolute;
+
+    width: 320px;
+    height: 320px;
+
+    right: -60px;
+    top: -130px;
+
+    border: 1px solid rgba(214, 179, 106, .08);
+    border-radius: 50%;
+}
+
+
+.advice-header-content {
+    position: relative;
+    z-index: 2;
+
+    max-width: 850px;
+}
+
+
+.advice-header .section-label {
+    font-family: Arial, sans-serif;
+
+    font-size: 12px;
+    font-weight: bold;
+
+    letter-spacing: 4px;
+
+    color: #d6b36a;
+}
+
+
+.advice-header .section-divider {
+    width: 45px;
+    height: 2px;
+
+    margin: 18px 0 25px;
+
+    background: #c89d4c;
+}
+
+
+.advice-header h1 {
+    margin: 0 0 30px;
+
+    font-size: clamp(55px, 7vw, 90px);
+    line-height: .95;
+
+    letter-spacing: -2px;
+}
+
+
+.advice-header h1 span {
+    color: #d6b36a;
+    font-style: italic;
+}
+
+
+.advice-header-content > p:last-child {
+    max-width: 570px;
+
+    margin: 0;
+
+    font-family: Arial, sans-serif;
+
+    font-size: 17px;
+    line-height: 1.75;
+
+    color: #dce6df;
+}
+
+
+/* ==============================
+   ADVICE PAGE BASE
+============================== */
+
+.advice-page {
+    overflow: hidden;
+}
+
+
+/* Shared labels */
+
+.advice-page .section-label {
+    font-family: Arial, sans-serif;
+
+    font-size: 12px;
+    font-weight: bold;
+
+    letter-spacing: 3px;
+
+    color: #8d7139;
+}
+
+
+.advice-page .section-divider {
+    width: 45px;
+    height: 2px;
+
+    margin: 15px 0;
+
+    background: #c89d4c;
+}
+
+
+/* ==============================
+   INTRODUCTION
+============================== */
+
+.advice-intro {
+    width: min(900px, 90%);
+
+    margin: 0 auto;
+
+    padding: 110px 0 90px;
+}
+
+
+.advice-intro h2,
+.advice-section h2,
+.green-flags-section h2 {
+    margin: 20px 0 30px;
+
+    font-size: clamp(38px, 5vw, 62px);
+    line-height: 1;
+
+    letter-spacing: -1.5px;
+
+    color: #173c2b;
+}
+
+
+.advice-intro > p:not(.section-label) {
+    max-width: 700px;
+
+    margin-bottom: 20px;
+
+    font-family: Arial, sans-serif;
+
+    font-size: 16px;
+    line-height: 1.8;
+
+    color: #59645d;
+}
+
+
+/* ==============================
+   ADVICE CARDS
+============================== */
+
+.advice-section {
+    width: min(1100px, 90%);
+
+    margin: 0 auto;
+
+    padding: 70px 0 120px;
+}
+
+
+.advice-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    gap: 20px;
+
+    margin-top: 55px;
+}
+
+
+.advice-card {
+    position: relative;
+
+    display: flex;
+    flex-direction: column;
+
+    min-height: 390px;
+
+    padding: 32px;
+
+    background: #fffdf8;
+
+    border: 1px solid rgba(23, 60, 43, .10);
+
+    box-shadow:
+        0 8px 25px rgba(23, 60, 43, .045);
+
+    transition:
+        transform .25s ease,
+        box-shadow .25s ease,
+        border-color .25s ease;
+}
+
+
+.advice-card:hover {
+    transform: translateY(-6px);
+
+    border-color: rgba(200, 157, 76, .45);
+
+    box-shadow:
+        0 15px 35px rgba(23, 60, 43, .10);
+}
+
+
+/* Number */
+
+.advice-number {
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    width: 42px;
+    height: 42px;
+
+    margin-bottom: 30px;
+
+    border-radius: 50%;
+
+    background: #173c2b;
+
+    color: #d6b36a;
+
+    font-family: Arial, sans-serif;
+
+    font-size: 11px;
+    font-weight: bold;
+}
+
+
+.advice-card h3 {
+    margin-bottom: 15px;
+
+    color: #173c2b;
+
+    font-size: 25px;
+    line-height: 1.1;
+}
+
+
+.advice-card > p {
+    margin: 0;
+
+    font-family: Arial, sans-serif;
+
+    color: #606a63;
+
+    font-size: 14px;
+    line-height: 1.75;
+}
+
+
+/* Tip at bottom */
+
+.advice-tip {
+    margin-top: auto;
+
+    padding: 17px 18px;
+
+    border-left: 3px solid #c89d4c;
+
+    background: #f7f3eb;
+
+    color: #59645d;
+
+    font-family: Arial, sans-serif;
+
+    font-size: 13px;
+    line-height: 1.65;
+}
+
+
+/* ==============================
+   CONVERSATION SECTION
+============================== */
+
+.conversation-section {
+    position: relative;
+
+    width: 100%;
+
+    padding: 110px 10%;
+
+    background: #173c2b;
+
+    color: white;
+
+    overflow: hidden;
+}
+
+
+/* Decorative heart */
+
+.conversation-section::after {
+    content: "♡";
+
+    position: absolute;
+
+    right: 7%;
+    bottom: -100px;
+
+    color: rgba(214, 179, 106, .06);
+
+    font-family: Georgia, serif;
+
+    font-size: 300px;
+
+    line-height: 1;
+
+    pointer-events: none;
+}
+
+
+.conversation-content {
+    position: relative;
+    z-index: 2;
+
+    max-width: 700px;
+}
+
+
+.conversation-section .section-label {
+    color: #d6b36a;
+}
+
+
+.conversation-section .section-divider {
+    background: #c89d4c;
+}
+
+
+.conversation-content h2 {
+    margin: 20px 0 25px;
+
+    font-size: clamp(40px, 5vw, 65px);
+    line-height: 1;
+
+    letter-spacing: -1.5px;
+}
+
+
+.conversation-content > p:last-child {
+    max-width: 600px;
+
+    margin: 0;
+
+    font-family: Arial, sans-serif;
+
+    color: #dce6df;
+
+    font-size: 16px;
+    line-height: 1.75;
+}
+
+
+/* Conversation cards */
+
+.conversation-grid {
+    position: relative;
+    z-index: 2;
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(4, 1fr);
+
+    gap: 15px;
+
+    margin-top: 60px;
+}
+
+
+.conversation-card {
+    min-height: 235px;
+
+    padding: 28px 25px;
+
+    border: 1px solid rgba(255, 255, 255, .12);
+
+    background: rgba(255, 255, 255, .035);
+
+    transition:
+        background .25s ease,
+        transform .25s ease;
+}
+
+
+.conversation-card:hover {
+    transform: translateY(-5px);
+
+    background: rgba(255, 255, 255, .07);
+}
+
+
+.conversation-card > span {
+    display: block;
+
+    margin-bottom: 40px;
+
+    color: #d6b36a;
+
+    font-family: Arial, sans-serif;
+
+    font-size: 11px;
+    font-weight: bold;
+
+    letter-spacing: 2px;
+}
+
+
+.conversation-card h3 {
+    margin-bottom: 12px;
+
+    color: white;
+
+    font-size: 22px;
+}
+
+
+.conversation-card p {
+    margin: 0;
+
+    color: #c7d0ca;
+
+    font-family: Arial, sans-serif;
+
+    font-size: 13px;
+    line-height: 1.7;
+}
+
+
+/* ==============================
+   GREEN FLAGS
+============================== */
+
+.green-flags-section {
+    width: min(1100px, 90%);
+
+    margin: 0 auto;
+
+    padding: 120px 0;
+}
+
+
+.green-flags-intro {
+    max-width: 700px;
+
+    margin-bottom: 60px;
+
+    font-family: Arial, sans-serif;
+
+    color: #606a63;
+
+    font-size: 16px;
+    line-height: 1.8;
+}
+
+
+.green-flags-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, 1fr);
+
+    border-top: 1px solid rgba(23, 60, 43, .12);
+}
+
+
+.green-flags-grid > div {
+    padding: 38px 40px 38px 0;
+
+    border-bottom: 1px solid rgba(23, 60, 43, .12);
+}
+
+
+.green-flags-grid > div:nth-child(even) {
+    padding-left: 40px;
+
+    border-left: 1px solid rgba(23, 60, 43, .12);
+}
+
+
+.green-flags-grid span {
+    display: block;
+
+    margin-bottom: 18px;
+
+    color: #c89d4c;
+
+    font-size: 25px;
+}
+
+
+.green-flags-grid h3 {
+    margin-bottom: 12px;
+
+    color: #173c2b;
+
+    font-size: 21px;
+    line-height: 1.2;
+}
+
+
+.green-flags-grid p {
+    max-width: 470px;
+
+    margin: 0;
+
+    font-family: Arial, sans-serif;
+
+    color: #606a63;
+
+    font-size: 14px;
+    line-height: 1.7;
+}
+
+
+/* ==============================
+   SECOND DATE
+============================== */
+
+.second-date-section {
+    width: min(1100px, 90%);
+
+    margin: 0 auto;
+
+    padding: 20px 0 120px;
+}
+
+
+.second-date-card {
+    position: relative;
+
+    overflow: hidden;
+
+    padding: 75px;
+
+    background: #e9dfca;
+
+    border-left: 5px solid #c89d4c;
+}
+
+
+.second-date-card::after {
+    content: "♡";
+
+    position: absolute;
+
+    right: 25px;
+    bottom: -75px;
+
+    color: rgba(23, 60, 43, .055);
+
+    font-family: Georgia, serif;
+
+    font-size: 230px;
+
+    line-height: 1;
+}
+
+
+.second-date-card > * {
+    position: relative;
+    z-index: 2;
+}
+
+
+.second-date-card h2 {
+    max-width: 700px;
+
+    margin: 18px 0 25px;
+
+    color: #173c2b;
+
+    font-size: clamp(38px, 5vw, 62px);
+    line-height: 1;
+
+    letter-spacing: -1.5px;
+}
+
+
+.second-date-card > p:not(.section-label) {
+    max-width: 650px;
+
+    margin-bottom: 18px;
+
+    font-family: Arial, sans-serif;
+
+    color: #59645d;
+
+    font-size: 15px;
+    line-height: 1.8;
+}
+
+
+.second-date-card .primary-button {
+    display: inline-block;
+
+    margin-top: 15px;
+}
+
+
+/* ==============================
+   FINAL NOTE
+============================== */
+
+.advice-final {
+    width: min(900px, 90%);
+
+    margin: 0 auto;
+
+    padding: 100px 0 140px;
+
+    text-align: center;
+}
+
+
+.advice-final .section-divider {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+
+.advice-final h2 {
+    margin: 20px 0 25px;
+
+    color: #173c2b;
+
+    font-size: clamp(45px, 6vw, 75px);
+    line-height: .98;
+
+    letter-spacing: -2px;
+}
+
+
+.advice-final > p:not(.section-label) {
+    max-width: 500px;
+
+    margin: 0 auto 30px;
+
+    font-family: Arial, sans-serif;
+
+    color: #606a63;
+
+    font-size: 16px;
+    line-height: 1.7;
+}
+
+
+.advice-final .secondary-button {
+    display: inline-block;
+
+    border: 1px solid #173c2b;
+
+    color: #173c2b;
+}
+
+
+.advice-final .secondary-button:hover {
+    background: #173c2b;
+
+    color: white;
+}
+
+
+/* ==============================
+   SCROLL REVEAL
+============================== */
+
+.scroll-reveal {
+    opacity: 0;
+
+    transform: translateY(25px);
+
+    transition:
+        opacity .7s ease,
+        transform .7s ease;
+}
+
+
+.scroll-reveal.visible {
+    opacity: 1;
+
+    transform: translateY(0);
+}
+
+
+/* ==============================
+   RESPONSIVE
+============================== */
+
+@media (max-width: 950px) {
+
+    .advice-grid {
+        grid-template-columns:
+            repeat(2, 1fr);
+    }
+
+    .conversation-grid {
+        grid-template-columns:
+            repeat(2, 1fr);
+    }
+
+}
+
+
+@media (max-width: 650px) {
+
+    .advice-header {
+        padding: 85px 7% 75px;
+    }
+
+
+    .advice-header h1 {
+        font-size: clamp(48px, 14vw, 70px);
+
+        letter-spacing: -1px;
+    }
+
+
+    .advice-intro {
+        padding-top: 80px;
+        padding-bottom: 65px;
+    }
+
+
+    .advice-section {
+        padding-top: 55px;
+        padding-bottom: 85px;
+    }
+
+
+    .advice-grid {
+        grid-template-columns: 1fr;
+
+        margin-top: 40px;
+    }
+
+
+    .advice-card {
+        min-height: 0;
+
+        padding: 28px;
+    }
+
+
+    .conversation-section {
+        padding: 85px 7%;
+    }
+
+
+    .conversation-grid {
+        grid-template-columns: 1fr;
+
+        margin-top: 45px;
+    }
+
+
+    .conversation-card {
+        min-height: 0;
+
+        padding: 25px;
+    }
+
+
+    .conversation-card > span {
+        margin-bottom: 25px;
+    }
+
+
+    .green-flags-section {
+        padding-top: 85px;
+        padding-bottom: 85px;
+    }
+
+
+    .green-flags-grid {
+        grid-template-columns: 1fr;
+    }
+
+
+    .green-flags-grid > div,
+    .green-flags-grid > div:nth-child(even) {
+        padding: 30px 0;
+
+        border-left: none;
+    }
+
+
+    .second-date-section {
+        padding-bottom: 85px;
+    }
+
+
+    .second-date-card {
+        padding: 45px 28px;
+    }
+
+
+    .second-date-card::after {
+        font-size: 150px;
+
+        right: -25px;
+        bottom: -45px;
+    }
+
+
+    .advice-final {
+        padding-top: 75px;
+        padding-bottom: 100px;
+    }
+
+}
+
+
+/* ==============================
+   ACCESSIBILITY
+============================== */
+
+@media (prefers-reduced-motion: reduce) {
+
+    .advice-card,
+    .conversation-card,
+    .scroll-reveal {
+        transition: none;
+    }
+
+    .scroll-reveal {
+        opacity: 1;
+        transform: none;
+    }
+
+}

@@ -5268,3 +5268,34 @@ textarea {
     position: relative;
     z-index: 2;
 }
+.faq-section::before {
+    content: "";
+
+    position: absolute;
+
+    width: 450px;
+    height: 450px;
+
+    right: -200px;
+    top: 100px;
+
+    border: 2px solid rgba(23, 60, 43, .05);
+
+    border-radius: 50%;
+}
+
+.faq-section::after {
+    content: "";
+
+    position: absolute;
+
+    width: 350px;
+    height: 350px;
+
+    right: -150px;
+    top: 150px;
+
+    border: 2px solid rgba(200, 157, 76, .06);
+
+    border-radius: 50%;
+}

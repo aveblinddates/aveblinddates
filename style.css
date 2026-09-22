@@ -1890,6 +1890,9 @@ footer p {
     right: -100px;
     top: -120px;
 }
+.countdown-page {
+   padding-top: 70px;
+}
 
 .page-header::after {
     content: "";

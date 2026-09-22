@@ -1239,6 +1239,10 @@
 
         const maxAgeInput =
             document.getElementById("max_age");
+        
+           const yourAgeInput =
+            document.getElementById("your_age");
+
 
 
         /* ==============================
@@ -1532,7 +1536,12 @@
                             document
                                 .getElementById("year")
                                 .value,
-
+                        
+                        your_age:
+                              parseInt(
+                                minAgeInput.value,
+                                10
+                            ),
 
                         major:
                             document

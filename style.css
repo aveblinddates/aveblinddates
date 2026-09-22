@@ -1858,6 +1858,7 @@ footer p {
     overflow: hidden;
 
     padding: 90px 20px;
+   margin-bottom: 30px;
 
     background:
         linear-gradient(
@@ -1877,7 +1878,7 @@ footer p {
     position: absolute;
 
     width: 320px;
-    height: 150px;
+    height: 320px;
 
     border:
         1px solid
@@ -1895,7 +1896,7 @@ footer p {
     position: absolute;
 
     width: 220px;
-    height: 150px;
+    height: 220px;
 
     border:
         1px solid

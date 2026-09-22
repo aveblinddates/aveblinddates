@@ -5189,3 +5189,22 @@ textarea {
     }
 
 }
+/* ==============================
+   RESOURCES SECTION POLISH
+============================== */
+
+.resources-intro {
+    max-width: 700px;
+
+    margin: 0 auto 55px;
+
+    padding-left: 20px;
+
+    border-left: 3px solid #173c2b;
+
+    font-family: Arial, sans-serif;
+
+    color: #59675f;
+
+    line-height: 1.8;
+}

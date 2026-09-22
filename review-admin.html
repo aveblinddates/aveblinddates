@@ -1,0 +1,1401 @@
+<!DOCTYPE html> <html lang="en"> <head>
+<meta charset="UTF-8">
+
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+>
+
+<title>Review Moderation | Ave Maria Blind Dating</title>
+
+<link rel="stylesheet" href="style.css">
+
+<style>
+
+    /* ==============================
+       ADMIN PAGE
+    ============================== */
+
+    .admin-page {
+        width: min(1000px, 90%);
+        margin: 0 auto;
+        padding: 80px 0 120px;
+    }
+
+    .admin-header {
+        margin-bottom: 55px;
+    }
+
+    .admin-header h1 {
+        font-size: clamp(42px, 6vw, 70px);
+        line-height: 1;
+        color: #173c2b;
+        margin-bottom: 20px;
+    }
+
+    .admin-header p {
+        max-width: 650px;
+        font-family: Arial, sans-serif;
+        color: #66736b;
+        line-height: 1.7;
+    }
+
+    /* Login */
+
+    .admin-login {
+        width: min(500px, 100%);
+        margin: 60px auto;
+        padding: 45px;
+        background: #e7dfd1;
+        border-top: 3px solid #c89d4c;
+    }
+
+    .admin-login h2 {
+        font-size: 34px;
+        margin-bottom: 25px;
+        color: #173c2b;
+    }
+
+    .admin-field {
+        margin-bottom: 20px;
+    }
+
+    .admin-field label {
+        display: block;
+        margin-bottom: 8px;
+
+        font-family: Arial, sans-serif;
+        font-size: 13px;
+        font-weight: bold;
+        color: #536158;
+    }
+
+    .admin-field input,
+    .public-review-input {
+        width: 100%;
+        padding: 14px 15px;
+
+        border: 1px solid rgba(23, 60, 43, .18);
+
+        background: #f7f3eb;
+        color: #17251d;
+
+        outline: none;
+    }
+
+    .admin-field input:focus,
+    .public-review-input:focus {
+        border-color: #c89d4c;
+    }
+
+    .admin-error {
+        margin-top: 15px;
+
+        font-family: Arial, sans-serif;
+        font-size: 14px;
+
+        color: #9b3d32;
+    }
+
+    /* Admin bar */
+
+    .admin-bar {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        gap: 20px;
+
+        margin-bottom: 50px;
+        padding-bottom: 20px;
+
+        border-bottom: 1px solid rgba(23, 60, 43, .12);
+    }
+
+    .admin-user {
+        font-family: Arial, sans-serif;
+        font-size: 13px;
+        color: #66736b;
+    }
+
+    .logout-button {
+        border: 1px solid #173c2b;
+
+        background: transparent;
+        color: #173c2b;
+
+        padding: 10px 17px;
+
+        font-family: Arial, sans-serif;
+        font-size: 13px;
+        font-weight: bold;
+
+        cursor: pointer;
+
+        transition: all .2s ease;
+    }
+
+    .logout-button:hover {
+        background: #173c2b;
+        color: white;
+    }
+
+    /* Sections */
+
+    .admin-section {
+        margin-bottom: 80px;
+    }
+
+    .admin-section-title {
+        display: flex;
+        align-items: baseline;
+        justify-content: space-between;
+
+        gap: 20px;
+
+        margin-bottom: 25px;
+    }
+
+    .admin-section-title h2 {
+        font-size: 38px;
+        color: #173c2b;
+    }
+
+    .review-count {
+        font-family: Arial, sans-serif;
+        font-size: 13px;
+        color: #9c7438;
+        font-weight: bold;
+    }
+
+    /* Review cards */
+
+    .admin-review-card {
+        margin-bottom: 30px;
+
+        padding: 35px;
+
+        background: #e7dfd1;
+
+        border-left: 3px solid #c89d4c;
+    }
+
+    .admin-review-meta {
+        display: flex;
+        flex-wrap: wrap;
+
+        gap: 12px 25px;
+
+        margin-bottom: 25px;
+
+        font-family: Arial, sans-serif;
+        font-size: 13px;
+
+        color: #66736b;
+    }
+
+    .admin-review-meta strong {
+        color: #173c2b;
+    }
+
+    .review-subheading {
+        margin-bottom: 10px;
+
+        font-family: Arial, sans-serif;
+        font-size: 11px;
+        font-weight: bold;
+
+        letter-spacing: 2px;
+        text-transform: uppercase;
+
+        color: #9c7438;
+    }
+
+    .full-review {
+        margin-bottom: 30px;
+
+        padding: 22px;
+
+        background: #f7f3eb;
+
+        color: #536158;
+
+        line-height: 1.7;
+    }
+
+    .public-review-input {
+        min-height: 150px;
+
+        resize: vertical;
+
+        font-family: Arial, sans-serif;
+        font-size: 15px;
+        line-height: 1.6;
+    }
+
+    .character-count {
+        margin-top: 7px;
+
+        text-align: right;
+
+        font-family: Arial, sans-serif;
+        font-size: 12px;
+
+        color: #66736b;
+    }
+
+    /* Buttons */
+
+    .review-actions {
+        display: flex;
+        flex-wrap: wrap;
+
+        gap: 12px;
+
+        margin-top: 25px;
+    }
+
+    .approve-button,
+    .reject-button,
+    .unpublish-button {
+        padding: 13px 20px;
+
+        border: none;
+
+        font-family: Arial, sans-serif;
+        font-size: 13px;
+        font-weight: bold;
+
+        cursor: pointer;
+
+        transition: all .2s ease;
+    }
+
+    .approve-button {
+        background: #173c2b;
+        color: white;
+    }
+
+    .approve-button:hover {
+        background: #24563e;
+        transform: translateY(-1px);
+    }
+
+    .reject-button,
+    .unpublish-button {
+        background: transparent;
+        border: 1px solid #9b3d32;
+        color: #9b3d32;
+    }
+
+    .reject-button:hover,
+    .unpublish-button:hover {
+        background: #9b3d32;
+        color: white;
+    }
+
+    .approve-button:disabled,
+    .reject-button:disabled,
+    .unpublish-button:disabled {
+        opacity: .5;
+        cursor: not-allowed;
+        transform: none;
+    }
+
+    /* Empty state */
+
+    .empty-reviews {
+        padding: 50px 30px;
+
+        text-align: center;
+
+        background: rgba(231, 223, 209, .65);
+
+        color: #66736b;
+    }
+
+    .empty-reviews span {
+        display: block;
+
+        margin-bottom: 10px;
+
+        font-size: 40px;
+        color: #c89d4c;
+    }
+
+    .admin-status {
+        margin-top: 20px;
+
+        font-family: Arial, sans-serif;
+        font-size: 14px;
+
+        color: #536158;
+    }
+
+    /* Mobile */
+
+    @media (max-width: 650px) {
+
+        .admin-page {
+            padding-top: 55px;
+        }
+
+        .admin-login {
+            padding: 30px 25px;
+        }
+
+        .admin-review-card {
+            padding: 25px 20px;
+        }
+
+        .admin-bar {
+            align-items: flex-start;
+            flex-direction: column;
+        }
+
+        .admin-section-title {
+            align-items: flex-start;
+            flex-direction: column;
+        }
+
+        .review-actions {
+            flex-direction: column;
+        }
+
+        .approve-button,
+        .reject-button,
+        .unpublish-button {
+            width: 100%;
+        }
+
+    }
+
+</style>
+
+</head> <body>
+<!-- Navigation -->
+
+<nav class="navbar">
+
+    <a href="index.html" class="logo">
+        Ave Maria Blind Dating
+    </a>
+
+    <div class="nav-links">
+
+        <a href="index.html#how-it-works">
+            How It Works
+        </a>
+
+        <a href="index.html#about">
+            About
+        </a>
+
+        <a href="index.html#faq">
+            FAQ
+        </a>
+
+        <a href="quiz.html" class="nav-cta">
+            Find My Match →
+        </a>
+
+    </div>
+
+</nav>
+
+<main class="admin-page">
+
+    <!-- Login -->
+
+    <section id="loginSection" class="admin-login">
+
+        <p class="section-label">
+            PRIVATE AREA
+        </p>
+
+        <div class="section-divider"></div>
+
+        <h2>
+            Review Moderation
+        </h2>
+
+        <form id="loginForm">
+
+            <div class="admin-field">
+
+                <label for="loginEmail">
+                    Email
+                </label>
+
+                <input
+                    type="email"
+                    id="loginEmail"
+                    required
+                    autocomplete="email"
+                >
+
+            </div>
+
+            <div class="admin-field">
+
+                <label for="loginPassword">
+                    Password
+                </label>
+
+                <input
+                    type="password"
+                    id="loginPassword"
+                    required
+                    autocomplete="current-password"
+                >
+
+            </div>
+
+            <button
+                type="submit"
+                class="primary-button"
+            >
+                Sign In →
+            </button>
+
+            <p
+                id="loginError"
+                class="admin-error"
+            ></p>
+
+        </form>
+
+    </section>
+
+    <!-- Dashboard -->
+
+    <section
+        id="dashboard"
+        style="display:none;"
+    >
+
+        <div class="admin-header">
+
+            <p class="section-label">
+                REVIEW MODERATION
+            </p>
+
+            <div class="section-divider"></div>
+
+            <h1>
+                Student Stories
+            </h1>
+
+            <p>
+                Review submitted experiences, choose the
+                version that should appear publicly, and
+                approve or reject submissions.
+            </p>
+
+        </div>
+
+        <!-- Admin bar -->
+
+        <div class="admin-bar">
+
+            <span
+                id="adminUser"
+                class="admin-user"
+            ></span>
+
+            <button
+                id="logoutButton"
+                class="logout-button"
+            >
+                Log Out
+            </button>
+
+        </div>
+
+        <!-- Pending -->
+
+        <section class="admin-section">
+
+            <div class="admin-section-title">
+
+                <h2>
+                    Pending Reviews
+                </h2>
+
+                <span
+                    id="pendingCount"
+                    class="review-count"
+                >
+                    0
+                </span>
+
+            </div>
+
+            <div id="pendingReviews">
+
+                <div class="empty-reviews">
+
+                    <span>♡</span>
+
+                    No pending reviews.
+
+                </div>
+
+            </div>
+
+        </section>
+
+        <!-- Approved -->
+
+        <section class="admin-section">
+
+            <div class="admin-section-title">
+
+                <h2>
+                    Published Reviews
+                </h2>
+
+                <span
+                    id="approvedCount"
+                    class="review-count"
+                >
+                    0
+                </span>
+
+            </div>
+
+            <div id="approvedReviews">
+
+                <div class="empty-reviews">
+
+                    <span>♡</span>
+
+                    No published reviews.
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </section>
+
+</main>
+
+<!-- Supabase -->
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<script>
+
+    /* ==============================
+       SUPABASE
+    ============================== */
+
+    const SUPABASE_URL =
+        "https://vixyounyimddctlwzmdj.supabase.co";
+
+    const SUPABASE_KEY =
+        "sb_publishable_dSoWkr2kH2oGI96i2zCpdg_Ddi-NQff";
+
+    const supabaseClient =
+        window.supabase.createClient(
+            SUPABASE_URL,
+            SUPABASE_KEY
+        );
+
+    /* ==============================
+       ELEMENTS
+    ============================== */
+
+    const loginSection =
+        document.getElementById("loginSection");
+
+    const dashboard =
+        document.getElementById("dashboard");
+
+    const loginForm =
+        document.getElementById("loginForm");
+
+    const loginError =
+        document.getElementById("loginError");
+
+    const adminUser =
+        document.getElementById("adminUser");
+
+    const pendingReviews =
+        document.getElementById("pendingReviews");
+
+    const approvedReviews =
+        document.getElementById("approvedReviews");
+
+    const pendingCount =
+        document.getElementById("pendingCount");
+
+    const approvedCount =
+        document.getElementById("approvedCount");
+
+    const logoutButton =
+        document.getElementById("logoutButton");
+
+    /* ==============================
+       ADMIN USER ID
+    ============================== */
+
+    const ADMIN_USER_ID =
+        "c8cb43ec-971a-49a0-9924-d1e88d39fa11";
+
+    /* ==============================
+       LOGIN
+    ============================== */
+
+    loginForm.addEventListener(
+        "submit",
+        async function(event) {
+
+            event.preventDefault();
+
+            loginError.textContent = "";
+
+            const email =
+                document
+                    .getElementById("loginEmail")
+                    .value
+                    .trim();
+
+            const password =
+                document
+                    .getElementById("loginPassword")
+                    .value;
+
+            const {
+                data,
+                error
+            } =
+                await supabaseClient.auth
+                    .signInWithPassword({
+                        email: email,
+                        password: password
+                    });
+
+            if (error) {
+
+                console.error(
+                    "LOGIN ERROR:",
+                    error
+                );
+
+                loginError.textContent =
+                    "Incorrect email or password.";
+
+                return;
+
+            }
+
+            if (
+                !data.user ||
+                data.user.id !== ADMIN_USER_ID
+            ) {
+
+                await supabaseClient.auth.signOut();
+
+                loginError.textContent =
+                    "This account does not have moderation access.";
+
+                return;
+
+            }
+
+            showDashboard(
+                data.user
+            );
+
+        }
+    );
+
+    /* ==============================
+       CHECK EXISTING SESSION
+    ============================== */
+
+    async function checkSession() {
+
+        const {
+            data,
+            error
+        } =
+            await supabaseClient.auth
+                .getSession();
+
+        if (error) {
+
+            console.error(
+                "SESSION ERROR:",
+                error
+            );
+
+            return;
+
+        }
+
+        const session =
+            data.session;
+
+        if (
+            session &&
+            session.user &&
+            session.user.id === ADMIN_USER_ID
+        ) {
+
+            showDashboard(
+                session.user
+            );
+
+        }
+
+    }
+
+    /* ==============================
+       SHOW DASHBOARD
+    ============================== */
+
+    function showDashboard(user) {
+
+        loginSection.style.display =
+            "none";
+
+        dashboard.style.display =
+            "block";
+
+        adminUser.textContent =
+            "Signed in as " +
+            user.email;
+
+        loadReviews();
+
+    }
+
+    /* ==============================
+       LOGOUT
+    ============================== */
+
+    logoutButton.addEventListener(
+        "click",
+        async function() {
+
+            await supabaseClient.auth.signOut();
+
+            dashboard.style.display =
+                "none";
+
+            loginSection.style.display =
+                "block";
+
+            loginForm.reset();
+
+        }
+    );
+
+    /* ==============================
+       LOAD REVIEWS
+    ============================== */
+
+    async function loadReviews() {
+
+        pendingReviews.innerHTML =
+            '<div class="empty-reviews">Loading...</div>';
+
+        approvedReviews.innerHTML =
+            '<div class="empty-reviews">Loading...</div>';
+
+        const {
+            data,
+            error
+        } =
+            await supabaseClient
+                .from("reviews")
+                .select("*")
+                .order(
+                    "created_at",
+                    {
+                        ascending: false
+                    }
+                );
+
+        if (error) {
+
+            console.error(
+                "LOAD REVIEWS ERROR:",
+                error
+            );
+
+            pendingReviews.innerHTML =
+                '<div class="empty-reviews">Could not load reviews.</div>';
+
+            approvedReviews.innerHTML =
+                '<div class="empty-reviews">Could not load reviews.</div>';
+
+            return;
+
+        }
+
+        const pending =
+            data.filter(
+                review =>
+                    review.status === "pending"
+            );
+
+        const approved =
+            data.filter(
+                review =>
+                    review.status === "approved"
+            );
+
+        pendingCount.textContent =
+            pending.length +
+            (
+                pending.length === 1
+                    ? " review"
+                    : " reviews"
+            );
+
+        approvedCount.textContent =
+            approved.length +
+            (
+                approved.length === 1
+                    ? " review"
+                    : " reviews"
+            );
+
+        renderPendingReviews(
+            pending
+        );
+
+        renderApprovedReviews(
+            approved
+        );
+
+    }
+
+    /* ==============================
+       FORMAT DATE
+    ============================== */
+
+    function formatDate(dateString) {
+
+        if (!dateString) {
+            return "";
+        }
+
+        return new Date(
+            dateString
+        ).toLocaleDateString(
+            undefined,
+            {
+                year: "numeric",
+                month: "long",
+                day: "numeric"
+            }
+        );
+
+    }
+
+    /* ==============================
+       PENDING REVIEWS
+    ============================== */
+
+    function renderPendingReviews(
+        reviews
+    ) {
+
+        if (!reviews.length) {
+
+            pendingReviews.innerHTML = `
+                <div class="empty-reviews">
+                    <span>♡</span>
+                    No pending reviews.
+                </div>
+            `;
+
+            return;
+
+        }
+
+        pendingReviews.innerHTML =
+            reviews
+                .map(
+                    review =>
+                        `
+                        <article
+                            class="admin-review-card"
+                            data-review-id="${escapeHtml(review.id)}"
+                        >
+
+                            <div class="admin-review-meta">
+
+                                <span>
+                                    <strong>Submitted:</strong>
+                                    ${escapeHtml(formatDate(review.created_at))}
+                                </span>
+
+                                ${
+                                    review.experience
+                                        ? `
+                                            <span>
+                                                <strong>Experience:</strong>
+                                                ${escapeHtml(review.experience)}
+                                            </span>
+                                          `
+                                        : ""
+                                }
+
+                            </div>
+
+                            <p class="review-subheading">
+                                Full Submission
+                            </p>
+
+                            <div class="full-review">
+                                ${escapeHtml(review.review)}
+                            </div>
+
+                            <p class="review-subheading">
+                                Public Version
+                            </p>
+
+                            <textarea
+                                class="public-review-input"
+                                maxlength="700"
+                                data-public-input="${escapeHtml(review.id)}"
+                            >${escapeHtml(
+                                review.public_review ||
+                                review.review ||
+                                ""
+                            )}</textarea>
+
+                            <div
+                                class="character-count"
+                                data-character-count="${escapeHtml(review.id)}"
+                            >
+                                0 / 700
+                            </div>
+
+                            <div class="review-actions">
+
+                                <button
+                                    type="button"
+                                    class="approve-button"
+                                    onclick="approveReview('${escapeJs(review.id)}')"
+                                >
+                                    ✓ Approve & Publish
+                                </button>
+
+                                <button
+                                    type="button"
+                                    class="reject-button"
+                                    onclick="rejectReview('${escapeJs(review.id)}')"
+                                >
+                                    Reject
+                                </button>
+
+                            </div>
+
+                        </article>
+                        `
+                )
+                .join("");
+
+        document
+            .querySelectorAll(
+                ".public-review-input"
+            )
+            .forEach(
+                textarea => {
+
+                    updateCharacterCount(
+                        textarea
+                    );
+
+                    textarea.addEventListener(
+                        "input",
+                        function() {
+
+                            updateCharacterCount(
+                                this
+                            );
+
+                        }
+                    );
+
+                }
+            );
+
+    }
+
+    /* ==============================
+       APPROVED REVIEWS
+    ============================== */
+
+    function renderApprovedReviews(
+        reviews
+    ) {
+
+        if (!reviews.length) {
+
+            approvedReviews.innerHTML = `
+                <div class="empty-reviews">
+                    <span>♡</span>
+                    No published reviews.
+                </div>
+            `;
+
+            return;
+
+        }
+
+        approvedReviews.innerHTML =
+            reviews
+                .map(
+                    review =>
+                        `
+                        <article
+                            class="admin-review-card"
+                        >
+
+                            <div class="admin-review-meta">
+
+                                <span>
+                                    <strong>Published:</strong>
+                                    ${escapeHtml(formatDate(review.approved_at))}
+                                </span>
+
+                            </div>
+
+                            <p class="review-subheading">
+                                Public Version
+                            </p>
+
+                            <div class="full-review">
+
+                                ${escapeHtml(
+                                    review.public_review ||
+                                    ""
+                                )}
+
+                            </div>
+
+                            <div class="review-actions">
+
+                                <button
+                                    type="button"
+                                    class="unpublish-button"
+                                    onclick="unpublishReview('${escapeJs(review.id)}')"
+                                >
+                                    Unpublish
+                                </button>
+
+                            </div>
+
+                        </article>
+                        `
+                )
+                .join("");
+
+    }
+
+    /* ==============================
+       CHARACTER COUNT
+    ============================== */
+
+    function updateCharacterCount(
+        textarea
+    ) {
+
+        const id =
+            textarea.dataset.publicInput;
+
+        const counter =
+            document.querySelector(
+                `[data-character-count="${CSS.escape(id)}"]`
+            );
+
+        if (!counter) {
+            return;
+        }
+
+        counter.textContent =
+            textarea.value.length +
+            " / 700 characters";
+
+    }
+
+    /* ==============================
+       APPROVE
+    ============================== */
+
+    async function approveReview(
+        reviewId
+    ) {
+
+        const textarea =
+            document.querySelector(
+                `[data-public-input="${CSS.escape(reviewId)}"]`
+            );
+
+        if (!textarea) {
+
+            alert(
+                "Could not find the public review."
+            );
+
+            return;
+
+        }
+
+        const publicReview =
+            textarea.value.trim();
+
+        if (!publicReview) {
+
+            alert(
+                "Please enter the public version of the review before approving it."
+            );
+
+            return;
+
+        }
+
+        if (
+            publicReview.length > 700
+        ) {
+
+            alert(
+                "The public review must be 700 characters or fewer."
+            );
+
+            return;
+
+        }
+
+        const confirmed =
+            confirm(
+                "Approve this review and publish the public version?"
+            );
+
+        if (!confirmed) {
+            return;
+        }
+
+        const {
+            error
+        } =
+            await supabaseClient
+                .from("reviews")
+                .update({
+
+                    status:
+                        "approved",
+
+                    public_review:
+                        publicReview,
+
+                    approved_at:
+                        new Date().toISOString(),
+
+                    approved_by:
+                        ADMIN_USER_ID
+
+                })
+                .eq(
+                    "id",
+                    reviewId
+                );
+
+        if (error) {
+
+            console.error(
+                "APPROVE ERROR:",
+                error
+            );
+
+            alert(
+                "The review could not be approved."
+            );
+
+            return;
+
+        }
+
+        await loadReviews();
+
+    }
+
+    /* ==============================
+       REJECT
+    ============================== */
+
+    async function rejectReview(
+        reviewId
+    ) {
+
+        const confirmed =
+            confirm(
+                "Reject this review? It will not appear publicly."
+            );
+
+        if (!confirmed) {
+            return;
+        }
+
+        const {
+            error
+        } =
+            await supabaseClient
+                .from("reviews")
+                .update({
+
+                    status:
+                        "rejected"
+
+                })
+                .eq(
+                    "id",
+                    reviewId
+                );
+
+        if (error) {
+
+            console.error(
+                "REJECT ERROR:",
+                error
+            );
+
+            alert(
+                "The review could not be rejected."
+            );
+
+            return;
+
+        }
+
+        await loadReviews();
+
+    }
+
+    /* ==============================
+       UNPUBLISH
+    ============================== */
+
+    async function unpublishReview(
+        reviewId
+    ) {
+
+        const confirmed =
+            confirm(
+                "Unpublish this review? It will be removed from the public reviews page."
+            );
+
+        if (!confirmed) {
+            return;
+        }
+
+        const {
+            error
+        } =
+            await supabaseClient
+                .from("reviews")
+                .update({
+
+                    status:
+                        "rejected"
+
+                })
+                .eq(
+                    "id",
+                    reviewId
+                );
+
+        if (error) {
+
+            console.error(
+                "UNPUBLISH ERROR:",
+                error
+            );
+
+            alert(
+                "The review could not be unpublished."
+            );
+
+            return;
+
+        }
+
+        await loadReviews();
+
+    }
+
+    /* ==============================
+       HTML ESCAPING
+    ============================== */
+
+    function escapeHtml(
+        value
+    ) {
+
+        if (
+            value === null ||
+            value === undefined
+        ) {
+
+            return "";
+
+        }
+
+        return String(value)
+            .replace(
+                /&/g,
+                "&amp;"
+            )
+            .replace(
+                /</g,
+                "&lt;"
+            )
+            .replace(
+                />/g,
+                "&gt;"
+            )
+            .replace(
+                /"/g,
+                "&quot;"
+            )
+            .replace(
+                /'/g,
+                "&#039;"
+            );
+
+    }
+
+    function escapeJs(
+        value
+    ) {
+
+        return String(value)
+            .replace(
+                /\\/g,
+                "\\\\"
+            )
+            .replace(
+                /'/g,
+                "\\'"
+            );
+
+    }
+
+    /* ==============================
+       START
+    ============================== */
+
+    checkSession();
+
+</script>
+
+</body> </html>

@@ -53,25 +53,26 @@
 
 
 
-    <!-- Countdown Header -->
-
+      <!-- Countdown Header -->
     <section class="countdown-header">
 
-        <div class="countdown-header-content">
+        <div class="countdown-content">
 
             <p class="section-label">
-                MONTHLY MATCHING DAY
+                THE NEXT MATCHING CYCLE
             </p>
 
+            <div class="section-divider"></div>
+
             <h1>
-                The next matching day
-                <span>is almost here.</span>
+                Matching Day<br>
+                <span>is coming.</span>
             </h1>
 
             <p>
-                Everyone who submits the quiz during the month
-                is considered together when the monthly matching
-                cycle begins.
+                Everyone who submits during the current month
+                will be considered together when the next
+                monthly matching cycle begins.
             </p>
 
         </div>
@@ -79,10 +80,8 @@
     </section>
 
 
-
     <!-- Countdown -->
-
-    <main class="countdown-container">
+    <main class="countdown-page">
 
         <section class="countdown-card">
 
@@ -90,98 +89,104 @@
                 NEXT MATCHING DAY
             </p>
 
-
-            <h2 id="matchingDate">
+            <h2 id="matching-date">
                 Loading...
             </h2>
 
+            <div class="countdown-divider"></div>
 
-            <div class="countdown-divider">
-                <span>♡</span>
-            </div>
-
-
-            <div
-                class="countdown-grid"
-                aria-live="polite"
-            >
+            <div class="countdown-timer">
 
                 <div class="countdown-unit">
 
-                    <span
-                        id="days"
-                        class="countdown-number"
-                    >
+                    <span id="days">
                         00
                     </span>
 
-                    <span class="countdown-unit-label">
-                        Days
-                    </span>
+                    <small>
+                        DAYS
+                    </small>
 
+                </div>
+
+
+                <div class="countdown-separator">
+                    :
                 </div>
 
 
                 <div class="countdown-unit">
 
-                    <span
-                        id="hours"
-                        class="countdown-number"
-                    >
+                    <span id="hours">
                         00
                     </span>
 
-                    <span class="countdown-unit-label">
-                        Hours
-                    </span>
+                    <small>
+                        HOURS
+                    </small>
 
+                </div>
+
+
+                <div class="countdown-separator">
+                    :
                 </div>
 
 
                 <div class="countdown-unit">
 
-                    <span
-                        id="minutes"
-                        class="countdown-number"
-                    >
+                    <span id="minutes">
                         00
                     </span>
 
-                    <span class="countdown-unit-label">
-                        Minutes
-                    </span>
+                    <small>
+                        MINUTES
+                    </small>
 
+                </div>
+
+
+                <div class="countdown-separator">
+                    :
                 </div>
 
 
                 <div class="countdown-unit">
 
-                    <span
-                        id="seconds"
-                        class="countdown-number"
-                    >
+                    <span id="seconds">
                         00
                     </span>
 
-                    <span class="countdown-unit-label">
-                        Seconds
-                    </span>
+                    <small>
+                        SECONDS
+                    </small>
 
                 </div>
 
             </div>
 
 
-            <p
-                id="countdownMessage"
-                class="countdown-message"
-            >
-                The monthly dating pool will be reviewed
-                when matching day arrives.
-            </p>
+            <div class="countdown-message">
+
+                <p>
+                    The current dating pool closes at the end
+                    of the month.
+                </p>
+
+                <p>
+                    If you want to participate in the next
+                    matching cycle, submit your quiz before
+                    the deadline.
+                </p>
+
+            </div>
+
+
+            <a href="quiz.html" class="primary-button">
+                Join the Dating Pool →
+            </a>
 
         </section>
-
 
 
         <!-- How The Cycle Works -->

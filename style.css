@@ -5369,7 +5369,7 @@ textarea {
     z-index: 2;
 }
 /* ==============================
-   FAQ DECORATIVE ARCS
+   FAQ SWEEPING CURVED LINES
 ============================== */
 
 .faq-section {
@@ -5378,22 +5378,26 @@ textarea {
 }
 
 
-/* Right-side green arcs */
+/* ==============================
+   LARGE GREEN SWEEP
+============================== */
 
 .faq-section::before {
     content: "";
 
     position: absolute;
 
-    width: 520px;
-    height: 520px;
+    width: 1400px;
+    height: 600px;
 
-    right: -280px;
-    top: 60px;
+    left: -250px;
+    top: 80px;
 
-    border: 2px solid rgba(23, 60, 43, .10);
+    border: 5px solid rgba(23, 60, 43, .24);
 
     border-radius: 50%;
+
+    transform: rotate(-8deg);
 
     pointer-events: none;
 
@@ -5401,22 +5405,26 @@ textarea {
 }
 
 
-/* Right-side gold arc */
+/* ==============================
+   GOLD SWEEP
+============================== */
 
 .faq-section::after {
     content: "";
 
     position: absolute;
 
-    width: 400px;
-    height: 400px;
+    width: 1250px;
+    height: 500px;
 
-    right: -210px;
-    top: 120px;
+    left: -100px;
+    top: 170px;
 
-    border: 2px solid rgba(200, 157, 76, .13);
+    border: 3px solid rgba(200, 157, 76, .20);
 
     border-radius: 50%;
+
+    transform: rotate(-8deg);
 
     pointer-events: none;
 
@@ -5424,20 +5432,24 @@ textarea {
 }
 
 
-/* Additional decorative arcs */
+/* ==============================
+   SECOND GREEN SWEEP
+============================== */
 
 .faq-decoration {
     position: absolute;
 
-    width: 600px;
-    height: 600px;
+    width: 1500px;
+    height: 650px;
 
-    left: -380px;
-    bottom: 40px;
+    left: -350px;
+    bottom: -250px;
 
-    border: 2px solid rgba(23, 60, 43, .075);
+    border: 5px solid rgba(23, 60, 43, .18);
 
     border-radius: 50%;
+
+    transform: rotate(7deg);
 
     pointer-events: none;
 
@@ -5445,20 +5457,20 @@ textarea {
 }
 
 
-/* Second left-side arc */
+/* Second gold sweep */
 
 .faq-decoration::after {
     content: "";
 
     position: absolute;
 
-    width: 430px;
-    height: 430px;
+    width: 1250px;
+    height: 500px;
 
-    left: 90px;
-    top: 85px;
+    left: 100px;
+    top: 70px;
 
-    border: 2px solid rgba(200, 157, 76, .09);
+    border: 3px solid rgba(200, 157, 76, .15);
 
     border-radius: 50%;
 }

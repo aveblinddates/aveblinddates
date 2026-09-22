@@ -1229,7 +1229,7 @@
             const normalizedEmail =
                 email.trim().toLowerCase();
 
-            return /^[a-z0-9._%+-]+@avemaria\.edu$/i
+            return /^[a-z0-9._%+-]+@my.avemaria\.edu$/i
                 .test(normalizedEmail);
 
         }
@@ -1396,7 +1396,7 @@
                 if (!isAveMariaEmail(email)) {
 
                     successMessage.textContent =
-                        "Please use your Ave Maria school email ending in @avemaria.edu.";
+                        "Please use your Ave Maria school email ending in @my.avemaria.edu.";
 
                     emailInput.focus();
 

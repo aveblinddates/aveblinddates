@@ -1,22 +1,35 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
 
     <title>Student Reviews | Ave Maria Blind Dating</title>
 
     <link rel="stylesheet" href="style.css">
+
 </head>
+
 
 <body>
 
-    <!-- Navigation -->
+
+    <!-- ==============================
+         NAVIGATION
+    =============================== -->
+
     <nav class="navbar">
 
         <a href="index.html" class="logo">
             Ave Maria Blind Dating
         </a>
+
 
         <div class="nav-links">
 
@@ -32,6 +45,10 @@
                 FAQ
             </a>
 
+            <a href="reviews.html">
+                Reviews
+            </a>
+
             <a href="quiz.html" class="nav-cta">
                 Find My Match →
             </a>
@@ -41,7 +58,11 @@
     </nav>
 
 
-    <!-- Header -->
+
+    <!-- ==============================
+         HERO
+    =============================== -->
+
     <section class="reviews-header">
 
         <div class="reviews-header-content">
@@ -50,17 +71,19 @@
                 STUDENT EXPERIENCES
             </p>
 
+
             <div class="section-divider"></div>
+
 
             <h1>
                 What happens<br>
                 <span>after you say yes?</span>
             </h1>
 
+
             <p>
-                The date is only the beginning. Here, you'll eventually
-                find stories and experiences shared by students who
-                have taken a chance on blind dating.
+                The date is only the beginning. Read stories from
+                students who have taken a chance on blind dating.
             </p>
 
         </div>
@@ -68,59 +91,158 @@
     </section>
 
 
-    <!-- Reviews Page -->
+
+    <!-- ==============================
+         MAIN CONTENT
+    =============================== -->
+
     <main class="reviews-page">
 
 
-        <!-- Reviews Status -->
-        <section class="reviews-status scroll-reveal">
 
-            <div class="reviews-status-icon">
-                ♡
-            </div>
+        <!-- ==============================
+             APPROVED REVIEWS
+        =============================== -->
+
+        <section class="approved-reviews scroll-reveal">
 
             <p class="section-label">
-                REVIEWS COMING SOON
+                STUDENT STORIES
             </p>
+
+
+            <div class="section-divider"></div>
+
 
             <h2>
-                The first stories<br>
-                are still being written.
+                What students are saying.
             </h2>
 
-            <p>
-                Ave Maria Blind Dating is still growing. Once students
-                have completed their dates, participants will have the
-                opportunity to share what their experience was like.
+
+            <p class="approved-reviews-intro">
+                Reviews are shared by participants who have chosen
+                to tell us about their experience.
             </p>
 
-            <p>
-                Submitted reviews will be manually reviewed before
-                appearing publicly on this page.
-            </p>
+
+
+            <!--
+                FUTURE SUPABASE REVIEWS WILL APPEAR HERE.
+
+                When we connect Supabase, approved reviews will
+                automatically be inserted into this container.
+
+                Each review will follow this structure:
+
+                <article class="review-card">
+
+                    <div class="review-card-top">
+
+                        <span class="review-card-number">
+                            01
+                        </span>
+
+                        <span class="review-card-experience">
+                            Great experience
+                        </span>
+
+                    </div>
+
+                    <p class="review-card-text">
+                        Review text goes here...
+                    </p>
+
+                    <div class="review-card-bottom">
+
+                        <span class="review-card-name">
+                            Anonymous
+                        </span>
+
+                        <span class="review-card-date">
+                            May 2026
+                        </span>
+
+                    </div>
+
+                </article>
+            -->
+
+
+            <div
+                class="reviews-grid"
+                id="reviews-grid"
+            >
+
+
+                <!--
+                    EMPTY STATE
+
+                    This will be hidden automatically once
+                    approved reviews are loaded.
+                -->
+
+                <div
+                    class="reviews-empty-state"
+                    id="reviews-empty-state"
+                >
+
+                    <div class="reviews-empty-icon">
+                        ♡
+                    </div>
+
+
+                    <h3>
+                        The first stories
+                        are still being written.
+                    </h3>
+
+
+                    <p>
+                        Once students have completed their dates,
+                        approved experiences will appear here.
+                    </p>
+
+                </div>
+
+
+            </div>
 
         </section>
 
 
-        <!-- What Reviews Can Include -->
+
+        <!-- ==============================
+             WHAT REVIEWS CAN INCLUDE
+        =============================== -->
+
         <section class="review-details scroll-reveal">
 
             <p class="section-label">
-                STUDENT EXPERIENCES
+                WHAT TO SHARE
             </p>
 
+
             <div class="section-divider"></div>
+
 
             <h2>
                 Every date is different.
             </h2>
 
+
             <p class="review-details-intro">
-                There isn't one way for a blind date to turn out.
-                Future reviews may share things like:
+                There isn't one right way for a blind date to turn
+                out. If you decide to share your experience, you
+                might talk about:
             </p>
 
+
+
             <div class="review-detail-grid">
+
+
+
+                <!-- Card 1 -->
 
                 <div class="review-detail-card">
 
@@ -128,17 +250,22 @@
                         01
                     </span>
 
+
                     <h3>
-                        The date
+                        The experience
                     </h3>
+
 
                     <p>
                         What it was like meeting someone without
-                        knowing exactly who you'd be meeting.
+                        knowing exactly what to expect.
                     </p>
 
                 </div>
 
+
+
+                <!-- Card 2 -->
 
                 <div class="review-detail-card">
 
@@ -146,17 +273,22 @@
                         02
                     </span>
 
+
                     <h3>
                         The conversation
                     </h3>
 
+
                     <p>
-                        The things you talked about and the moments
-                        that made the evening memorable.
+                        What you talked about and what made the
+                        conversation memorable.
                     </p>
 
                 </div>
 
+
+
+                <!-- Card 3 -->
 
                 <div class="review-detail-card">
 
@@ -164,17 +296,22 @@
                         03
                     </span>
 
+
                     <h3>
                         The unexpected
                     </h3>
 
+
                     <p>
-                        Something about the person or experience
-                        that you didn't see coming.
+                        Something about the person, date, or
+                        experience that surprised you.
                     </p>
 
                 </div>
 
+
+
+                <!-- Card 4 -->
 
                 <div class="review-detail-card">
 
@@ -182,23 +319,30 @@
                         04
                     </span>
 
+
                     <h3>
                         The takeaway
                     </h3>
 
+
                     <p>
-                        What you learned, what surprised you, or
-                        what you'd tell someone considering a date.
+                        What you'd tell another student who is
+                        thinking about giving blind dating a try.
                     </p>
 
                 </div>
+
 
             </div>
 
         </section>
 
 
-        <!-- Privacy -->
+
+        <!-- ==============================
+             PRIVACY
+        =============================== -->
+
         <section class="review-privacy scroll-reveal">
 
             <div class="review-privacy-content">
@@ -207,19 +351,29 @@
                     PRIVACY
                 </p>
 
+
                 <h2>
-                    Share only what you're comfortable sharing.
+                    Share only what
+                    you're comfortable sharing.
                 </h2>
 
-                <p>
-                    Reviews are not automatically published. Every
-                    submission will be manually reviewed before it
-                    appears on the website.
-                </p>
 
                 <p>
-                    Personal information should only be included if
-                    you're comfortable having it displayed publicly.
+                    Every submission is reviewed before it can
+                    appear publicly on the website.
+                </p>
+
+
+                <p>
+                    Please don't include private information about
+                    your date or anyone else unless you are
+                    comfortable having it displayed publicly.
+                </p>
+
+
+                <p>
+                    Reviews may be edited for formatting, length,
+                    clarity, or privacy before publication.
                 </p>
 
             </div>
@@ -227,24 +381,289 @@
         </section>
 
 
-        <!-- CTA -->
+
+        <!-- ==============================
+             REVIEW SUBMISSION
+        =============================== -->
+
+        <section class="review-submission scroll-reveal">
+
+            <div class="review-submission-content">
+
+
+                <p class="section-label">
+                    SHARE YOUR EXPERIENCE
+                </p>
+
+
+                <div class="section-divider"></div>
+
+
+                <h2>
+                    Tell us how it went.
+                </h2>
+
+
+                <p class="review-submission-intro">
+
+                    Been on an Ave Maria Blind Dating date?
+                    We'd love to hear about it.
+
+                    Your submission will stay private until
+                    it has been reviewed and approved.
+
+                </p>
+
+
+
+                <!-- ==============================
+                     REVIEW FORM
+                =============================== -->
+
+                <form
+                    class="review-form"
+                    id="review-form"
+                >
+
+
+
+                    <!-- Name -->
+
+                    <div class="form-group">
+
+                        <label for="review-name">
+                            Name or display name
+                        </label>
+
+
+                        <input
+                            type="text"
+                            id="review-name"
+                            name="name"
+                            maxlength="50"
+                            placeholder="Anonymous"
+                        >
+
+
+                        <small>
+                            This is the name that may appear
+                            with your review.
+                        </small>
+
+                    </div>
+
+
+
+                    <!-- Review -->
+
+                    <div class="form-group">
+
+                        <label for="review-text">
+                            Your experience
+                        </label>
+
+
+                        <textarea
+                            id="review-text"
+                            name="review"
+                            rows="8"
+                            maxlength="1500"
+                            required
+                            placeholder="What was your experience like?"
+                        ></textarea>
+
+
+                        <small>
+                            Please don't include private information
+                            about your date or anyone else.
+                        </small>
+
+                    </div>
+
+
+
+                    <!-- Overall Experience -->
+
+                    <div class="form-group">
+
+                        <label for="review-experience">
+                            How would you describe the experience?
+                        </label>
+
+
+                        <select
+                            id="review-experience"
+                            name="experience"
+                            required
+                        >
+
+                            <option
+                                value=""
+                                disabled
+                                selected
+                            >
+                                Select one
+                            </option>
+
+
+                            <option value="great">
+                                It was a great experience
+                            </option>
+
+
+                            <option value="good">
+                                It was a good experience
+                            </option>
+
+
+                            <option value="unexpected">
+                                It was unexpected
+                            </option>
+
+
+                            <option value="not-for-me">
+                                It wasn't for me
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+
+                    <!-- Second Date -->
+
+                    <div class="form-group">
+
+                        <label for="review-second-date">
+                            Would you be interested in another date?
+                        </label>
+
+
+                        <select
+                            id="review-second-date"
+                            name="second_date"
+                            required
+                        >
+
+                            <option
+                                value=""
+                                disabled
+                                selected
+                            >
+                                Select one
+                            </option>
+
+
+                            <option value="yes">
+                                Yes
+                            </option>
+
+
+                            <option value="maybe">
+                                Maybe
+                            </option>
+
+
+                            <option value="no">
+                                No
+                            </option>
+
+
+                            <option value="prefer-not">
+                                Prefer not to say
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+
+                    <!-- Permission -->
+
+                    <div class="form-consent">
+
+                        <label>
+
+                            <input
+                                type="checkbox"
+                                id="review-permission"
+                                name="permission"
+                                required
+                            >
+
+
+                            <span>
+
+                                I understand that my submission will
+                                be reviewed before publication, and I
+                                give permission for my review to be
+                                published if it is approved.
+
+                            </span>
+
+                        </label>
+
+                    </div>
+
+
+
+                    <!-- Submit -->
+
+                    <button
+                        type="submit"
+                        class="primary-button review-submit-button"
+                    >
+                        Submit My Review →
+                    </button>
+
+
+
+                    <!-- Form Status -->
+
+                    <div
+                        class="review-form-message"
+                        id="review-form-message"
+                        aria-live="polite"
+                    ></div>
+
+
+                </form>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- ==============================
+             FINAL CTA
+        =============================== -->
+
         <section class="reviews-cta scroll-reveal">
 
             <p class="section-label">
                 READY TO TRY IT?
             </p>
 
+
             <h2>
                 Your story could<br>
                 be the next one.
             </h2>
+
 
             <p>
                 Take the quiz and join the next monthly
                 dating pool.
             </p>
 
-            <a href="quiz.html" class="primary-button">
+
+            <a
+                href="quiz.html"
+                class="primary-button"
+            >
                 Find My Match →
             </a>
 
@@ -254,22 +673,33 @@
     </main>
 
 
-    <!-- Footer -->
+
+    <!-- ==============================
+         FOOTER
+    =============================== -->
+
     <footer>
 
         <h3>
             AVE MARIA BLIND DATING
         </h3>
 
+
         <p>
             Made for Ave Maria University students.
         </p>
 
+
         <p class="footer-disclaimer">
-            Ave Maria Blind Dating is an independent student-created
-            project and is not affiliated with, sponsored by, endorsed
-            by, or administered by Ave Maria University.
+
+            Ave Maria Blind Dating is an independent
+            student-created project and is not affiliated with,
+            sponsored by, endorsed by, or administered by
+            Ave Maria University.
+
         </p>
+
+
 
         <div class="footer-links">
 
@@ -277,21 +707,26 @@
                 How It Works
             </a>
 
+
             <a href="index.html#about">
                 About
             </a>
+
 
             <a href="index.html#faq">
                 FAQ
             </a>
 
+
             <a href="stats.html">
                 Stats
             </a>
 
+
             <a href="advice.html">
                 Dating Advice
             </a>
+
 
             <a href="reviews.html">
                 Reviews
@@ -302,7 +737,11 @@
     </footer>
 
 
-    <!-- Scroll Reveal -->
+
+    <!-- ==============================
+         SCROLL REVEAL
+    =============================== -->
+
     <script>
 
         const scrollElements =
@@ -318,6 +757,7 @@
 
                 const windowHeight =
                     window.innerHeight;
+
 
                 if (elementTop < windowHeight - 100) {
 
@@ -340,5 +780,7 @@
 
     </script>
 
+
 </body>
+
 </html>

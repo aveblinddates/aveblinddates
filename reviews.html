@@ -842,29 +842,14 @@
 
         try {
 
-            const {
-                data,
-                error
-            } =
-                await supabaseClient
-
-                    .from("reviews")
-
-                    .select(
-                        "id, name, review, experience, created_at"
-                    )
-
-                    .eq(
-                        "status",
-                        "approved"
-                    )
-
-                    .order(
-                        "created_at",
-                        {
-                            ascending: false
-                        }
-                    );
+            const { data, error } = await supabaseClient
+    .from("reviews")
+    .select("id, public_review, created_at")
+    .eq("status", "approved")
+    .not("public_review", "is", null)
+    .order("created_at", {
+        ascending: false
+    });
 
 
             if (error) {
@@ -975,7 +960,7 @@
 
 
                         <p class="review-card-text">
-                            ${escapeHtml(review.review)}
+                            ${escapeHtml(review.public_review)}
                         </p>
 
 

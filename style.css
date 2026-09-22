@@ -5208,7 +5208,9 @@ textarea {
 
     line-height: 1.8;
 }
-/* Resources background */
+/* ==============================
+   RESOURCES BACKGROUND DESIGN
+============================== */
 
 .resources {
     position: relative;
@@ -5226,6 +5228,8 @@ textarea {
 }
 
 
+/* Large green curved line */
+
 .resources::before {
     content: "";
 
@@ -5237,13 +5241,17 @@ textarea {
     top: -300px;
     left: -180px;
 
-    border: 2px solid rgba(23, 60, 43, .05);
+    border: 2px solid rgba(23, 60, 43, .10);
 
     border-radius: 50%;
 
     pointer-events: none;
+
+    z-index: 0;
 }
 
+
+/* Second green curved line */
 
 .resources::after {
     content: "";
@@ -5256,46 +5264,122 @@ textarea {
     right: -320px;
     bottom: -350px;
 
-    border: 2px solid rgba(23, 60, 43, .045);
+    border: 2px solid rgba(23, 60, 43, .08);
 
     border-radius: 50%;
 
     pointer-events: none;
+
+    z-index: 0;
 }
 
+
+/* Keep resource content above decorations */
 
 .resources > * {
     position: relative;
     z-index: 2;
 }
+/* ==============================
+   FAQ DECORATIVE ARCS
+============================== */
+
+.faq-section {
+    position: relative;
+    overflow: hidden;
+}
+
+
+/* Right-side green arcs */
+
 .faq-section::before {
     content: "";
 
     position: absolute;
 
-    width: 450px;
-    height: 450px;
+    width: 520px;
+    height: 520px;
 
-    right: -200px;
-    top: 100px;
+    right: -280px;
+    top: 60px;
 
-    border: 2px solid rgba(23, 60, 43, .05);
+    border: 2px solid rgba(23, 60, 43, .10);
 
     border-radius: 50%;
+
+    pointer-events: none;
+
+    z-index: 0;
 }
+
+
+/* Right-side gold arc */
 
 .faq-section::after {
     content: "";
 
     position: absolute;
 
-    width: 350px;
-    height: 350px;
+    width: 400px;
+    height: 400px;
 
-    right: -150px;
-    top: 150px;
+    right: -210px;
+    top: 120px;
 
-    border: 2px solid rgba(200, 157, 76, .06);
+    border: 2px solid rgba(200, 157, 76, .13);
 
     border-radius: 50%;
+
+    pointer-events: none;
+
+    z-index: 0;
+}
+
+
+/* Additional decorative arcs */
+
+.faq-decoration {
+    position: absolute;
+
+    width: 600px;
+    height: 600px;
+
+    left: -380px;
+    bottom: 40px;
+
+    border: 2px solid rgba(23, 60, 43, .075);
+
+    border-radius: 50%;
+
+    pointer-events: none;
+
+    z-index: 0;
+}
+
+
+/* Second left-side arc */
+
+.faq-decoration::after {
+    content: "";
+
+    position: absolute;
+
+    width: 430px;
+    height: 430px;
+
+    left: 90px;
+    top: 85px;
+
+    border: 2px solid rgba(200, 157, 76, .09);
+
+    border-radius: 50%;
+}
+
+
+/* Keep FAQ content above decorations */
+
+.faq-section > *:not(.faq-decoration) {
+    position: relative;
+
+    z-index: 2;
 }

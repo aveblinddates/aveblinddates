@@ -355,68 +355,23 @@
 
 
 
-    <!-- Countdown JavaScript -->
-
+    <!-- Countdown Script -->
     <script>
 
-        const daysElement =
-            document.getElementById("days");
-
-        const hoursElement =
-            document.getElementById("hours");
-
-        const minutesElement =
-            document.getElementById("minutes");
-
-        const secondsElement =
-            document.getElementById("seconds");
-
-        const matchingDateElement =
-            document.getElementById("matchingDate");
-
-        const countdownMessage =
-            document.getElementById("countdownMessage");
-
-
         /*
-         * Get the next first day of the month.
+         * Find the first day of the next month.
          *
-         * If today is already the first,
-         * the next matching day is the first
-         * of the following month.
+         * Example:
+         * September 2026 → October 1, 2026
          */
 
         function getNextMatchingDay() {
 
-            const now =
-                new Date();
-
-            let year =
-                now.getFullYear();
-
-            let month =
-                now.getMonth();
-
-
-            if (now.getDate() === 1) {
-
-                month += 1;
-
-            }
-
-
-            if (month > 11) {
-
-                month = 0;
-
-                year += 1;
-
-            }
-
+            const now = new Date();
 
             return new Date(
-                year,
-                month,
+                now.getFullYear(),
+                now.getMonth() + 1,
                 1,
                 0,
                 0,
@@ -427,119 +382,108 @@
         }
 
 
+        const matchingDate =
+            getNextMatchingDay();
+
+
         /*
-         * Format the matching date.
+         * Display the matching date.
          */
 
-        function formatMatchingDate(date) {
+        const dateDisplay =
+            document.getElementById("matching-date");
 
-            return date.toLocaleDateString(
+
+        dateDisplay.textContent =
+            matchingDate.toLocaleDateString(
                 "en-US",
                 {
-                    weekday: "long",
                     month: "long",
                     day: "numeric",
                     year: "numeric"
                 }
             );
 
-        }
-
 
         /*
-         * Add leading zero.
-         */
-
-        function pad(number) {
-
-            return String(number)
-                .padStart(2, "0");
-
-        }
-
-
-        /*
-         * Update countdown.
+         * Countdown.
          */
 
         function updateCountdown() {
 
             const now =
-                new Date();
+                new Date().getTime();
 
             const target =
-                getNextMatchingDay();
+                matchingDate.getTime();
 
             const difference =
-                target.getTime() -
-                now.getTime();
+                target - now;
 
 
-            matchingDateElement.textContent =
-                formatMatchingDate(target);
-
+            /*
+             * If the countdown reaches zero,
+             * reload the page so the next monthly
+             * cycle can be calculated.
+             */
 
             if (difference <= 0) {
 
-                daysElement.textContent = "00";
-                hoursElement.textContent = "00";
-                minutesElement.textContent = "00";
-                secondsElement.textContent = "00";
-
-                countdownMessage.textContent =
-                    "Matching day is here! The monthly dating pool is now being processed.";
+                window.location.reload();
 
                 return;
 
             }
 
 
-            const totalSeconds =
-                Math.floor(
-                    difference / 1000
-                );
-
-
             const days =
                 Math.floor(
-                    totalSeconds / 86400
+                    difference /
+                    (1000 * 60 * 60 * 24)
                 );
 
 
             const hours =
                 Math.floor(
-                    (totalSeconds % 86400) / 3600
+                    (difference /
+                    (1000 * 60 * 60)) % 24
                 );
 
 
             const minutes =
                 Math.floor(
-                    (totalSeconds % 3600) / 60
+                    (difference /
+                    (1000 * 60)) % 60
                 );
 
 
             const seconds =
-                totalSeconds % 60;
+                Math.floor(
+                    (difference / 1000) % 60
+                );
 
 
-            daysElement.textContent =
-                pad(days);
+            document.getElementById("days")
+                .textContent =
+                String(days).padStart(2, "0");
 
-            hoursElement.textContent =
-                pad(hours);
 
-            minutesElement.textContent =
-                pad(minutes);
+            document.getElementById("hours")
+                .textContent =
+                String(hours).padStart(2, "0");
 
-            secondsElement.textContent =
-                pad(seconds);
+
+            document.getElementById("minutes")
+                .textContent =
+                String(minutes).padStart(2, "0");
+
+
+            document.getElementById("seconds")
+                .textContent =
+                String(seconds).padStart(2, "0");
 
         }
 
-
-        /*
-         * Start countdown.
-         */
 
         updateCountdown();
 
@@ -551,7 +495,5 @@
 
     </script>
 
-
 </body>
-
 </html>

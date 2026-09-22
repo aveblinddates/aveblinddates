@@ -6969,3 +6969,26 @@ textarea {
     }
 
 }
+/* ==============================
+   SUBTLE ADMIN ACCESS
+============================== */
+
+.admin-access {
+    display: inline-block;
+
+    margin-top: 22px;
+
+    font-size: 15px;
+
+    color: rgba(214, 179, 106, 0.45);
+
+    transition:
+        color .2s ease,
+        transform .2s ease;
+}
+
+.admin-access:hover {
+    color: #d6b36a;
+
+    transform: scale(1.15);
+}

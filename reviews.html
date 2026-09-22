@@ -780,7 +780,467 @@
 
     </script>
 
+<!-- ==============================
+     SUPABASE
+============================== -->
 
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<script>
+
+    /* ==============================
+       SUPABASE CONNECTION
+    ============================== */
+
+    const SUPABASE_URL =
+        "https://vixyounyimddctlwzmdj.supabase.co";
+
+    const SUPABASE_KEY =
+        "sb_publishable_dSoWkr2kH2oGI96i2zCpdg_Ddi-NQff";
+
+
+    const supabaseClient =
+        window.supabase.createClient(
+            SUPABASE_URL,
+            SUPABASE_KEY
+        );
+
+
+
+    /* ==============================
+       ELEMENTS
+    ============================== */
+
+    const reviewForm =
+        document.getElementById("review-form");
+
+
+    const reviewMessage =
+        document.getElementById("review-form-message");
+
+
+    const reviewSubmitButton =
+        document.querySelector(
+            ".review-submit-button"
+        );
+
+
+    const reviewsGrid =
+        document.getElementById("reviews-grid");
+
+
+    const emptyState =
+        document.getElementById("reviews-empty-state");
+
+
+
+    /* ==============================
+       LOAD APPROVED REVIEWS
+    ============================== */
+
+    async function loadApprovedReviews() {
+
+        try {
+
+            const {
+                data,
+                error
+            } =
+                await supabaseClient
+
+                    .from("reviews")
+
+                    .select(
+                        "id, name, review, experience, created_at"
+                    )
+
+                    .eq(
+                        "status",
+                        "approved"
+                    )
+
+                    .order(
+                        "created_at",
+                        {
+                            ascending: false
+                        }
+                    );
+
+
+            if (error) {
+
+                console.error(
+                    "REVIEWS LOAD ERROR:",
+                    error
+                );
+
+                return;
+
+            }
+
+
+            /* No approved reviews yet */
+
+            if (!data || data.length === 0) {
+
+                return;
+
+            }
+
+
+            /* Hide empty state */
+
+            if (emptyState) {
+
+                emptyState.style.display =
+                    "none";
+
+            }
+
+
+            /* Create review cards */
+
+            data.forEach(
+                (review, index) => {
+
+                    const card =
+                        document.createElement(
+                            "article"
+                        );
+
+
+                    card.className =
+                        "review-card";
+
+
+                    /* Format experience */
+
+                    const experienceLabels = {
+
+                        great:
+                            "Great experience",
+
+                        good:
+                            "Good experience",
+
+                        unexpected:
+                            "Unexpected experience",
+
+                        "not-for-me":
+                            "Not for me"
+
+                    };
+
+
+                    const experienceText =
+                        experienceLabels[
+                            review.experience
+                        ] ||
+                        "Student experience";
+
+
+                    /* Format date */
+
+                    const reviewDate =
+                        new Date(
+                            review.created_at
+                        );
+
+
+                    const formattedDate =
+                        reviewDate.toLocaleDateString(
+                            "en-US",
+                            {
+                                month: "long",
+                                year: "numeric"
+                            }
+                        );
+
+
+                    /* Create card */
+
+                    card.innerHTML = `
+
+                        <div class="review-card-top">
+
+                            <span class="review-card-number">
+                                ${String(index + 1).padStart(2, "0")}
+                            </span>
+
+                            <span class="review-card-experience">
+                                ${experienceText}
+                            </span>
+
+                        </div>
+
+
+                        <p class="review-card-text">
+                            ${escapeHtml(review.review)}
+                        </p>
+
+
+                        <div class="review-card-bottom">
+
+                            <span class="review-card-name">
+                                ${escapeHtml(
+                                    review.name || "Anonymous"
+                                )}
+                            </span>
+
+                            <span class="review-card-date">
+                                ${formattedDate}
+                            </span>
+
+                        </div>
+
+                    `;
+
+
+                    reviewsGrid.appendChild(
+                        card
+                    );
+
+                }
+            );
+
+
+        } catch (error) {
+
+            console.error(
+                "REVIEWS ERROR:",
+                error
+            );
+
+        }
+
+    }
+
+
+
+    /* ==============================
+       HTML SAFETY
+    ============================== */
+
+    function escapeHtml(text) {
+
+        const div =
+            document.createElement("div");
+
+
+        div.textContent =
+            text;
+
+
+        return div.innerHTML;
+
+    }
+
+
+
+    /* ==============================
+       SUBMIT REVIEW
+    ============================== */
+
+    reviewForm.addEventListener(
+        "submit",
+        async function(event) {
+
+            event.preventDefault();
+
+
+            /* Browser validation */
+
+            if (!reviewForm.checkValidity()) {
+
+                reviewForm.reportValidity();
+
+                return;
+
+            }
+
+
+            /* Get values */
+
+            const name =
+                document
+                    .getElementById("review-name")
+                    .value
+                    .trim();
+
+
+            const review =
+                document
+                    .getElementById("review-text")
+                    .value
+                    .trim();
+
+
+            const experience =
+                document
+                    .getElementById("review-experience")
+                    .value;
+
+
+            const secondDate =
+                document
+                    .getElementById("review-second-date")
+                    .value;
+
+
+            /* Disable button */
+
+            reviewSubmitButton.disabled =
+                true;
+
+
+            reviewSubmitButton.textContent =
+                "Submitting...";
+
+
+            reviewMessage.className =
+                "review-form-message";
+
+
+            reviewMessage.textContent =
+                "";
+
+
+            try {
+
+                /* ==============================
+                   INSERT REVIEW
+                ============================== */
+
+                const {
+                    error
+                } =
+                    await supabaseClient
+
+                        .from("reviews")
+
+                        .insert([
+
+                            {
+
+                                name:
+                                    name ||
+                                    "Anonymous",
+
+                                review:
+                                    review,
+
+                                experience:
+                                    experience,
+
+                                second_date:
+                                    secondDate
+
+                                /*
+                                 * Notice that we do NOT
+                                 * send status here.
+                                 *
+                                 * Supabase automatically
+                                 * gives it "pending".
+                                 */
+
+                            }
+
+                        ]);
+
+
+                /* ==============================
+                   HANDLE ERROR
+                ============================== */
+
+                if (error) {
+
+                    console.error(
+                        "REVIEW SUBMISSION ERROR:",
+                        error
+                    );
+
+
+                    reviewMessage.className =
+                        "review-form-message error";
+
+
+                    reviewMessage.textContent =
+                        "Something went wrong while submitting your review. Please try again.";
+
+
+                    reviewSubmitButton.disabled =
+                        false;
+
+
+                    reviewSubmitButton.textContent =
+                        "Submit My Review →";
+
+
+                    return;
+
+                }
+
+
+                /* ==============================
+                   SUCCESS
+                ============================== */
+
+                reviewMessage.className =
+                    "review-form-message success";
+
+
+                reviewMessage.textContent =
+                    "Thank you! Your review has been submitted and will be reviewed before it appears on the website.";
+
+
+                reviewForm.reset();
+
+
+                reviewSubmitButton.disabled =
+                    false;
+
+
+                reviewSubmitButton.textContent =
+                    "Submit My Review →";
+
+
+            } catch (error) {
+
+                console.error(
+                    "REVIEW ERROR:",
+                    error
+                );
+
+
+                reviewMessage.className =
+                    "review-form-message error";
+
+
+                reviewMessage.textContent =
+                    "We couldn't submit your review right now. Please try again in a moment.";
+
+
+                reviewSubmitButton.disabled =
+                    false;
+
+
+                reviewSubmitButton.textContent =
+                    "Submit My Review →";
+
+            }
+
+        }
+    );
+
+
+
+    /* ==============================
+       START
+    ============================== */
+
+    loadApprovedReviews();
+
+</script>
 </body>
 
 </html>

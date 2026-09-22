@@ -844,7 +844,7 @@
 
             const { data, error } = await supabaseClient
     .from("reviews")
-    .select("id, public_review, created_at")
+    .select("id, public_review, created_at, name, experience")
     .eq("status", "approved")
     .not("public_review", "is", null)
     .order("created_at", {

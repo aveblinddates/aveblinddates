@@ -1858,7 +1858,7 @@ footer p {
     overflow: hidden;
 
     padding: 90px 20px;
-   margin-bottom: 15px;
+   
 
     background:
         linear-gradient(
@@ -1879,7 +1879,7 @@ footer p {
 
     width: 320px;
     height: 320px;
-   margin-bottom: 20 px;
+   
 
     border:
         1px solid
@@ -1898,13 +1898,13 @@ footer p {
 
     width: 220px;
     height: 220px;
-   margin-bottom: 20 px;
+   
 
     border:
         1px solid
         rgba(214, 179, 106, .10);
 
-    border-radius: 50%;
+    border-radius: 45%;
 
     left: -100px;
     bottom: -120px;
@@ -1919,7 +1919,7 @@ footer p {
 .page-header .section-label {
     color: #d6b36a;
 
-    margin-bottom: 18px;
+    margin-bottom: 25px;
 }
 
 .page-header h1 {

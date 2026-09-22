@@ -1,0 +1,478 @@
+<!DOCTYPE html> <html lang="en"> <head>
+<meta charset="UTF-8">
+
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+>
+
+<title>No Connection | Ave Maria Blind Dating</title>
+
+<link rel="stylesheet" href="style.css">
+
+<style>
+
+    /* ==============================
+       OFFLINE PAGE
+    ============================== */
+
+    .offline-page {
+
+        min-height: calc(100vh - 82px);
+
+        display: flex;
+
+        align-items: center;
+
+        justify-content: center;
+
+        padding: 80px 7%;
+
+        text-align: center;
+
+        position: relative;
+
+        overflow: hidden;
+
+    }
+
+
+    .offline-content {
+
+        width: min(700px, 100%);
+
+        position: relative;
+
+        z-index: 2;
+
+    }
+
+
+    .offline-icon {
+
+        font-size: 75px;
+
+        line-height: 1;
+
+        color: #c89d4c;
+
+        margin-bottom: 30px;
+
+        animation:
+            offlinePulse 3s ease-in-out infinite;
+
+    }
+
+
+    .offline-page h1 {
+
+        font-size:
+            clamp(42px, 6vw, 70px);
+
+        line-height: 1;
+
+        color: #173c2b;
+
+        margin-bottom: 25px;
+
+    }
+
+
+    .offline-page h1 span {
+
+        color: #c89d4c;
+
+        font-style: italic;
+
+    }
+
+
+    .offline-page p {
+
+        max-width: 560px;
+
+        margin: 0 auto 30px;
+
+        font-family: Arial, sans-serif;
+
+        font-size: 17px;
+
+        line-height: 1.7;
+
+        color: #66736b;
+
+    }
+
+
+    .offline-divider {
+
+        width: 70px;
+
+        height: 2px;
+
+        background: #c89d4c;
+
+        margin: 0 auto 30px;
+
+        opacity: .7;
+
+    }
+
+
+    .offline-status {
+
+        display: inline-flex;
+
+        align-items: center;
+
+        gap: 9px;
+
+        margin-bottom: 30px;
+
+        padding: 9px 15px;
+
+        background: #e7dfd1;
+
+        font-family: Arial, sans-serif;
+
+        font-size: 12px;
+
+        font-weight: bold;
+
+        letter-spacing: 1px;
+
+        color: #536158;
+
+    }
+
+
+    .status-dot {
+
+        width: 8px;
+
+        height: 8px;
+
+        border-radius: 50%;
+
+        background: #9b3d32;
+
+    }
+
+
+    .offline-buttons {
+
+        display: flex;
+
+        justify-content: center;
+
+        gap: 15px;
+
+        flex-wrap: wrap;
+
+    }
+
+
+    /* Decorative hearts */
+
+    .offline-decoration {
+
+        position: absolute;
+
+        color: #173c2b;
+
+        opacity: .035;
+
+        pointer-events: none;
+
+        user-select: none;
+
+    }
+
+
+    .offline-decoration.one {
+
+        top: 14%;
+
+        left: 8%;
+
+        font-size: 190px;
+
+        transform: rotate(-15deg);
+
+    }
+
+
+    .offline-decoration.two {
+
+        bottom: 8%;
+
+        right: 8%;
+
+        font-size: 220px;
+
+        transform: rotate(15deg);
+
+    }
+
+
+    /* Animation */
+
+    @keyframes offlinePulse {
+
+        0%,
+        100% {
+
+            transform:
+                scale(1);
+
+            opacity: 1;
+
+        }
+
+        50% {
+
+            transform:
+                scale(1.08);
+
+            opacity: .75;
+
+        }
+
+    }
+
+
+    /* Mobile */
+
+    @media (max-width: 600px) {
+
+        .offline-page {
+
+            padding:
+                60px 7%;
+
+        }
+
+
+        .offline-icon {
+
+            font-size: 60px;
+
+        }
+
+
+        .offline-page h1 {
+
+            font-size: 42px;
+
+        }
+
+
+        .offline-page p {
+
+            font-size: 15px;
+
+        }
+
+
+        .offline-buttons {
+
+            flex-direction: column;
+
+        }
+
+
+        .offline-buttons a,
+        .offline-buttons button {
+
+            width: 100%;
+
+            text-align: center;
+
+        }
+
+
+        .offline-decoration {
+
+            display: none;
+
+        }
+
+    }
+
+</style>
+
+</head> <body>
+<!-- Navigation -->
+
+<nav class="navbar">
+
+    <a href="index.html" class="logo">
+        Ave Maria Blind Dating
+    </a>
+
+
+    <div class="nav-links">
+
+        <a href="index.html#how-it-works">
+            How It Works
+        </a>
+
+        <a href="index.html#about">
+            About
+        </a>
+
+        <a href="index.html#faq">
+            FAQ
+        </a>
+
+        <a href="quiz.html" class="nav-cta">
+            Find My Match →
+        </a>
+
+    </div>
+
+</nav>
+
+
+<!-- Offline -->
+
+<main class="offline-page">
+
+
+    <div
+        class="offline-decoration one"
+        aria-hidden="true"
+    >
+        ♡
+    </div>
+
+
+    <div
+        class="offline-decoration two"
+        aria-hidden="true"
+    >
+        ♡
+    </div>
+
+
+    <div class="offline-content">
+
+
+        <div
+            class="offline-icon"
+            aria-hidden="true"
+        >
+            ♡
+        </div>
+
+
+        <p class="section-label">
+            NO CONNECTION
+        </p>
+
+
+        <div class="offline-divider"></div>
+
+
+        <div class="offline-status">
+
+            <span class="status-dot"></span>
+
+            YOU'RE OFFLINE
+
+        </div>
+
+
+        <h1>
+            Looks like this connection<br>
+            <span>went on a blind date.</span>
+        </h1>
+
+
+        <p>
+            We can't reach the website right now.
+            Check your internet connection and try again.
+        </p>
+
+
+        <div class="offline-buttons">
+
+            <button
+                type="button"
+                class="primary-button"
+                onclick="window.location.reload()"
+            >
+                Try Again →
+            </button>
+
+
+            <a
+                href="index.html"
+                class="secondary-button"
+                style="
+                    background: transparent;
+                    color: #173c2b;
+                    border-color: #173c2b;
+                "
+            >
+                Back to Home
+            </a>
+
+        </div>
+
+
+    </div>
+
+</main>
+
+
+<!-- Footer -->
+
+<footer>
+
+    <h3>
+        AVE MARIA BLIND DATING
+    </h3>
+
+    <p>
+        Made for Ave Maria University students.
+    </p>
+
+    <p class="footer-disclaimer">
+        Ave Maria Blind Dating is an independent
+        student-created project and is not affiliated
+        with, sponsored by, endorsed by, or administered
+        by Ave Maria University.
+    </p>
+
+    <div class="footer-links">
+
+        <a href="index.html#how-it-works">
+            How It Works
+        </a>
+
+        <a href="index.html#about">
+            About
+        </a>
+
+        <a href="index.html#faq">
+            FAQ
+        </a>
+
+        <a href="stats.html">
+            Stats
+        </a>
+
+        <a href="advice.html">
+            Dating Advice
+        </a>
+
+        <a href="reviews.html">
+            Reviews
+        </a>
+
+    </div>
+
+</footer>
+
+</body> </html>

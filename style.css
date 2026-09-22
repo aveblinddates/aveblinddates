@@ -1504,14 +1504,14 @@ textarea {
 }
 
 .resource-grid {
-    width: min(1100px, 90%);
+    width: min(1200px, 92%);
 
     margin: 0 auto;
 
     display: grid;
 
     grid-template-columns:
-        repeat(3, 1fr);
+        repeat(4, 1fr);
 
     gap: 20px;
 

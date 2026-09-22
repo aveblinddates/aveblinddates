@@ -1,0 +1,464 @@
+<!DOCTYPE html> <html lang="en"> <head>
+<meta charset="UTF-8">
+
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+>
+
+<title>Page Not Found | Ave Maria Blind Dating</title>
+
+<link rel="stylesheet" href="style.css">
+
+<style>
+
+    /* ==============================
+       404 PAGE
+    ============================== */
+
+    .error-page {
+
+        min-height: calc(100vh - 82px);
+
+        display: flex;
+
+        align-items: center;
+
+        justify-content: center;
+
+        padding: 80px 7%;
+
+        text-align: center;
+
+        position: relative;
+
+        overflow: hidden;
+
+    }
+
+
+    .error-content {
+
+        width: min(700px, 100%);
+
+        position: relative;
+
+        z-index: 2;
+
+    }
+
+
+    .error-number {
+
+        font-family: Georgia, "Times New Roman", serif;
+
+        font-size: clamp(120px, 22vw, 240px);
+
+        line-height: .8;
+
+        color: #173c2b;
+
+        opacity: .10;
+
+        margin-bottom: -20px;
+
+        user-select: none;
+
+    }
+
+
+    .error-heart {
+
+        font-size: 70px;
+
+        line-height: 1;
+
+        color: #c89d4c;
+
+        margin-bottom: 25px;
+
+        animation: gentleHeart 3s ease-in-out infinite;
+
+    }
+
+
+    .error-page h1 {
+
+        font-size: clamp(42px, 6vw, 70px);
+
+        line-height: 1;
+
+        color: #173c2b;
+
+        margin-bottom: 25px;
+
+    }
+
+
+    .error-page h1 span {
+
+        color: #c89d4c;
+
+        font-style: italic;
+
+    }
+
+
+    .error-page p {
+
+        max-width: 560px;
+
+        margin: 0 auto 30px;
+
+        font-family: Arial, sans-serif;
+
+        font-size: 17px;
+
+        line-height: 1.7;
+
+        color: #66736b;
+
+    }
+
+
+    .error-page .section-label {
+
+        margin-bottom: 15px;
+
+    }
+
+
+    .error-divider {
+
+        width: 70px;
+
+        height: 2px;
+
+        background: #c89d4c;
+
+        margin: 0 auto 30px;
+
+        opacity: .7;
+
+    }
+
+
+    .error-buttons {
+
+        display: flex;
+
+        justify-content: center;
+
+        gap: 15px;
+
+        flex-wrap: wrap;
+
+    }
+
+
+    /* Decorative hearts */
+
+    .error-decoration {
+
+        position: absolute;
+
+        color: #173c2b;
+
+        opacity: .035;
+
+        pointer-events: none;
+
+        user-select: none;
+
+    }
+
+
+    .error-decoration.one {
+
+        top: 15%;
+
+        left: 8%;
+
+        font-size: 180px;
+
+        transform: rotate(-15deg);
+
+    }
+
+
+    .error-decoration.two {
+
+        bottom: 10%;
+
+        right: 8%;
+
+        font-size: 220px;
+
+        transform: rotate(15deg);
+
+    }
+
+
+    /* Heart animation */
+
+    @keyframes gentleHeart {
+
+        0%,
+        100% {
+
+            transform:
+                scale(1);
+
+        }
+
+        50% {
+
+            transform:
+                scale(1.08);
+
+        }
+
+    }
+
+
+    /* Mobile */
+
+    @media (max-width: 600px) {
+
+        .error-page {
+
+            padding:
+                60px 7%;
+
+        }
+
+
+        .error-number {
+
+            font-size: 140px;
+
+        }
+
+
+        .error-heart {
+
+            font-size: 55px;
+
+        }
+
+
+        .error-page h1 {
+
+            font-size: 42px;
+
+        }
+
+
+        .error-page p {
+
+            font-size: 15px;
+
+        }
+
+
+        .error-buttons {
+
+            flex-direction: column;
+
+        }
+
+
+        .error-buttons a {
+
+            width: 100%;
+
+            text-align: center;
+
+        }
+
+
+        .error-decoration {
+
+            display: none;
+
+        }
+
+    }
+
+</style>
+
+</head> <body>
+<!-- Navigation -->
+
+<nav class="navbar">
+
+    <a href="index.html" class="logo">
+        Ave Maria Blind Dating
+    </a>
+
+
+    <div class="nav-links">
+
+        <a href="index.html#how-it-works">
+            How It Works
+        </a>
+
+        <a href="index.html#about">
+            About
+        </a>
+
+        <a href="index.html#faq">
+            FAQ
+        </a>
+
+        <a href="quiz.html" class="nav-cta">
+            Find My Match →
+        </a>
+
+    </div>
+
+</nav>
+
+
+<!-- 404 -->
+
+<main class="error-page">
+
+
+    <!-- Decorative elements -->
+
+    <div
+        class="error-decoration one"
+        aria-hidden="true"
+    >
+        ♡
+    </div>
+
+
+    <div
+        class="error-decoration two"
+        aria-hidden="true"
+    >
+        ♡
+    </div>
+
+
+    <div class="error-content">
+
+
+        <div
+            class="error-number"
+            aria-hidden="true"
+        >
+            404
+        </div>
+
+
+        <div
+            class="error-heart"
+            aria-hidden="true"
+        >
+            ♡
+        </div>
+
+
+        <p class="section-label">
+            WRONG TURN
+        </p>
+
+
+        <div class="error-divider"></div>
+
+
+        <h1>
+            Looks like this page<br>
+            <span>went on a blind date.</span>
+        </h1>
+
+
+        <p>
+            We couldn't find the page you were looking for.
+            Maybe the connection wasn't meant to be.
+        </p>
+
+
+        <div class="error-buttons">
+
+            <a
+                href="index.html"
+                class="primary-button"
+            >
+                Back to Home →
+            </a>
+
+
+            <a
+                href="quiz.html"
+                class="secondary-button"
+                style="
+                    background: transparent;
+                    color: #173c2b;
+                    border-color: #173c2b;
+                "
+            >
+                Find My Match
+            </a>
+
+        </div>
+
+
+    </div>
+
+</main>
+
+
+<!-- Footer -->
+
+<footer>
+
+    <h3>
+        AVE MARIA BLIND DATING
+    </h3>
+
+    <p>
+        Made for Ave Maria University students.
+    </p>
+
+    <p class="footer-disclaimer">
+        Ave Maria Blind Dating is an independent
+        student-created project and is not affiliated
+        with, sponsored by, endorsed by, or administered
+        by Ave Maria University.
+    </p>
+
+    <div class="footer-links">
+
+        <a href="index.html#how-it-works">
+            How It Works
+        </a>
+
+        <a href="index.html#about">
+            About
+        </a>
+
+        <a href="index.html#faq">
+            FAQ
+        </a>
+
+        <a href="stats.html">
+            Stats
+        </a>
+
+        <a href="advice.html">
+            Dating Advice
+        </a>
+
+        <a href="reviews.html">
+            Reviews
+        </a>
+
+    </div>
+
+</footer>
+
+</body> </html>

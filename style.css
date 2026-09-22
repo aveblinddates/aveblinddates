@@ -1891,7 +1891,7 @@ footer p {
     top: -120px;
 }
 .countdown-page {
-   padding-top: 35px;
+   padding-top: 20px;
 }
 
 .page-header::after {
@@ -1951,7 +1951,9 @@ footer p {
 
     color: #dce6df;
 }
-
+.final-cta {
+   margin-bottom: 30px;
+}
 
 /* ==============================
    NEW PAGE CONTENT

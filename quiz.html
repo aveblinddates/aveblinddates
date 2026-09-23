@@ -148,7 +148,27 @@
                     </label>
 
                 </div>
+<label for="your_age">
+    How old are you?
+</label>
 
+<select
+    id="your_age"
+    name="your_age"
+    required
+>
+    <option value="">
+        Select your age
+    </option>
+
+    <option value="18">18</option>
+    <option value="19">19</option>
+    <option value="20">20</option>
+    <option value="21">21</option>
+    <option value="22">22</option>
+    <option value="23">23</option>
+    <option value="24">24</option>
+</select>
 
                 <label for="year">
                     What year are you?
@@ -1488,17 +1508,23 @@
                             email,
 
                         gender:
-                            document.querySelector(
-                                'input[name="gender"]:checked'
-                            )?.value,
+    document.querySelector(
+        'input[name="gender"]:checked'
+    )?.value,
 
 
-                        min_age:
-                            parseInt(
-                                minAgeInput.value,
-                                10
-                            ),
+your_age:
+    parseInt(
+        document.getElementById("your_age").value,
+        10
+    ),
 
+
+min_age:
+    parseInt(
+        minAgeInput.value,
+        10
+    ),
 
                         max_age:
                             parseInt(

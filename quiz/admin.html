@@ -1097,6 +1097,112 @@ const matchesContainer =
     document.getElementById(
         "matchesContainer"
     );
+matchesContainer.addEventListener(
+    "click",
+    async function(event) {
+
+        const button =
+            event.target.closest(
+                ".approve-match-button"
+            );
+
+        if (!button) {
+            return;
+        }
+
+        const personAId =
+            button.dataset.personA;
+
+        const personBId =
+            button.dataset.personB;
+
+        const confirmed =
+            confirm(
+                "Approve this match? This will save the match for the email stage, but will NOT send any emails."
+            );
+
+        if (!confirmed) {
+            return;
+        }
+
+        button.disabled = true;
+
+        button.textContent =
+            "Approving...";
+
+        try {
+
+            const {
+                data,
+                error
+            } =
+                await supabaseClient
+                    .from("approved_matches")
+                    .insert([{
+                        person_a_id: personAId,
+                        person_b_id: personBId
+                    }])
+                    .select();
+
+            if (error) {
+
+                console.error(
+                    "APPROVAL ERROR:",
+                    error
+                );
+
+                alert(
+                    "Approval failed: " +
+                    error.message
+                );
+
+                button.disabled = false;
+
+                button.textContent =
+                    "Approve Match →";
+
+                return;
+
+            }
+
+            console.log(
+                "MATCH APPROVED:",
+                data
+            );
+
+            button.textContent =
+                "✓ Match Approved";
+
+            button.style.background =
+                "#24563e";
+
+            matchingStatus.textContent =
+                "Match approved";
+
+            matchingStatusDescription.textContent =
+                "The match has been saved for the email preparation stage. No emails have been sent.";
+
+        } catch (error) {
+
+            console.error(
+                "APPROVAL EXCEPTION:",
+                error
+            );
+
+            alert(
+                "Something went wrong: " +
+                error.message
+            );
+
+            button.disabled = false;
+
+            button.textContent =
+                "Approve Match →";
+
+        }
+
+    }
+);
 
 const startMatchingButton =
     document.getElementById(
@@ -1473,150 +1579,154 @@ startMatchingButton.addEventListener(
 
             matchesContainer.innerHTML = "";
 
-            matches.forEach(
-                function(match) {
+           matches.forEach(
+    function(match) {
 
-                    const matchCard =
-                        document.createElement("div");
+        const matchCard =
+            document.createElement("div");
 
-                    matchCard.style.textAlign =
-                        "left";
+        matchCard.style.textAlign =
+            "left";
 
-                    matchCard.style.padding =
-                        "30px";
+        matchCard.style.padding =
+            "30px";
 
-                    matchCard.style.background =
-                        "#f7f3eb";
+        matchCard.style.background =
+            "#f7f3eb";
 
-                    matchCard.style.border =
-                        "1px solid rgba(23, 60, 43, .12)";
+        matchCard.style.border =
+            "1px solid rgba(23, 60, 43, .12)";
 
-                    matchCard.style.marginBottom =
-                        "20px";
+        matchCard.style.marginBottom =
+            "20px";
 
-                    const score =
-                        Number(
-                            match.compatibility_score
-                        ).toFixed(1);
+        const score =
+            Number(
+                match.compatibility_score
+            ).toFixed(1);
 
-                    matchCard.innerHTML = `
+        matchCard.innerHTML = `
 
-                        <div style="
-                            font-family: Arial, sans-serif;
-                            font-size: 11px;
-                            font-weight: bold;
-                            letter-spacing: 2px;
-                            text-transform: uppercase;
-                            color: #9c7438;
-                            margin-bottom: 10px;
-                        ">
-                            PROPOSED MATCH
-                        </div>
+            <div style="
+                font-family: Arial, sans-serif;
+                font-size: 11px;
+                font-weight: bold;
+                letter-spacing: 2px;
+                text-transform: uppercase;
+                color: #9c7438;
+                margin-bottom: 10px;
+            ">
+                PROPOSED MATCH
+            </div>
 
-                        <h3 style="
-                            margin: 0 0 10px;
-                            color: #173c2b;
-                            font-size: 28px;
-                        ">
-                            ${escapeHtml(match.person_a_name)}
-                            ×
-                            ${escapeHtml(match.person_b_name)}
-                        </h3>
+            <h3 style="
+                margin: 0 0 10px;
+                color: #173c2b;
+                font-size: 28px;
+            ">
+                ${escapeHtml(match.person_a_name)}
+                ×
+                ${escapeHtml(match.person_b_name)}
+            </h3>
 
-                        <div style="
-                            font-size: 34px;
-                            color: #173c2b;
-                            margin-bottom: 20px;
-                        ">
-                            ${score}%
-                            <span style="
-                                font-family: Arial, sans-serif;
-                                font-size: 13px;
-                                color: #66736b;
-                            ">
-                                compatibility
-                            </span>
-                        </div>
+            <div style="
+                font-size: 34px;
+                color: #173c2b;
+                margin-bottom: 20px;
+            ">
+                ${score}%
+                <span style="
+                    font-family: Arial, sans-serif;
+                    font-size: 13px;
+                    color: #66736b;
+                ">
+                    compatibility
+                </span>
+            </div>
 
-                        <div style="
-                            display: grid;
-                            grid-template-columns:
-                                repeat(2, minmax(0, 1fr));
-                            gap: 10px;
-                            font-family: Arial, sans-serif;
-                            font-size: 13px;
-                            color: #536158;
-                        ">
+            <div style="
+                display: grid;
+                grid-template-columns:
+                    repeat(2, minmax(0, 1fr));
+                gap: 10px;
+                font-family: Arial, sans-serif;
+                font-size: 13px;
+                color: #536158;
+            ">
 
-                            <div>
-                                <strong>Goals:</strong>
-                                ${Number(match.relationship_goals_score).toFixed(1)}%
-                            </div>
+                <div>
+                    <strong>Goals:</strong>
+                    ${Number(match.relationship_goals_score).toFixed(1)}%
+                </div>
 
-                            <div>
-                                <strong>Faith:</strong>
-                                ${Number(match.faith_score).toFixed(1)}%
-                            </div>
+                <div>
+                    <strong>Faith:</strong>
+                    ${Number(match.faith_score).toFixed(1)}%
+                </div>
 
-                            <div>
-                                <strong>Communication:</strong>
-                                ${Number(match.communication_score).toFixed(1)}%
-                            </div>
+                <div>
+                    <strong>Communication:</strong>
+                    ${Number(match.communication_score).toFixed(1)}%
+                </div>
 
-                            <div>
-                                <strong>Lifestyle:</strong>
-                                ${Number(match.social_lifestyle_score).toFixed(1)}%
-                            </div>
+                <div>
+                    <strong>Lifestyle:</strong>
+                    ${Number(match.social_lifestyle_score).toFixed(1)}%
+                </div>
 
-                            <div>
-                                <strong>Pace:</strong>
-                                ${Number(match.relationship_pace_score).toFixed(1)}%
-                            </div>
+                <div>
+                    <strong>Pace:</strong>
+                    ${Number(match.relationship_pace_score).toFixed(1)}%
+                </div>
 
-                            <div>
-                                <strong>Personality:</strong>
-                                ${Number(match.personality_score).toFixed(1)}%
-                            </div>
+                <div>
+                    <strong>Personality:</strong>
+                    ${Number(match.personality_score).toFixed(1)}%
+                </div>
 
-                            <div>
-                                <strong>Weekend:</strong>
-                                ${Number(match.weekend_score).toFixed(1)}%
-                            </div>
+                <div>
+                    <strong>Weekend:</strong>
+                    ${Number(match.weekend_score).toFixed(1)}%
+                </div>
 
-                        </div>
+            </div>
 
-                       <div style="
-    margin-top: 25px;
-    padding-top: 20px;
-    border-top: 1px solid rgba(23, 60, 43, .12);
-    font-family: Arial, sans-serif;
-    font-size: 13px;
-    color: #66736b;
-">
-    Status: Awaiting administrator approval
-</div>
+            <div style="
+                margin-top: 25px;
+                padding-top: 20px;
+                border-top: 1px solid rgba(23, 60, 43, .12);
+                font-family: Arial, sans-serif;
+                font-size: 13px;
+                color: #66736b;
+            ">
+                Status: Awaiting administrator approval
+            </div>
 
-<div style="
-    margin-top: 20px;
-">
-    <button
-        type="button"
-        class="admin-button primary-admin-button approve-match-button"
-        data-person-a="${match.person_a_id}"
-        data-person-b="${match.person_b_id}"
-    >
-        Approve Match →
-    </button>
-</div>
+            <div style="
+                margin-top: 20px;
+            ">
 
-                    `;
+                <button
+                    type="button"
+                    class="admin-button primary-admin-button approve-match-button"
+                    data-person-a="${match.person_a_id}"
+                    data-person-b="${match.person_b_id}"
+                >
+                    Approve Match →
+                </button>
 
-                    matchesContainer.appendChild(
-                        matchCard
-                    );
+            </div>
 
-                }
-            );
+        `;
+
+        matchesContainer.appendChild(
+            matchCard
+        );
+
+    }
+);
+
+               
 
         } catch (error) {
 
@@ -1664,97 +1774,7 @@ function escapeHtml(value) {
         .replace(/'/g, "&#039;");
 
 }
-/* ==============================
-   APPROVE MATCH
-============================== */
 
-async function approveMatch(
-    personAId,
-    personBId,
-    button
-) {
-
-    const confirmed =
-        confirm(
-            "Approve this match? This will save the match for the email stage, but will NOT send any emails."
-        );
-
-    if (!confirmed) {
-        return;
-    }
-
-    button.disabled = true;
-
-    button.textContent =
-        "Approving...";
-
-    try {
-
-        const {
-            data,
-            error
-        } =
-            await supabaseClient
-                .from("approved_matches")
-                .insert([{
-                    person_a_id: personAId,
-                    person_b_id: personBId
-                }])
-                .select();
-
-        if (error) {
-
-            console.error(
-                "APPROVAL ERROR:",
-                error
-            );
-
-            alert(
-                "The match could not be approved. Check the browser console for details."
-            );
-
-            button.disabled = false;
-
-            button.textContent =
-                "Approve Match →";
-
-            return;
-
-        }
-
-        button.textContent =
-            "✓ Match Approved";
-
-        button.style.background =
-            "#24563e";
-
-        button.disabled = true;
-
-        matchingStatus.textContent =
-            "Match approved";
-
-        matchingStatusDescription.textContent =
-            "The match has been saved for the email preparation stage. No emails have been sent.";
-
-    } catch (error) {
-
-        console.error(
-            "APPROVAL EXCEPTION:",
-            error
-        );
-
-        alert(
-            "Something went wrong while approving the match."
-        );
-
-        button.disabled = false;
-
-        button.textContent =
-            "Approve Match →";
-
-    }
-
-}
 
 /* ==============================
    RENDER MATCHES
@@ -1875,12 +1895,26 @@ function renderMatches(
                 </div>
 
 
-                <div class="match-card-footer">
+               <div class="match-card-footer">
 
-                    This is a proposed match.
-                    No approval or email has been sent.
+    This is a proposed match.
+    No approval or email has been sent.
 
-                </div>
+</div>
+
+<div style="margin-top: 20px;">
+
+    <button
+        type="button"
+        class="admin-button primary-admin-button approve-match-button"
+        data-person-a="${match.person_a_id}"
+        data-person-b="${match.person_b_id}"
+    >
+        Approve Match →
+    </button>
+
+</div>
+
 
             `;
 
@@ -1888,23 +1922,7 @@ function renderMatches(
             matchesContainer.appendChild(
                 card
             );
-const approveButton =
-    matchCard.querySelector(
-        ".approve-match-button"
-    );
 
-approveButton.addEventListener(
-    "click",
-    function() {
-
-        approveMatch(
-            match.person_a_id,
-            match.person_b_id,
-            approveButton
-        );
-
-    }
-);
 
         }
     );

@@ -1,1333 +1,1554 @@
-<!DOCTYPE html> <html lang="en"> <head>
-<meta charset="UTF-8">
-
+<!DOCTYPE html> <html lang="en"> <head> <meta charset="UTF-8">
 <meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0"
+name="viewport"
+content="width=device-width, initial-scale=1.0"
+
+<title>Dating Admin | Ave Maria Blind Dating</title> <link rel="stylesheet" href="style.css" > <style>
+/* ==============================
+ADMIN PAGE
+============================== */
+.admin-page {
+width: min(1100px, 90%);
+margin: 0 auto;
+padding: 80px 0 120px;
+}
+
+.admin-header {
+margin-bottom: 50px;
+}
+
+.admin-header h1 {
+font-size: clamp(42px, 6vw, 70px);
+line-height: 1;
+color: #173c2b;
+margin-bottom: 20px;
+}
+
+.admin-header p {
+max-width: 700px;
+font-family: Arial, sans-serif;
+color: #66736b;
+line-height: 1.7;
+}
+
+/* ==============================
+LOGIN
+============================== */
+
+.admin-login {
+width: min(500px, 100%);
+margin: 60px auto;
+padding: 45px;
+background: #e7dfd1;
+border-top: 3px solid #c89d4c;
+box-sizing: border-box;
+}
+
+.admin-login h2 {
+font-size: 34px;
+margin-bottom: 25px;
+color: #173c2b;
+}
+
+.admin-field {
+margin-bottom: 20px;
+}
+
+.admin-field label {
+display: block;
+margin-bottom: 8px;
+font-family: Arial, sans-serif;
+font-size: 13px;
+font-weight: bold;
+color: #536158;
+}
+
+.admin-field input {
+width: 100%;
+padding: 14px 15px;
+border: 1px solid rgba(23, 60, 43, .18);
+background: #f7f3eb;
+color: #17251d;
+outline: none;
+box-sizing: border-box;
+}
+
+.admin-field input:focus {
+border-color: #c89d4c;
+}
+
+.admin-error {
+margin-top: 15px;
+font-family: Arial, sans-serif;
+font-size: 14px;
+color: #9b3d32;
+}
+
+/* ==============================
+ADMIN BAR
+============================== */
+
+.admin-bar {
+display: flex;
+align-items: center;
+justify-content: space-between;
+gap: 20px;
+margin-bottom: 50px;
+padding-bottom: 20px;
+border-bottom: 1px solid rgba(23, 60, 43, .12);
+}
+
+.admin-user {
+font-family: Arial, sans-serif;
+font-size: 13px;
+color: #66736b;
+}
+
+.logout-button {
+border: 1px solid #173c2b;
+background: transparent;
+color: #173c2b;
+padding: 10px 17px;
+font-family: Arial, sans-serif;
+font-size: 13px;
+font-weight: bold;
+cursor: pointer;
+}
+
+.logout-button:hover {
+background: #173c2b;
+color: white;
+}
+
+/* ==============================
+DASHBOARD CARDS
+============================== */
+
+.dashboard-grid {
+display: grid;
+grid-template-columns:
+repeat(3, minmax(0, 1fr));
+gap: 20px;
+margin-bottom: 60px;
+}
+
+.dashboard-card {
+padding: 30px;
+background: #e7dfd1;
+border-top: 3px solid #c89d4c;
+}
+
+.dashboard-card-label {
+margin-bottom: 10px;
+font-family: Arial, sans-serif;
+font-size: 11px;
+font-weight: bold;
+letter-spacing: 2px;
+text-transform: uppercase;
+color: #9c7438;
+}
+
+.dashboard-card-value {
+font-size: 40px;
+color: #173c2b;
+}
+
+.dashboard-card-description {
+margin-top: 10px;
+font-family: Arial, sans-serif;
+font-size: 13px;
+line-height: 1.5;
+color: #66736b;
+}
+
+/* ==============================
+SECTIONS
+============================== */
+
+.admin-section {
+margin-bottom: 70px;
+}
+
+.admin-section-title {
+display: flex;
+align-items: baseline;
+justify-content: space-between;
+gap: 20px;
+margin-bottom: 25px;
+}
+
+.admin-section-title h2 {
+font-size: 38px;
+color: #173c2b;
+}
+
+.section-description {
+max-width: 700px;
+margin-bottom: 30px;
+font-family: Arial, sans-serif;
+line-height: 1.7;
+color: #66736b;
+}
+
+/* ==============================
+STATUS
+============================== */
+
+.status-box {
+margin-bottom: 30px;
+padding: 25px 30px;
+background: #f7f3eb;
+border-left: 3px solid #c89d4c;
+}
+
+.status-label {
+margin-bottom: 8px;
+font-family: Arial, sans-serif;
+font-size: 11px;
+font-weight: bold;
+letter-spacing: 2px;
+text-transform: uppercase;
+color: #9c7438;
+}
+
+.status-value {
+font-size: 24px;
+color: #173c2b;
+}
+
+.status-description {
+margin-top: 8px;
+font-family: Arial, sans-serif;
+font-size: 14px;
+line-height: 1.6;
+color: #66736b;
+}
+
+/* ==============================
+BUTTONS
+============================== */
+
+.admin-actions {
+display: flex;
+flex-wrap: wrap;
+gap: 12px;
+margin-top: 25px;
+}
+
+.admin-button {
+padding: 14px 22px;
+border: none;
+font-family: Arial, sans-serif;
+font-size: 13px;
+font-weight: bold;
+cursor: pointer;
+transition: all .2s ease;
+}
+
+.primary-admin-button {
+background: #173c2b;
+color: white;
+}
+
+.primary-admin-button:hover {
+background: #24563e;
+transform: translateY(-1px);
+}
+
+.secondary-admin-button {
+background: transparent;
+border: 1px solid #173c2b;
+color: #173c2b;
+}
+
+.secondary-admin-button:hover {
+background: #173c2b;
+color: white;
+}
+
+.admin-button:disabled {
+opacity: .45;
+cursor: not-allowed;
+transform: none;
+}
+
+/* ==============================
+MATCHES
+============================== */
+
+.matches-placeholder {
+padding: 50px 30px;
+text-align: center;
+background: rgba(231, 223, 209, .65);
+color: #66736b;
+}
+
+.matches-placeholder span {
+display: block;
+margin-bottom: 12px;
+font-size: 40px;
+color: #c89d4c;
+}
+
+.match-card {
+margin-bottom: 20px;
+padding: 30px;
+background: #f7f3eb;
+border: 1px solid rgba(23, 60, 43, .12);
+box-sizing: border-box;
+}
+
+.match-card-header {
+display: flex;
+align-items: center;
+justify-content: space-between;
+gap: 20px;
+margin-bottom: 25px;
+}
+
+.match-card-names {
+font-size: 28px;
+color: #173c2b;
+}
+
+.match-card-names span {
+color: #c89d4c;
+margin: 0 8px;
+}
+
+.match-score {
+font-size: 34px;
+color: #173c2b;
+white-space: nowrap;
+}
+
+.score-grid {
+display: grid;
+grid-template-columns:
+repeat(2, minmax(0, 1fr));
+gap: 10px;
+font-family: Arial, sans-serif;
+font-size: 13px;
+color: #536158;
+}
+
+.score-box {
+padding: 12px;
+background: rgba(231, 223, 209, .6);
+}
+
+.match-card-footer {
+margin-top: 25px;
+padding-top: 20px;
+border-top: 1px solid rgba(23, 60, 43, .12);
+font-family: Arial, sans-serif;
+font-size: 13px;
+line-height: 1.6;
+color: #66736b;
+}
+
+.match-approval-area {
+margin-top: 20px;
+}
+
+/* ==============================
+SAFETY NOTICE
+============================== */
+
+.safety-notice {
+margin-top: 50px;
+padding: 25px 30px;
+background: #f7f3eb;
+border: 1px solid rgba(23, 60, 43, .12);
+}
+
+.safety-notice h3 {
+margin-bottom: 10px;
+color: #173c2b;
+}
+
+.safety-notice p {
+margin: 0;
+font-family: Arial, sans-serif;
+font-size: 14px;
+line-height: 1.7;
+color: #66736b;
+}
+
+/* ==============================
+MOBILE
+============================== */
+
+@media (max-width: 700px) {
+
+.admin-page {
+    padding-top: 55px;
+}
+
+.admin-login {
+    padding: 30px 25px;
+}
+
+.dashboard-grid {
+    grid-template-columns: 1fr;
+}
+
+.admin-bar {
+    align-items: flex-start;
+    flex-direction: column;
+}
+
+.admin-section-title {
+    align-items: flex-start;
+    flex-direction: column;
+}
+
+.admin-actions {
+    flex-direction: column;
+}
+
+.admin-button {
+    width: 100%;
+}
+
+.match-card-header {
+    align-items: flex-start;
+    flex-direction: column;
+}
+
+.score-grid {
+    grid-template-columns: 1fr;
+}
+
+}
+</style> </head> <body> <!-- ============================== NAVIGATION ============================== --> <nav class="navbar">
+<a
+    href="index.html"
+    class="logo"
 >
+    Ave Maria Blind Dating
+</a>
 
-<title>Dating Admin | Ave Maria Blind Dating</title>
+<div class="nav-links">
 
-<link
-    rel="stylesheet"
-    href="style.css"
->
-
-<style>
-
-    /* ==============================
-       ADMIN PAGE
-    ============================== */
-
-    .admin-page {
-        width: min(1100px, 90%);
-        margin: 0 auto;
-        padding: 80px 0 120px;
-    }
-
-    .admin-header {
-        margin-bottom: 50px;
-    }
-
-    .admin-header h1 {
-        font-size: clamp(42px, 6vw, 70px);
-        line-height: 1;
-        color: #173c2b;
-        margin-bottom: 20px;
-    }
-
-    .admin-header p {
-        max-width: 700px;
-        font-family: Arial, sans-serif;
-        color: #66736b;
-        line-height: 1.7;
-    }
-
-    /* ==============================
-       LOGIN
-    ============================== */
-
-    .admin-login {
-        width: min(500px, 100%);
-        margin: 60px auto;
-        padding: 45px;
-        background: #e7dfd1;
-        border-top: 3px solid #c89d4c;
-        box-sizing: border-box;
-    }
-
-    .admin-login h2 {
-        font-size: 34px;
-        margin-bottom: 25px;
-        color: #173c2b;
-    }
-
-    .admin-field {
-        margin-bottom: 20px;
-    }
-
-    .admin-field label {
-        display: block;
-        margin-bottom: 8px;
-        font-family: Arial, sans-serif;
-        font-size: 13px;
-        font-weight: bold;
-        color: #536158;
-    }
-
-    .admin-field input {
-        width: 100%;
-        padding: 14px 15px;
-        border: 1px solid rgba(23, 60, 43, .18);
-        background: #f7f3eb;
-        color: #17251d;
-        outline: none;
-        box-sizing: border-box;
-    }
-
-    .admin-field input:focus {
-        border-color: #c89d4c;
-    }
-
-    .admin-error {
-        margin-top: 15px;
-        font-family: Arial, sans-serif;
-        font-size: 14px;
-        color: #9b3d32;
-    }
-
-    /* ==============================
-       ADMIN BAR
-    ============================== */
-
-    .admin-bar {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        gap: 20px;
-        margin-bottom: 50px;
-        padding-bottom: 20px;
-        border-bottom: 1px solid rgba(23, 60, 43, .12);
-    }
-
-    .admin-user {
-        font-family: Arial, sans-serif;
-        font-size: 13px;
-        color: #66736b;
-    }
-
-    .logout-button {
-        border: 1px solid #173c2b;
-        background: transparent;
-        color: #173c2b;
-        padding: 10px 17px;
-        font-family: Arial, sans-serif;
-        font-size: 13px;
-        font-weight: bold;
-        cursor: pointer;
-    }
-
-    .logout-button:hover {
-        background: #173c2b;
-        color: white;
-    }
-
-    /* ==============================
-       DASHBOARD CARDS
-    ============================== */
-
-    .dashboard-grid {
-        display: grid;
-        grid-template-columns:
-            repeat(3, minmax(0, 1fr));
-        gap: 20px;
-        margin-bottom: 60px;
-    }
-
-    .dashboard-card {
-        padding: 30px;
-        background: #e7dfd1;
-        border-top: 3px solid #c89d4c;
-    }
-
-    .dashboard-card-label {
-        margin-bottom: 10px;
-        font-family: Arial, sans-serif;
-        font-size: 11px;
-        font-weight: bold;
-        letter-spacing: 2px;
-        text-transform: uppercase;
-        color: #9c7438;
-    }
-
-    .dashboard-card-value {
-        font-size: 40px;
-        color: #173c2b;
-    }
-
-    .dashboard-card-description {
-        margin-top: 10px;
-        font-family: Arial, sans-serif;
-        font-size: 13px;
-        line-height: 1.5;
-        color: #66736b;
-    }
-
-    /* ==============================
-       SECTIONS
-    ============================== */
-
-    .admin-section {
-        margin-bottom: 70px;
-    }
-
-    .admin-section-title {
-        display: flex;
-        align-items: baseline;
-        justify-content: space-between;
-        gap: 20px;
-        margin-bottom: 25px;
-    }
-
-    .admin-section-title h2 {
-        font-size: 38px;
-        color: #173c2b;
-    }
-
-    .section-description {
-        max-width: 700px;
-        margin-bottom: 30px;
-        font-family: Arial, sans-serif;
-        line-height: 1.7;
-        color: #66736b;
-    }
-
-    /* ==============================
-       STATUS
-    ============================== */
-
-    .status-box {
-        margin-bottom: 30px;
-        padding: 25px 30px;
-        background: #f7f3eb;
-        border-left: 3px solid #c89d4c;
-    }
-
-    .status-label {
-        margin-bottom: 8px;
-        font-family: Arial, sans-serif;
-        font-size: 11px;
-        font-weight: bold;
-        letter-spacing: 2px;
-        text-transform: uppercase;
-        color: #9c7438;
-    }
-
-    .status-value {
-        font-size: 24px;
-        color: #173c2b;
-    }
-
-    .status-description {
-        margin-top: 8px;
-        font-family: Arial, sans-serif;
-        font-size: 14px;
-        line-height: 1.6;
-        color: #66736b;
-    }
-
-    /* ==============================
-       BUTTONS
-    ============================== */
-
-    .admin-actions {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 12px;
-        margin-top: 25px;
-    }
-
-    .admin-button {
-        padding: 14px 22px;
-        border: none;
-        font-family: Arial, sans-serif;
-        font-size: 13px;
-        font-weight: bold;
-        cursor: pointer;
-        transition: all .2s ease;
-    }
-
-    .primary-admin-button {
-        background: #173c2b;
-        color: white;
-    }
-
-    .primary-admin-button:hover {
-        background: #24563e;
-        transform: translateY(-1px);
-    }
-
-    .secondary-admin-button {
-        background: transparent;
-        border: 1px solid #173c2b;
-        color: #173c2b;
-    }
-
-    .secondary-admin-button:hover {
-        background: #173c2b;
-        color: white;
-    }
-
-    .danger-admin-button {
-        background: transparent;
-        border: 1px solid #9b3d32;
-        color: #9b3d32;
-    }
-
-    .danger-admin-button:hover {
-        background: #9b3d32;
-        color: white;
-    }
-
-    .admin-button:disabled {
-        opacity: .45;
-        cursor: not-allowed;
-        transform: none;
-    }
-
-    /* ==============================
-       MATCHES
-    ============================== */
-
-    .matches-placeholder {
-        padding: 50px 30px;
-        text-align: center;
-        background: rgba(231, 223, 209, .65);
-        color: #66736b;
-    }
-
-    .matches-placeholder span {
-        display: block;
-        margin-bottom: 12px;
-        font-size: 40px;
-        color: #c89d4c;
-    }
-
-    .match-card {
-        margin-bottom: 20px;
-        padding: 30px;
-        background: #f7f3eb;
-        border: 1px solid rgba(23, 60, 43, .12);
-        box-sizing: border-box;
-    }
-
-    .match-card-header {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        gap: 20px;
-        margin-bottom: 25px;
-    }
-
-    .match-card-names {
-        font-size: 28px;
-        color: #173c2b;
-    }
-
-    .match-card-names span {
-        color: #c89d4c;
-        margin: 0 8px;
-    }
-
-    .match-score {
-        font-size: 34px;
-        color: #173c2b;
-        white-space: nowrap;
-    }
-
-    .score-grid {
-        display: grid;
-        grid-template-columns:
-            repeat(2, minmax(0, 1fr));
-        gap: 10px;
-        font-family: Arial, sans-serif;
-        font-size: 13px;
-        color: #536158;
-    }
-
-    .score-box {
-        padding: 12px;
-        background: rgba(231, 223, 209, .6);
-    }
-
-    .match-card-footer {
-        margin-top: 25px;
-        padding-top: 20px;
-        border-top: 1px solid rgba(23, 60, 43, .12);
-        font-family: Arial, sans-serif;
-        font-size: 13px;
-        line-height: 1.6;
-        color: #66736b;
-    }
-
-    .match-approval-area {
-        margin-top: 20px;
-    }
-
-    /* ==============================
-       SAFETY NOTICE
-    ============================== */
-
-    .safety-notice {
-        margin-top: 50px;
-        padding: 25px 30px;
-        background: #f7f3eb;
-        border: 1px solid rgba(23, 60, 43, .12);
-    }
-
-    .safety-notice h3 {
-        margin-bottom: 10px;
-        color: #173c2b;
-    }
-
-    .safety-notice p {
-        margin: 0;
-        font-family: Arial, sans-serif;
-        font-size: 14px;
-        line-height: 1.7;
-        color: #66736b;
-    }
-
-    /* ==============================
-       MOBILE
-    ============================== */
-
-    @media (max-width: 700px) {
-
-        .admin-page {
-            padding-top: 55px;
-        }
-
-        .admin-login {
-            padding: 30px 25px;
-        }
-
-        .dashboard-grid {
-            grid-template-columns: 1fr;
-        }
-
-        .admin-bar {
-            align-items: flex-start;
-            flex-direction: column;
-        }
-
-        .admin-section-title {
-            align-items: flex-start;
-            flex-direction: column;
-        }
-
-        .admin-actions {
-            flex-direction: column;
-        }
-
-        .admin-button {
-            width: 100%;
-        }
-
-        .match-card-header {
-            align-items: flex-start;
-            flex-direction: column;
-        }
-
-        .score-grid {
-            grid-template-columns: 1fr;
-        }
-
-    }
-
-</style>
-
-</head> <body>
-<!-- ==============================
-     NAVIGATION
-============================== -->
-
-<nav class="navbar">
-
-    <a
-        href="index.html"
-        class="logo"
-    >
-        Ave Maria Blind Dating
+    <a href="index.html#how-it-works">
+        How It Works
     </a>
 
-    <div class="nav-links">
+    <a href="index.html#about">
+        About
+    </a>
 
-        <a href="index.html#how-it-works">
-            How It Works
-        </a>
+    <a href="index.html#faq">
+        FAQ
+    </a>
 
-        <a href="index.html#about">
-            About
-        </a>
-
-        <a href="index.html#faq">
-            FAQ
-        </a>
-
-        <a
-            href="quiz.html"
-            class="nav-cta"
-        >
-            Find My Match →
-        </a>
-
-    </div>
-
-</nav>
-
-<!-- ==============================
-     MAIN
-============================== -->
-
-<main class="admin-page">
-
-    <!-- ==============================
-         LOGIN
-    ============================== -->
-
-    <section
-        id="loginSection"
-        class="admin-login"
+    <a
+        href="quiz.html"
+        class="nav-cta"
     >
+        Find My Match →
+    </a>
 
-        <p class="section-label">
-            PRIVATE AREA
-        </p>
+</div>
 
-        <div class="section-divider"></div>
+</nav> <!-- ============================== MAIN ============================== --> <main class="admin-page"> <!-- ============================== LOGIN ============================== --> <section id="loginSection" class="admin-login" >
+<p class="section-label">
+    PRIVATE AREA
+</p>
 
-        <h2>
-            Dating Administration
-        </h2>
+<div class="section-divider"></div>
 
-        <form id="loginForm">
+<h2>
+    Dating Administration
+</h2>
 
-            <div class="admin-field">
+<form id="loginForm">
 
-                <label for="loginEmail">
-                    Email
-                </label>
+    <div class="admin-field">
 
-                <input
-                    type="email"
-                    id="loginEmail"
-                    required
-                    autocomplete="email"
-                >
+        <label for="loginEmail">
+            Email
+        </label>
 
-            </div>
+        <input
+            type="email"
+            id="loginEmail"
+            required
+            autocomplete="email"
+        >
 
-            <div class="admin-field">
+    </div>
 
-                <label for="loginPassword">
-                    Password
-                </label>
+    <div class="admin-field">
 
-                <input
-                    type="password"
-                    id="loginPassword"
-                    required
-                    autocomplete="current-password"
-                >
+        <label for="loginPassword">
+            Password
+        </label>
 
-            </div>
+        <input
+            type="password"
+            id="loginPassword"
+            required
+            autocomplete="current-password"
+        >
 
-            <button
-                type="submit"
-                class="admin-button primary-admin-button"
-            >
-                Sign In →
-            </button>
+    </div>
 
-            <p
-                id="loginError"
-                class="admin-error"
-            ></p>
-
-        </form>
-
-    </section>
-
-    <!-- ==============================
-         DASHBOARD
-    ============================== -->
-
-    <section
-        id="dashboard"
-        style="display:none;"
+    <button
+        type="submit"
+        class="admin-button primary-admin-button"
     >
-
-        <header class="admin-header">
-
-            <p class="section-label">
-                DATING ADMINISTRATION
-            </p>
-
-            <div class="section-divider"></div>
-
-            <h1>
-                Matching Dashboard
-            </h1>
-
-            <p>
-                This is the private control panel for the
-                Ave Maria Blind Dating matching system.
-                Matching, approval, and email sending will
-                all require manual administrator action.
-            </p>
-
-        </header>
-
-        <!-- ==============================
-             ADMIN BAR
-        ============================== -->
-
-        <div class="admin-bar">
-
-            <span
-                id="adminUser"
-                class="admin-user"
-            ></span>
-
-            <button
-                id="logoutButton"
-                class="logout-button"
-                type="button"
-            >
-                Log Out
-            </button>
-
-        </div>
-
-        <!-- ==============================
-             CURRENT POOL
-        ============================== -->
-
-        <section class="admin-section">
-
-            <div class="admin-section-title">
-
-                <h2>
-                    Current Pool
-                </h2>
-
-            </div>
-
-            <div class="dashboard-grid">
-
-                <div class="dashboard-card">
-
-                    <div class="dashboard-card-label">
-                        Participants
-                    </div>
-
-                    <div
-                        id="participantCount"
-                        class="dashboard-card-value"
-                    >
-                        —
-                    </div>
-
-                    <div class="dashboard-card-description">
-                        Profiles currently in the matching pool.
-                    </div>
-
-                </div>
-
-                <div class="dashboard-card">
-
-                    <div class="dashboard-card-label">
-                        Men
-                    </div>
-
-                    <div
-                        id="maleCount"
-                        class="dashboard-card-value"
-                    >
-                        —
-                    </div>
-
-                    <div class="dashboard-card-description">
-                        Male participants in the current pool.
-                    </div>
-
-                </div>
-
-                <div class="dashboard-card">
-
-                    <div class="dashboard-card-label">
-                        Women
-                    </div>
-
-                    <div
-                        id="femaleCount"
-                        class="dashboard-card-value"
-                    >
-                        —
-                    </div>
-
-                    <div class="dashboard-card-description">
-                        Female participants in the current pool.
-                    </div>
-
-                </div>
-
-            </div>
-
-        </section>
-
-        <!-- ==============================
-             MATCHING
-        ============================== -->
-
-        <section class="admin-section">
-
-            <div class="admin-section-title">
-
-                <h2>
-                    Matching
-                </h2>
-
-            </div>
-
-            <p class="section-description">
-                Matching is completely manual. Nothing will
-                happen until you explicitly start a matching
-                run. Once generated, proposed matches will
-                be available for review before anything is
-                approved or sent.
-            </p>
-
-            <div class="status-box">
-
-                <div class="status-label">
-                    Current Status
-                </div>
-
-                <div
-                    id="matchingStatus"
-                    class="status-value"
-                >
-                    No matching run
-                </div>
-
-                <div
-                    id="matchingStatusDescription"
-                    class="status-description"
-                >
-                    The current participant pool has not
-                    been matched yet.
-                </div>
-
-            </div>
-
-            <div class="admin-actions">
-
-                <button
-                    id="startMatchingButton"
-                    type="button"
-                    class="admin-button primary-admin-button"
-                >
-                    Start Matching →
-                </button>
-
-                <button
-                    id="refreshPoolButton"
-                    type="button"
-                    class="admin-button secondary-admin-button"
-                >
-                    Refresh Pool
-                </button>
-
-            </div>
-
-        </section>
-
-        <!-- ==============================
-             PROPOSED MATCHES
-        ============================== -->
-
-        <section class="admin-section">
-
-            <div class="admin-section-title">
-
-                <h2>
-                    Proposed Matches
-                </h2>
-
-            </div>
-
-            <div
-                id="matchesContainer"
-                class="matches-placeholder"
-            >
-
-                <span>♡</span>
-
-                No matches have been generated yet.
-
-            </div>
-
-        </section>
-
-       <!-- ==============================
-     EMAILS
-============================== -->
-
-<section class="admin-section">
-
-    <div class="admin-section-title">
-
-        <h2>
-            Emails
-        </h2>
-
-    </div>
-
-    <p class="section-description">
-        Prepare personalized emails for approved matches.
-        Preparing emails does not send anything. All emails
-        must be reviewed before sending is enabled.
-    </p>
-
-    <div class="status-box">
-
-        <div class="status-label">
-            Email Status
-        </div>
-
-        <div
-            id="emailStatus"
-            class="status-value"
-        >
-            Not Prepared
-        </div>
-
-        <div
-            id="emailStatusDescription"
-            class="status-description"
-        >
-            No email drafts have been prepared yet.
-        </div>
-
-    </div>
-
-    <div class="admin-actions">
-
-        <button
-            id="prepareEmailsButton"
-            type="button"
-            class="admin-button primary-admin-button"
-        >
-            Prepare Emails →
-        </button>
-
+        Sign In →
+    </button>
+
+    <p
+        id="loginError"
+        class="admin-error"
+    ></p>
+
+</form>
+
+</section> <!-- ============================== DASHBOARD ============================== --> <section id="dashboard" style="display:none;" > <header class="admin-header">
+<p class="section-label">
+    DATING ADMINISTRATION
+</p>
+
+<div class="section-divider"></div>
+
+<h1>
+    Matching Dashboard
+</h1>
+
+<p>
+    Private administration for the
+    Ave Maria Blind Dating matching system.
+    Matching and approval remain manual.
+</p>
+
+</header> <!-- ============================== ADMIN BAR ============================== --> <div class="admin-bar">
+<span
+    id="adminUser"
+    class="admin-user"
+></span>
+
+<button
+    id="logoutButton"
+    class="logout-button"
+    type="button"
+>
+    Log Out
+</button>
+
+</div> <!-- ============================== CURRENT POOL ============================== --> <section class="admin-section"> <div class="admin-section-title">
+<h2>
+    Current Pool
+</h2>
+
+</div> <div class="dashboard-grid">
+<div class="dashboard-card">
+
+    <div class="dashboard-card-label">
+        Participants
     </div>
 
     <div
-        id="emailPreviewContainer"
-        style="margin-top: 30px;"
-    ></div>
+        id="participantCount"
+        class="dashboard-card-value"
+    >
+        …
+    </div>
 
-</section>
+    <div class="dashboard-card-description">
+        Eligible participants in the current monthly pool.
+    </div>
 
+</div>
 
-        <!-- ==============================
-             SAFETY NOTICE
-        ============================== -->
+<div class="dashboard-card">
 
-        <div class="safety-notice">
+    <div class="dashboard-card-label">
+        Men
+    </div>
 
-            <h3>
-                Manual approval required
-            </h3>
+    <div
+        id="maleCount"
+        class="dashboard-card-value"
+    >
+        …
+    </div>
 
-            <p>
-                This dashboard is intentionally being built
-                in stages. Starting a matching run will not
-                send emails. Email delivery will remain
-                disabled until the matching results, email
-                content, and final approval workflow have
-                all been implemented and tested.
-            </p>
+    <div class="dashboard-card-description">
+        Eligible male participants.
+    </div>
 
-        </div>
+</div>
 
-    </section>
+<div class="dashboard-card">
 
-</main>
+    <div class="dashboard-card-label">
+        Women
+    </div>
 
-<!-- ==============================
-     SUPABASE
-============================== -->
+    <div
+        id="femaleCount"
+        class="dashboard-card-value"
+    >
+        …
+    </div>
 
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <div class="dashboard-card-description">
+        Eligible female participants.
+    </div>
 
-<script>
+</div>
 
-    /* ==============================
-       SUPABASE
-    ============================== */
+</div> </section> <!-- ============================== MATCHING ============================== --> <section class="admin-section"> <div class="admin-section-title">
+<h2>
+    Matching
+</h2>
 
-    const SUPABASE_URL =
-        "https://vixyounyimddctlwzmdj.supabase.co";
+</div> <p class="section-description">
+Generate proposed matches using the existing
+monthly matching system. Generating proposals
+does not approve matches and does not send emails.
 
-    const SUPABASE_KEY =
-        "sb_publishable_dSoWkr2kH2oGI96i2zCpdg_Ddi-NQff";
+</p> <div class="status-box">
+<div class="status-label">
+    Current Status
+</div>
 
-    const supabaseClient =
-        window.supabase.createClient(
-            SUPABASE_URL,
-            SUPABASE_KEY
-        );
+<div
+    id="matchingStatus"
+    class="status-value"
+>
+    No matching run
+</div>
 
-    /* ==============================
-       ADMIN USER
-    ============================== */
+<div
+    id="matchingStatusDescription"
+    class="status-description"
+>
+    The current participant pool has not been
+    previewed yet.
 
-    const ADMIN_USER_ID =
-        "c8cb43ec-971a-49a0-9924-d1e88d39fa11";
+</div>
 
-    /* ==============================
-       ELEMENTS
-    ============================== */
+</div> <div class="admin-actions">
+<button
+    id="startMatchingButton"
+    type="button"
+    class="admin-button primary-admin-button"
+>
+    Generate Matches →
+</button>
 
-    const loginSection =
-        document.getElementById(
-            "loginSection"
-        );
+<button
+    id="refreshPoolButton"
+    type="button"
+    class="admin-button secondary-admin-button"
+>
+    Refresh Pool
+</button>
 
-    const dashboard =
-        document.getElementById(
-            "dashboard"
-        );
+</div> </section> <!-- ============================== PROPOSED MATCHES ============================== --> <section class="admin-section"> <div class="admin-section-title">
+<h2>
+    Proposed Matches
+</h2>
 
-    const loginForm =
-        document.getElementById(
-            "loginForm"
-        );
+</div> <div id="matchesContainer" class="matches-placeholder" >
+<span>♡</span>
 
-    const loginError =
-        document.getElementById(
-            "loginError"
-        );
+No matches have been generated yet.
 
-    const adminUser =
-        document.getElementById(
-            "adminUser"
-        );
+</div> </section> <!-- ============================== EMAILS ============================== --> <section class="admin-section"> <div class="admin-section-title">
+<h2>
+    Emails
+</h2>
 
-    const logoutButton =
-        document.getElementById(
-            "logoutButton"
-        );
+</div> <p class="section-description">
+Prepare personalized email drafts for approved
+matches. Preparing emails does not send anything.
 
-    const participantCount =
-        document.getElementById(
-            "participantCount"
-        );
+</p> <div class="status-box">
+<div class="status-label">
+    Email Status
+</div>
 
-    const maleCount =
-        document.getElementById(
-            "maleCount"
-        );
+<div
+    id="emailStatus"
+    class="status-value"
+>
+    Not Prepared
+</div>
 
-    const femaleCount =
-        document.getElementById(
-            "femaleCount"
-        );
+<div
+    id="emailStatusDescription"
+    class="status-description"
+>
+    No email drafts have been prepared yet.
 
-    const matchingStatus =
-        document.getElementById(
-            "matchingStatus"
-        );
+</div>
 
-    const matchingStatusDescription =
-        document.getElementById(
-            "matchingStatusDescription"
-        );
+</div> <div class="admin-actions">
+<button
+    id="prepareEmailsButton"
+    type="button"
+    class="admin-button primary-admin-button"
+>
+    Prepare Emails →
+</button>
 
-    const matchesContainer =
-        document.getElementById(
-            "matchesContainer"
-        );
+</div> <div id="emailPreviewContainer" style="margin-top:30px;" ></div> </section> <!-- ============================== SAFETY NOTICE ============================== --> <div class="safety-notice"> <h3> Manual approval required </h3> <p> Generating matches does not approve them and does not send emails. Matches must be reviewed and manually approved before the email stage. </p> </div> </section> </main> <!-- ============================== SUPABASE ============================== --> <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script> <script>
+/* ==============================
+SUPABASE
+============================== */
+const SUPABASE_URL =
+"https://vixyounyimddctlwzmdj.supabase.co";
 
-    const startMatchingButton =
-        document.getElementById(
-            "startMatchingButton"
-        );
+const SUPABASE_KEY =
+"sb_publishable_dSoWkr2kH2oGI96i2zCpdg_Ddi-NQff";
 
-    const refreshPoolButton =
-        document.getElementById(
-            "refreshPoolButton"
-        );
+const supabaseClient =
+window.supabase.createClient(
+SUPABASE_URL,
+SUPABASE_KEY
+);
+
+/* ==============================
+ADMIN USER
+============================== */
+
+const ADMIN_USER_ID =
+"c8cb43ec-971a-49a0-9924-d1e88d39fa11";
+
+/* ==============================
+ELEMENTS
+============================== */
+
+const loginSection =
+document.getElementById("loginSection");
+
+const dashboard =
+document.getElementById("dashboard");
+
+const loginForm =
+document.getElementById("loginForm");
+
+const loginError =
+document.getElementById("loginError");
+
+const adminUser =
+document.getElementById("adminUser");
+
+const logoutButton =
+document.getElementById("logoutButton");
+
+const participantCount =
+document.getElementById("participantCount");
+
+const maleCount =
+document.getElementById("maleCount");
+
+const femaleCount =
+document.getElementById("femaleCount");
+
+const matchingStatus =
+document.getElementById("matchingStatus");
+
+const matchingStatusDescription =
+document.getElementById(
+"matchingStatusDescription"
+);
+
+const matchesContainer =
+document.getElementById(
+"matchesContainer"
+);
+
+const startMatchingButton =
+document.getElementById(
+"startMatchingButton"
+);
+
+const refreshPoolButton =
+document.getElementById(
+"refreshPoolButton"
+);
+
 const emailStatus =
-    document.getElementById(
-        "emailStatus"
-    );
+document.getElementById(
+"emailStatus"
+);
 
 const emailStatusDescription =
-    document.getElementById(
-        "emailStatusDescription"
-    );
+document.getElementById(
+"emailStatusDescription"
+);
 
 const prepareEmailsButton =
-    document.getElementById(
-        "prepareEmailsButton"
-    );
+document.getElementById(
+"prepareEmailsButton"
+);
 
 const emailPreviewContainer =
-    document.getElementById(
-        "emailPreviewContainer"
-    );
+document.getElementById(
+"emailPreviewContainer"
+);
 
-    /* ==============================
-       ESCAPE HTML
-    ============================== */
+/* ==============================
+ESCAPE HTML
+============================== */
 
-    function escapeHtml(
-        value
-    ) {
+function escapeHtml(value) {
 
-        return String(
-            value ?? ""
-        )
-            .replace(
-                /&/g,
-                "&amp;"
-            )
-            .replace(
-                /</g,
-                "&lt;"
-            )
-            .replace(
-                />/g,
-                "&gt;"
-            )
-            .replace(
-                /"/g,
-                "&quot;"
-            )
-            .replace(
-                /'/g,
-                "&#039;"
-            );
+return String(value ?? "")
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#039;");
+
+}
+/* ==============================
+SCORE BOX
+============================== */
+
+function scoreBox(label, value) {
+
+const numericValue =
+    Number(value);
+
+const displayValue =
+    Number.isFinite(numericValue)
+        ? numericValue.toFixed(1)
+        : "—";
+
+return `
+
+    <div class="score-box">
+
+        <strong>
+            ${escapeHtml(label)}
+        </strong>
+
+        <br>
+
+        ${displayValue}%
+
+    </div>
+
+`;
+
+}
+/* ==============================
+LOGIN
+============================== */
+
+loginForm.addEventListener(
+"submit",
+async function(event) {
+
+    event.preventDefault();
+
+    loginError.textContent = "";
+
+    const email =
+        document
+            .getElementById("loginEmail")
+            .value
+            .trim();
+
+    const password =
+        document
+            .getElementById("loginPassword")
+            .value;
+
+    const {
+        data,
+        error
+    } =
+        await supabaseClient.auth
+            .signInWithPassword({
+                email,
+                password
+            });
+
+    if (error) {
+
+        console.error(
+            "LOGIN ERROR:",
+            error
+        );
+
+        loginError.textContent =
+            "Incorrect email or password.";
+
+        return;
 
     }
 
-    /* ==============================
-       SCORE BOX
-    ============================== */
-
-    function scoreBox(
-        label,
-        value
+    if (
+        !data.user ||
+        data.user.id !== ADMIN_USER_ID
     ) {
 
-        const numericValue =
-            Number(value);
+        await supabaseClient.auth.signOut();
 
-        const displayValue =
-            Number.isFinite(
-                numericValue
-            )
-                ? numericValue.toFixed(1)
+        loginError.textContent =
+            "This account does not have dating administration access.";
+
+        return;
+
+    }
+
+    showDashboard(data.user);
+
+}
+
+);
+/* ==============================
+SESSION
+============================== */
+
+async function checkSession() {
+
+const {
+    data,
+    error
+} =
+    await supabaseClient.auth.getSession();
+
+if (error) {
+
+    console.error(
+        "SESSION ERROR:",
+        error
+    );
+
+    return;
+
+}
+
+const session =
+    data.session;
+
+if (
+    session &&
+    session.user &&
+    session.user.id === ADMIN_USER_ID
+) {
+
+    showDashboard(
+        session.user
+    );
+
+}
+
+}
+/* ==============================
+SHOW DASHBOARD
+============================== */
+
+function showDashboard(user) {
+
+loginSection.style.display =
+    "none";
+
+dashboard.style.display =
+    "block";
+
+adminUser.textContent =
+    "Signed in as " +
+    user.email;
+
+loadPool();
+
+}
+/* ==============================
+LOGOUT
+============================== */
+
+logoutButton.addEventListener(
+"click",
+async function() {
+
+    await supabaseClient.auth
+        .signOut();
+
+    dashboard.style.display =
+        "none";
+
+    loginSection.style.display =
+        "block";
+
+    loginForm.reset();
+
+}
+
+);
+/* ==============================
+LOAD ADMIN POOL STATS
+============================== */
+
+async function loadPool() {
+
+participantCount.textContent = "…";
+maleCount.textContent = "…";
+femaleCount.textContent = "…";
+
+try {
+
+    const {
+        data,
+        error
+    } =
+        await supabaseClient.rpc(
+            "get_admin_pool_stats"
+        );
+
+    if (error) {
+
+        console.error(
+            "POOL STATS ERROR:",
+            error
+        );
+
+        participantCount.textContent = "—";
+        maleCount.textContent = "—";
+        femaleCount.textContent = "—";
+
+        return;
+
+    }
+
+    const stats =
+        data?.[0];
+
+    if (!stats) {
+
+        console.error(
+            "POOL STATS: No data returned"
+        );
+
+        participantCount.textContent = "—";
+        maleCount.textContent = "—";
+        femaleCount.textContent = "—";
+
+        return;
+
+    }
+
+    participantCount.textContent =
+        stats.participant_count ?? 0;
+
+    maleCount.textContent =
+        stats.male_count ?? 0;
+
+    femaleCount.textContent =
+        stats.female_count ?? 0;
+
+    console.log(
+        "ADMIN POOL STATS:",
+        stats
+    );
+
+} catch (error) {
+
+    console.error(
+        "POOL STATS EXCEPTION:",
+        error
+    );
+
+    participantCount.textContent = "—";
+    maleCount.textContent = "—";
+    femaleCount.textContent = "—";
+
+}
+
+}
+/* ==============================
+REFRESH POOL
+============================== */
+
+refreshPoolButton.addEventListener(
+"click",
+async function() {
+
+    await loadPool();
+
+}
+
+);
+/* ==============================
+RENDER MATCHES
+============================== */
+
+function renderMatches(matches) {
+
+matchesContainer.innerHTML = "";
+
+if (
+    !matches ||
+    matches.length === 0
+) {
+
+    matchesContainer.className =
+        "matches-placeholder";
+
+    matchesContainer.innerHTML = `
+
+        <span>♡</span>
+
+        No eligible matches were returned.
+
+    `;
+
+    return;
+
+}
+
+matchesContainer.className = "";
+
+matches.forEach(
+    function(match) {
+
+        const card =
+            document.createElement("div");
+
+        card.className =
+            "match-card";
+
+        const score =
+            Number(
+                match.compatibility_score
+            );
+
+        const scoreText =
+            Number.isFinite(score)
+                ? score.toFixed(1)
                 : "—";
 
-        return `
+        card.innerHTML = `
 
-            <div class="score-box">
+            <div
+                style="
+                    font-family:Arial,sans-serif;
+                    font-size:11px;
+                    font-weight:bold;
+                    letter-spacing:2px;
+                    text-transform:uppercase;
+                    color:#9c7438;
+                    margin-bottom:10px;
+                "
+            >
+                PROPOSED MATCH
+            </div>
 
-                <strong>
-                    ${escapeHtml(label)}
-                </strong>
+            <div class="match-card-header">
 
-                <br>
+                <div class="match-card-names">
 
-                ${displayValue}%
+                    ${escapeHtml(
+                        match.person_a_name
+                    )}
+
+                    <span>×</span>
+
+                    ${escapeHtml(
+                        match.person_b_name
+                    )}
+
+                </div>
+
+                <div class="match-score">
+
+                    ${scoreText}%
+
+                </div>
+
+            </div>
+
+            <div class="score-grid">
+
+                ${scoreBox(
+                    "Goals",
+                    match.relationship_goals_score
+                )}
+
+                ${scoreBox(
+                    "Faith",
+                    match.faith_score
+                )}
+
+                ${scoreBox(
+                    "Communication",
+                    match.communication_score
+                )}
+
+                ${scoreBox(
+                    "Lifestyle",
+                    match.social_lifestyle_score
+                )}
+
+                ${scoreBox(
+                    "Pace",
+                    match.relationship_pace_score
+                )}
+
+                ${scoreBox(
+                    "Personality",
+                    match.personality_score
+                )}
+
+                ${scoreBox(
+                    "Weekend",
+                    match.weekend_score
+                )}
+
+            </div>
+
+            <div class="match-card-footer">
+
+                This is a proposed match.
+                No approval or email has been sent.
+
+            </div>
+
+            <div class="match-approval-area">
+
+                <button
+                    type="button"
+                    class="
+                        admin-button
+                        primary-admin-button
+                        approve-match-button
+                    "
+
+                    data-person-a="${escapeHtml(
+                        match.person_a_id
+                    )}"
+
+                    data-person-b="${escapeHtml(
+                        match.person_b_id
+                    )}"
+
+                    data-score="${match.compatibility_score}"
+
+                    data-goals="${match.relationship_goals_score}"
+
+                    data-faith="${match.faith_score}"
+
+                    data-communication="${match.communication_score}"
+
+                    data-lifestyle="${match.social_lifestyle_score}"
+
+                    data-pace="${match.relationship_pace_score}"
+
+                    data-personality="${match.personality_score}"
+
+                    data-weekend="${match.weekend_score}"
+                >
+                    Approve Match →
+                </button>
 
             </div>
 
         `;
 
+        matchesContainer.appendChild(card);
+
+    }
+);
+
+}
+/* ==============================
+APPROVE MATCH
+============================== */
+
+matchesContainer.addEventListener(
+"click",
+async function(event) {
+
+    const button =
+        event.target.closest(
+            ".approve-match-button"
+        );
+
+    if (!button) {
+        return;
     }
 
-    /* ==============================
-       LOGIN
-    ============================== */
+    const personAId =
+        button.dataset.personA;
 
-    loginForm.addEventListener(
-        "submit",
-        async function(event) {
+    const personBId =
+        button.dataset.personB;
 
-            event.preventDefault();
+    const confirmed =
+        confirm(
+            "Approve this match? This will save it for the email stage, but will NOT send an email."
+        );
 
-            loginError.textContent = "";
+    if (!confirmed) {
+        return;
+    }
 
-            const email =
-                document
-                    .getElementById(
-                        "loginEmail"
-                    )
-                    .value
-                    .trim();
+    button.disabled = true;
 
-            const password =
-                document
-                    .getElementById(
-                        "loginPassword"
-                    )
-                    .value;
+    button.textContent =
+        "Checking...";
 
-            const {
-                data,
-                error
-            } =
-                await supabaseClient.auth
-                    .signInWithPassword({
-                        email: email,
-                        password: password
-                    });
+    try {
 
-            if (error) {
+        /* CHECK BOTH DIRECTIONS */
 
-                console.error(
-                    "LOGIN ERROR:",
-                    error
+        const {
+            data: existingMatches,
+            error: checkError
+        } =
+            await supabaseClient
+                .from("approved_matches")
+                .select("id")
+                .or(
+                    `and(person_a_id.eq.${personAId},person_b_id.eq.${personBId}),and(person_a_id.eq.${personBId},person_b_id.eq.${personAId})`
                 );
 
-                loginError.textContent =
-                    "Incorrect email or password.";
+        if (checkError) {
 
-                return;
-
-            }
-
-            if (
-                !data.user ||
-                data.user.id !== ADMIN_USER_ID
-            ) {
-
-                await supabaseClient.auth
-                    .signOut();
-
-                loginError.textContent =
-                    "This account does not have dating administration access.";
-
-                return;
-
-            }
-
-            showDashboard(
-                data.user
+            throw new Error(
+                checkError.message
             );
 
         }
-    );
 
-    /* ==============================
-       SESSION
-    ============================== */
+        if (
+            existingMatches &&
+            existingMatches.length > 0
+        ) {
 
-    async function checkSession() {
+            button.textContent =
+                "✓ Already Approved";
 
-        const {
-            data,
-            error
-        } =
-            await supabaseClient.auth
-                .getSession();
-
-        if (error) {
-
-            console.error(
-                "SESSION ERROR:",
-                error
-            );
+            button.style.background =
+                "#24563e";
 
             return;
 
         }
 
-        const session =
-            data.session;
+        /* READ SCORES */
 
-        if (
-            session &&
-            session.user &&
-            session.user.id === ADMIN_USER_ID
-        ) {
-
-            showDashboard(
-                session.user
+        const compatibilityScore =
+            Number(
+                button.dataset.score
             );
 
-        }
+        const relationshipGoalsScore =
+            Number(
+                button.dataset.goals
+            );
 
-    }
+        const faithScore =
+            Number(
+                button.dataset.faith
+            );
 
-    /* ==============================
-       SHOW DASHBOARD
-    ============================== */
+        const communicationScore =
+            Number(
+                button.dataset.communication
+            );
 
-    function showDashboard(
-        user
-    ) {
+        const socialLifestyleScore =
+            Number(
+                button.dataset.lifestyle
+            );
 
-        loginSection.style.display =
-            "none";
+        const relationshipPaceScore =
+            Number(
+                button.dataset.pace
+            );
 
-        dashboard.style.display =
-            "block";
+        const personalityScore =
+            Number(
+                button.dataset.personality
+            );
 
-        adminUser.textContent =
-            "Signed in as " +
-            user.email;
+        const weekendScore =
+            Number(
+                button.dataset.weekend
+            );
 
-        loadPool();
+        /* INSERT */
 
-    }
-
-    /* ==============================
-       LOGOUT
-    ============================== */
-
-    logoutButton.addEventListener(
-        "click",
-        async function() {
-
-            await supabaseClient.auth
-                .signOut();
-
-            dashboard.style.display =
-                "none";
-
-            loginSection.style.display =
-                "block";
-
-            loginForm.reset();
-
-        }
-    );
-
-    /* ==============================
-       LOAD POOL
-    ============================== */
-
-    async function loadPool() {
-
-        participantCount.textContent =
-            "…";
-
-        maleCount.textContent =
-            "…";
-
-        femaleCount.textContent =
-            "…";
+        button.textContent =
+            "Approving...";
 
         const {
             data,
             error
         } =
             await supabaseClient
-                .from("profiles")
-                .select(
-                    "id, gender"
-                );
+                .from("approved_matches")
+                .insert([{
+
+                    person_a_id:
+                        personAId,
+
+                    person_b_id:
+                        personBId,
+
+                    compatibility_score:
+                        compatibilityScore,
+
+                    relationship_goals_score:
+                        relationshipGoalsScore,
+
+                    faith_score:
+                        faithScore,
+
+                    communication_score:
+                        communicationScore,
+
+                    social_lifestyle_score:
+                        socialLifestyleScore,
+
+                    relationship_pace_score:
+                        relationshipPaceScore,
+
+                    personality_score:
+                        personalityScore,
+
+                    weekend_score:
+                        weekendScore,
+
+                    status:
+                        "pending"
+
+                }])
+                .select();
+
+        if (error) {
+
+            throw new Error(
+                error.message
+            );
+
+        }
+
+        console.log(
+            "MATCH APPROVED:",
+            data
+        );
+
+        button.textContent =
+            "✓ Match Approved";
+
+        button.style.background =
+            "#24563e";
+
+        matchingStatus.textContent =
+            "Match approved";
+
+        matchingStatusDescription.textContent =
+            "The match has been saved for the email preparation stage. No email has been sent.";
+
+    } catch (error) {
+
+        console.error(
+            "APPROVAL ERROR:",
+            error
+        );
+
+        alert(
+            "Approval failed: " +
+            error.message
+        );
+
+        button.disabled =
+            false;
+
+        button.textContent =
+            "Approve Match →";
+
+    }
+
+}
+
+);
+/* ==============================
+GENERATE PROPOSED MATCHES
+============================== */
+
+startMatchingButton.addEventListener(
+"click",
+async function() {
+
+    startMatchingButton.disabled =
+        true;
+
+    startMatchingButton.textContent =
+        "Generating...";
+
+    matchingStatus.textContent =
+        "Generating matches";
+
+    matchingStatusDescription.textContent =
+        "Running the existing monthly matching preview.";
+
+    matchesContainer.className =
+        "matches-placeholder";
+
+    matchesContainer.innerHTML = `
+
+        <span>♡</span>
+
+        Generating proposed matches...
+
+    `;
+
+    try {
+
+        /*
+         * IMPORTANT:
+         *
+         * This calls your EXISTING
+         * preview_monthly_pairs()
+         * function.
+         *
+         * The matching algorithm itself
+         * is not changed here.
+         */
+
+        const {
+            data,
+            error
+        } =
+            await supabaseClient.rpc(
+                "preview_monthly_pairs"
+            );
 
         if (error) {
 
             console.error(
-                "POOL ERROR:",
+                "MATCHING ERROR:",
                 error
             );
 
-            participantCount.textContent =
-                "—";
+            matchingStatus.textContent =
+                "Matching failed";
 
-            maleCount.textContent =
-                "—";
-
-            femaleCount.textContent =
-                "—";
-
-            return;
-
-        }
-
-        const profiles =
-            data || [];
-
-        const males =
-            profiles.filter(
-                profile =>
-                    profile.gender === "male"
-            );
-
-        const females =
-            profiles.filter(
-                profile =>
-                    profile.gender === "female"
-            );
-
-        participantCount.textContent =
-            profiles.length;
-
-        maleCount.textContent =
-            males.length;
-
-        femaleCount.textContent =
-            females.length;
-
-    }
-
-    /* ==============================
-       REFRESH POOL
-    ============================== */
-
-    refreshPoolButton.addEventListener(
-        "click",
-        async function() {
-
-            await loadPool();
-
-        }
-    );
-
-    /* ==============================
-       RENDER MATCHES
-    ============================== */
-
-    function renderMatches(
-        matches
-    ) {
-
-        matchesContainer.innerHTML = "";
-
-        if (
-            !matches ||
-            matches.length === 0
-        ) {
+            matchingStatusDescription.textContent =
+                error.message;
 
             matchesContainer.className =
                 "matches-placeholder";
 
             matchesContainer.innerHTML = `
 
-                <span>♡</span>
+                <span>!</span>
 
-                No eligible matches were found.
+                Matching failed.
 
             `;
 
@@ -1335,700 +1556,114 @@ const emailPreviewContainer =
 
         }
 
-        matchesContainer.className =
-            "";
-
-        matches.forEach(
-            function(match) {
-
-                const card =
-                    document.createElement(
-                        "div"
-                    );
-
-                card.className =
-                    "match-card";
-
-                const score =
-                    Number(
-                        match.compatibility_score
-                    );
-
-                const scoreText =
-                    Number.isFinite(score)
-                        ? score.toFixed(1)
-                        : "—";
-
-                card.innerHTML = `
-
-                    <div
-                        style="
-                            font-family: Arial, sans-serif;
-                            font-size: 11px;
-                            font-weight: bold;
-                            letter-spacing: 2px;
-                            text-transform: uppercase;
-                            color: #9c7438;
-                            margin-bottom: 10px;
-                        "
-                    >
-                        PROPOSED MATCH
-                    </div>
-
-                    <div class="match-card-header">
-
-                        <div class="match-card-names">
-
-                            ${escapeHtml(
-                                match.person_a_name
-                            )}
-
-                            <span>×</span>
-
-                            ${escapeHtml(
-                                match.person_b_name
-                            )}
-
-                        </div>
-
-                        <div class="match-score">
-
-                            ${scoreText}%
-
-                        </div>
-
-                    </div>
-
-                    <div class="score-grid">
-
-                        ${scoreBox(
-                            "Goals",
-                            match.relationship_goals_score
-                        )}
-
-                        ${scoreBox(
-                            "Faith",
-                            match.faith_score
-                        )}
-
-                        ${scoreBox(
-                            "Communication",
-                            match.communication_score
-                        )}
-
-                        ${scoreBox(
-                            "Lifestyle",
-                            match.social_lifestyle_score
-                        )}
-
-                        ${scoreBox(
-                            "Pace",
-                            match.relationship_pace_score
-                        )}
-
-                        ${scoreBox(
-                            "Personality",
-                            match.personality_score
-                        )}
-
-                        ${scoreBox(
-                            "Weekend",
-                            match.weekend_score
-                        )}
-
-                    </div>
-
-                    <div class="match-card-footer">
-
-                        This is a proposed match.
-                        No approval or email has been sent.
-
-                    </div>
-
-                    <div class="match-approval-area">
-
-                        <button
-                            type="button"
-                            class="admin-button primary-admin-button approve-match-button"
-
-                            data-person-a="${escapeHtml(
-                                match.person_a_id
-                            )}"
-
-                            data-person-b="${escapeHtml(
-                                match.person_b_id
-                            )}"
-
-                            data-score="${match.compatibility_score}"
-
-                            data-goals="${match.relationship_goals_score}"
-
-                            data-faith="${match.faith_score}"
-
-                            data-communication="${match.communication_score}"
-
-                            data-lifestyle="${match.social_lifestyle_score}"
-
-                            data-pace="${match.relationship_pace_score}"
-
-                            data-personality="${match.personality_score}"
-
-                            data-weekend="${match.weekend_score}"
-                        >
-                            Approve Match →
-                        </button>
-
-                    </div>
-
-                `;
-
-                matchesContainer.appendChild(
-                    card
-                );
-
-            }
-        );
-
-    }
-
-    /* ==============================
-   APPROVE MATCH
-============================== */
-
-matchesContainer.addEventListener(
-    "click",
-    async function(event) {
-
-        const button =
-            event.target.closest(
-                ".approve-match-button"
-            );
-
-        if (!button) {
-            return;
-        }
-
-        const personAId =
-            button.dataset.personA;
-
-        const personBId =
-            button.dataset.personB;
-
-        const confirmed =
-            confirm(
-                "Approve this match? This will save the match for the email stage, but will NOT send any emails."
-            );
-
-        if (!confirmed) {
-            return;
-        }
-
-        button.disabled = true;
-
-        button.textContent =
-            "Checking...";
-
-        try {
-
-            /* ==============================
-               CHECK IF ALREADY APPROVED
-            ============================== */
-
-            const {
-                data: existingMatch,
-                error: checkError
-            } =
-                await supabaseClient
-                    .from("approved_matches")
-                    .select("id")
-                    .eq(
-                        "person_a_id",
-                        personAId
-                    )
-                    .eq(
-                        "person_b_id",
-                        personBId
-                    )
-                    .maybeSingle();
-
-            if (checkError) {
-
-                console.error(
-                    "APPROVAL CHECK ERROR:",
-                    checkError
-                );
-
-                throw new Error(
-                    checkError.message
-                );
-
-            }
-
-            /* ==============================
-               ALREADY APPROVED
-            ============================== */
-
-            if (existingMatch) {
-
-                button.textContent =
-                    "✓ Already Approved";
-
-                button.style.background =
-                    "#24563e";
-
-                matchingStatus.textContent =
-                    "Match already approved";
-
-                matchingStatusDescription.textContent =
-                    "This match was previously approved and is already saved for the email preparation stage.";
-
-                return;
-
-            }
-
-            /* ==============================
-               READ SCORES
-            ============================== */
-
-            button.textContent =
-                "Approving...";
-
-            const compatibilityScore =
-                Number(
-                    button.dataset.score
-                );
-
-            const relationshipGoalsScore =
-                Number(
-                    button.dataset.goals
-                );
-
-            const faithScore =
-                Number(
-                    button.dataset.faith
-                );
-
-            const communicationScore =
-                Number(
-                    button.dataset.communication
-                );
-
-            const socialLifestyleScore =
-                Number(
-                    button.dataset.lifestyle
-                );
-
-            const relationshipPaceScore =
-                Number(
-                    button.dataset.pace
-                );
-
-            const personalityScore =
-                Number(
-                    button.dataset.personality
-                );
-
-            const weekendScore =
-                Number(
-                    button.dataset.weekend
-                );
-
-            if (
-                !Number.isFinite(
-                    compatibilityScore
-                )
-            ) {
-
-                throw new Error(
-                    "Compatibility score is missing."
-                );
-
-            }
-
-            /* ==============================
-               INSERT APPROVED MATCH
-            ============================== */
-
-            const {
-                data,
-                error
-            } =
-                await supabaseClient
-                    .from("approved_matches")
-                    .insert([{
-
-                        person_a_id:
-                            personAId,
-
-                        person_b_id:
-                            personBId,
-
-                        compatibility_score:
-                            compatibilityScore,
-
-                        relationship_goals_score:
-                            relationshipGoalsScore,
-
-                        faith_score:
-                            faithScore,
-
-                        communication_score:
-                            communicationScore,
-
-                        social_lifestyle_score:
-                            socialLifestyleScore,
-
-                        relationship_pace_score:
-                            relationshipPaceScore,
-
-                        personality_score:
-                            personalityScore,
-
-                        weekend_score:
-                            weekendScore
-
-                    }])
-                    .select();
-
-            if (error) {
-
-                console.error(
-                    "APPROVAL ERROR:",
-                    error
-                );
-
-                throw new Error(
-                    error.message ||
-                    "Unknown database error."
-                );
-
-            }
-
-            console.log(
-                "MATCH APPROVED:",
-                data
-            );
-
-            /* ==============================
-               SUCCESS
-            ============================== */
-
-            button.textContent =
-                "✓ Match Approved";
-
-            button.style.background =
-                "#24563e";
-
-            matchingStatus.textContent =
-                "Match approved";
-
-            matchingStatusDescription.textContent =
-                "The match has been saved for the email preparation stage. No emails have been sent.";
-
-        } catch (error) {
-
-            console.error(
-                "APPROVAL EXCEPTION:",
-                error
-            );
-
-            alert(
-                "Approval failed: " +
-                (
-                    error.message ||
-                    "Unknown error."
-                )
-            );
-
-            button.disabled =
-                false;
-
-            button.textContent =
-                "Approve Match →";
-
-        }
-
-    }
-);
-
-/* ==============================
-   PREPARE EMAILS
-============================== */
-
-async function prepareEmails() {
-
-    emailStatus.textContent =
-        "Preparing...";
-
-    emailStatusDescription.textContent =
-        "Loading approved matches and generating email drafts.";
-
-    emailPreviewContainer.innerHTML = "";
-
-    prepareEmailsButton.disabled = true;
-
-    prepareEmailsButton.textContent =
-        "Preparing...";
-
-    try {
-
-        const {
-            data,
-            error
-        } =
-            await supabaseClient.rpc(
-                "preview_approved_match_emails"
-            );
-
-        if (error) {
-
-            console.error(
-                "EMAIL PREPARATION ERROR:",
-                error
-            );
-
-            emailStatus.textContent =
-                "Preparation Failed";
-
-            emailStatusDescription.textContent =
-                error.message ||
-                "Unable to prepare emails.";
-
-            prepareEmailsButton.disabled = false;
-
-            prepareEmailsButton.textContent =
-                "Prepare Emails →";
-
-            return;
-
-        }
-
-        const emails =
+        const matches =
             data || [];
 
-        if (emails.length === 0) {
+        renderMatches(matches);
 
-            emailStatus.textContent =
-                "No Emails";
+        if (matches.length > 0) {
 
-            emailStatusDescription.textContent =
-                "There are no approved matches ready for email preparation.";
+            matchingStatus.textContent =
+                "Matches generated";
 
-            prepareEmailsButton.disabled = false;
-
-            prepareEmailsButton.textContent =
-                "Prepare Emails →";
-
-            return;
-
-        }
-
-        emailStatus.textContent =
-            "Ready for Review";
-
-        emailStatusDescription.textContent =
-            emails.length +
-            " email draft pair" +
-            (emails.length === 1 ? "" : "s") +
-            " prepared. Nothing has been sent.";
-
-        emails.forEach(
-            function(email) {
-
-                const card =
-                    document.createElement(
-                        "div"
-                    );
-
-                card.style.background =
-                    "#f7f3eb";
-
-                card.style.border =
-                    "1px solid rgba(23, 60, 43, .12)";
-
-                card.style.padding =
-                    "30px";
-
-                card.style.marginBottom =
-                    "20px";
-
-                card.innerHTML = `
-
-                    <div
-                        style="
-                            font-family: Arial, sans-serif;
-                            font-size: 11px;
-                            font-weight: bold;
-                            letter-spacing: 2px;
-                            text-transform: uppercase;
-                            color: #9c7438;
-                            margin-bottom: 20px;
-                        "
-                    >
-                        EMAIL DRAFTS
-                    </div>
-
-                    <div
-                        style="
-                            font-family: Arial, sans-serif;
-                            font-size: 14px;
-                            color: #66736b;
-                            margin-bottom: 25px;
-                        "
-                    >
-                        Compatibility:
-                        <strong>
-                            ${Number(
-                                email.compatibility_score
-                            ).toFixed(1)}%
-                        </strong>
-                    </div>
-
-                    <div
-                        style="
-                            border-top: 1px solid rgba(23, 60, 43, .12);
-                            padding-top: 25px;
-                            margin-bottom: 30px;
-                        "
-                    >
-
-                        <h3
-                            style="
-                                color: #173c2b;
-                                margin-bottom: 8px;
-                            "
-                        >
-                            ${escapeHtml(
-                                email.person_a_name
-                            )}
-                        </h3>
-
-                        <p
-                            style="
-                                font-family: Arial, sans-serif;
-                                font-size: 13px;
-                                color: #66736b;
-                                margin-bottom: 15px;
-                            "
-                        >
-                            To:
-                            ${escapeHtml(
-                                email.person_a_email
-                            )}
-                        </p>
-
-                        <p
-                            style="
-                                font-family: Arial, sans-serif;
-                                font-size: 13px;
-                                font-weight: bold;
-                                color: #173c2b;
-                            "
-                        >
-                            ${escapeHtml(
-                                email.person_a_email_subject
-                            )}
-                        </p>
-
-                        <pre
-                            style="
-                                white-space: pre-wrap;
-                                font-family: Arial, sans-serif;
-                                font-size: 14px;
-                                line-height: 1.7;
-                                color: #17251d;
-                                background: white;
-                                padding: 20px;
-                                margin-top: 15px;
-                                border: 1px solid rgba(23, 60, 43, .10);
-                            "
-                        >${escapeHtml(
-                            email.person_a_email_body
-                        )}</pre>
-
-                    </div>
-
-                    <div
-                        style="
-                            border-top: 1px solid rgba(23, 60, 43, .12);
-                            padding-top: 25px;
-                        "
-                    >
-
-                        <h3
-                            style="
-                                color: #173c2b;
-                                margin-bottom: 8px;
-                            "
-                        >
-                            ${escapeHtml(
-                                email.person_b_name
-                            )}
-                        </h3>
-
-                        <p
-                            style="
-                                font-family: Arial, sans-serif;
-                                font-size: 13px;
-                                color: #66736b;
-                                margin-bottom: 15px;
-                            "
-                        >
-                            To:
-                            ${escapeHtml(
-                                email.person_b_email
-                            )}
-                        </p>
-
-                        <p
-                            style="
-                                font-family: Arial, sans-serif;
-                                font-size: 13px;
-                                font-weight: bold;
-                                color: #173c2b;
-                            "
-                        >
-                            ${escapeHtml(
-                                email.person_b_email_subject
-                            )}
-                        </p>
-
-                        <pre
-                            style="
-                                white-space: pre-wrap;
-                                font-family: Arial, sans-serif;
-                                font-size: 14px;
-                                line-height: 1.7;
-                                color: #17251d;
-                                background: white;
-                                padding: 20px;
-                                margin-top: 15px;
-                                border: 1px solid rgba(23, 60, 43, .10);
-                            "
-                        >${escapeHtml(
-                            email.person_b_email_body
-                        )}</pre>
-
-                    </div>
-
-                `;
-
-                emailPreviewContainer.appendChild(
-                    card
+            matchingStatusDescription =
+                document.getElementById(
+                    "matchingStatusDescription"
                 );
 
-            }
-        );
+            matchingStatusDescription.textContent =
+                matches.length +
+                " proposed match" +
+                (
+                    matches.length === 1
+                        ? ""
+                        : "es"
+                ) +
+                " returned by the matching system.";
 
-        prepareEmailsButton.disabled = false;
+        } else {
 
-        prepareEmailsButton.textContent =
-            "Prepare Emails Again →";
+            matchingStatus.textContent =
+                "No matches found";
+
+            matchingStatusDescription.textContent =
+                "The matching function returned no eligible pairs.";
+
+        }
 
     } catch (error) {
 
         console.error(
-            "EMAIL PREPARATION ERROR:",
+            "MATCHING EXCEPTION:",
+            error
+        );
+
+        matchingStatus.textContent =
+            "Matching failed";
+
+        matchingStatusDescription.textContent =
+            error.message ||
+            "Something went wrong.";
+
+        matchesContainer.className =
+            "matches-placeholder";
+
+        matchesContainer.innerHTML = `
+
+            <span>!</span>
+
+            Something went wrong while generating matches.
+
+        `;
+
+    } finally {
+
+        startMatchingButton.disabled =
+            false;
+
+        startMatchingButton.textContent =
+            "Generate Matches →";
+
+    }
+
+}
+
+);
+/* ==============================
+PREPARE EMAILS
+============================== */
+
+async function prepareEmails() {
+
+emailStatus.textContent =
+    "Preparing...";
+
+emailStatusDescription.textContent =
+    "Loading approved matches and generating drafts.";
+
+emailPreviewContainer.innerHTML =
+    "";
+
+prepareEmailsButton.disabled =
+    true;
+
+prepareEmailsButton.textContent =
+    "Preparing...";
+
+try {
+
+    const {
+        data,
+        error
+    } =
+        await supabaseClient.rpc(
+            "preview_approved_match_emails"
+        );
+
+    if (error) {
+
+        console.error(
+            "EMAIL ERROR:",
             error
         );
 
@@ -2036,175 +1671,215 @@ async function prepareEmails() {
             "Preparation Failed";
 
         emailStatusDescription.textContent =
-            "Something went wrong while preparing the emails.";
+            error.message;
 
-        prepareEmailsButton.disabled = false;
-
-        prepareEmailsButton.textContent =
-            "Prepare Emails →";
+        return;
 
     }
 
-}
-prepareEmailsButton.addEventListener(
-    "click",
-    function() {
+    const emails =
+        data || [];
 
-        prepareEmails();
+    if (emails.length === 0) {
+
+        emailStatus.textContent =
+            "No Emails";
+
+        emailStatusDescription.textContent =
+            "There are no approved matches ready for email preparation.";
+
+        return;
 
     }
-);
 
-    /* ==============================
-       START MATCHING
-    ============================== */
+    emailStatus.textContent =
+        "Ready for Review";
 
-    startMatchingButton.addEventListener(
-        "click",
-        async function() {
+    emailStatusDescription.textContent =
+        emails.length +
+        " email draft pair" +
+        (
+            emails.length === 1
+                ? ""
+                : "s"
+        ) +
+        " prepared.";
 
-            startMatchingButton.disabled =
-                true;
+    emails.forEach(
+        function(email) {
 
-            startMatchingButton.textContent =
-                "Matching...";
+            const card =
+                document.createElement(
+                    "div"
+                );
 
-            matchingStatus.textContent =
-                "Running matching engine";
+            card.style.background =
+                "#f7f3eb";
 
-            matchingStatusDescription.textContent =
-                "Generating compatible pairs from the current monthly pool.";
+            card.style.border =
+                "1px solid rgba(23,60,43,.12)";
 
-            matchesContainer.className =
-                "matches-placeholder";
+            card.style.padding =
+                "30px";
 
-            matchesContainer.innerHTML = `
+            card.style.marginBottom =
+                "20px";
 
-                <span>♡</span>
+            card.innerHTML = `
 
-                Generating proposed matches...
+                <div
+                    style="
+                        font-family:Arial,sans-serif;
+                        font-size:11px;
+                        font-weight:bold;
+                        letter-spacing:2px;
+                        text-transform:uppercase;
+                        color:#9c7438;
+                        margin-bottom:20px;
+                    "
+                >
+                    EMAIL DRAFTS
+                </div>
+
+                <div
+                    style="
+                        font-family:Arial,sans-serif;
+                        font-size:14px;
+                        color:#66736b;
+                        margin-bottom:25px;
+                    "
+                >
+                    Compatibility:
+                    <strong>
+                        ${Number(
+                            email.compatibility_score
+                        ).toFixed(1)}%
+                    </strong>
+                </div>
+
+                <div>
+
+                    <h3 style="color:#173c2b;">
+                        ${escapeHtml(
+                            email.person_a_name
+                        )}
+                    </h3>
+
+                    <p
+                        style="
+                            font-family:Arial,sans-serif;
+                            font-size:13px;
+                            color:#66736b;
+                        "
+                    >
+                        To:
+                        ${escapeHtml(
+                            email.person_a_email
+                        )}
+                    </p>
+
+                    <pre
+                        style="
+                            white-space:pre-wrap;
+                            font-family:Arial,sans-serif;
+                            font-size:14px;
+                            line-height:1.7;
+                            color:#17251d;
+                            background:white;
+                            padding:20px;
+                        "
+                    >${escapeHtml(
+                        email.person_a_email_body
+                    )}</pre>
+
+                </div>
+
+                <div
+                    style="
+                        border-top:1px solid rgba(23,60,43,.12);
+                        margin-top:25px;
+                        padding-top:25px;
+                    "
+                >
+
+                    <h3 style="color:#173c2b;">
+                        ${escapeHtml(
+                            email.person_b_name
+                        )}
+                    </h3>
+
+                    <p
+                        style="
+                            font-family:Arial,sans-serif;
+                            font-size:13px;
+                            color:#66736b;
+                        "
+                    >
+                        To:
+                        ${escapeHtml(
+                            email.person_b_email
+                        )}
+                    </p>
+
+                    <pre
+                        style="
+                            white-space:pre-wrap;
+                            font-family:Arial,sans-serif;
+                            font-size:14px;
+                            line-height:1.7;
+                            color:#17251d;
+                            background:white;
+                            padding:20px;
+                        "
+                    >${escapeHtml(
+                        email.person_b_email_body
+                    )}</pre>
+
+                </div>
 
             `;
 
-            try {
-
-                const {
-                    data,
-                    error
-                } =
-                    await supabaseClient
-                        .rpc(
-                            "preview_monthly_pairs"
-                        );
-
-                if (error) {
-
-                    console.error(
-                        "MATCHING ERROR:",
-                        error
-                    );
-
-                    matchingStatus.textContent =
-                        "Matching failed";
-
-                    matchingStatusDescription.textContent =
-                        error.message ||
-                        "The matching function could not be run.";
-
-                    matchesContainer.className =
-                        "matches-placeholder";
-
-                    matchesContainer.innerHTML = `
-
-                        <span>!</span>
-
-                        Matching failed.
-                        Check the browser console for details.
-
-                    `;
-
-                    return;
-
-                }
-
-                const matches =
-                    data || [];
-
-                renderMatches(
-                    matches
-                );
-
-                if (
-                    matches.length > 0
-                ) {
-
-                    matchingStatus.textContent =
-                        "Matches generated";
-
-                    matchingStatusDescription.textContent =
-                        matches.length +
-                        " proposed match" +
-                        (
-                            matches.length === 1
-                                ? ""
-                                : "es"
-                        ) +
-                        " ready for manual review.";
-
-                } else {
-
-                    matchingStatus.textContent =
-                        "No matches found";
-
-                    matchingStatusDescription.textContent =
-                        "There are currently no eligible pairs in the monthly pool.";
-
-                }
-
-            } catch (error) {
-
-                console.error(
-                    "MATCHING EXCEPTION:",
-                    error
-                );
-
-                matchingStatus.textContent =
-                    "Matching failed";
-
-                matchingStatusDescription.textContent =
-                    error.message ||
-                    "Something went wrong while running the matching engine.";
-
-                matchesContainer.className =
-                    "matches-placeholder";
-
-                matchesContainer.innerHTML = `
-
-                    <span>!</span>
-
-                    Something went wrong while generating matches.
-
-                `;
-
-            } finally {
-
-                startMatchingButton.disabled =
-                    false;
-
-                startMatchingButton.textContent =
-                    "Start Matching →";
-
-            }
+            emailPreviewContainer.appendChild(
+                card
+            );
 
         }
     );
 
-    /* ==============================
-       START
-    ============================== */
+} catch (error) {
 
-    checkSession();
+    console.error(
+        "EMAIL PREPARATION EXCEPTION:",
+        error
+    );
 
-</script>
+    emailStatus.textContent =
+        "Preparation Failed";
 
-</body> </html>
+    emailStatusDescription.textContent =
+        error.message ||
+        "Something went wrong.";
+
+} finally {
+
+    prepareEmailsButton.disabled =
+        false;
+
+    prepareEmailsButton.textContent =
+        "Prepare Emails Again →";
+
+}
+
+}
+prepareEmailsButton.addEventListener(
+"click",
+prepareEmails
+);
+
+/* ==============================
+START
+============================== */
+
+checkSession();
+
+</script> </body> </html>

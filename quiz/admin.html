@@ -1007,141 +1007,435 @@ return `
 
 }
 /* =========================================================
-RENDER MATCHES
+RENDER MATCHES + APPROVAL
 ========================================================= */
+
+async function approveMatch(matchId, button) {
+
+    const confirmed =
+        confirm(
+            "Approve this match?\n\n" +
+            "Once approved, it will become available for email draft preparation."
+        );
+
+    if (!confirmed) {
+        return;
+    }
+
+    button.disabled = true;
+    button.textContent = "Approving...";
+
+    try {
+
+        /* ==============================
+           GET THE MATCH
+        ============================== */
+
+        const {
+            data: match,
+            error: matchError
+        } =
+            await supabaseClient
+                .from("matches")
+                .select(`
+                    id,
+                    person_a_id,
+                    person_b_id,
+                    compatibility_score,
+                    relationship_goals_score,
+                    faith_score,
+                    communication_score,
+                    social_lifestyle_score,
+                    relationship_pace_score,
+                    personality_score,
+                    weekend_score
+                `)
+                .eq("id", matchId)
+                .single();
+
+        if (matchError) {
+            throw matchError;
+        }
+
+        if (!match) {
+            throw new Error(
+                "The match could not be found."
+            );
+        }
+
+
+        /* ==============================
+           SAVE APPROVED MATCH
+        ============================== */
+
+        const {
+            error: approvalError
+        } =
+            await supabaseClient
+                .from("approved_matches")
+                .insert({
+
+                    person_a_id:
+                        match.person_a_id,
+
+                    person_b_id:
+                        match.person_b_id,
+
+                    compatibility_score:
+                        match.compatibility_score,
+
+                    relationship_goals_score:
+                        match.relationship_goals_score,
+
+                    faith_score:
+                        match.faith_score,
+
+                    communication_score:
+                        match.communication_score,
+
+                    social_lifestyle_score:
+                        match.social_lifestyle_score,
+
+                    relationship_pace_score:
+                        match.relationship_pace_score,
+
+                    personality_score:
+                        match.personality_score,
+
+                    weekend_score:
+                        match.weekend_score,
+
+                    status:
+                        "approved",
+
+                    approved_at:
+                        new Date().toISOString()
+
+                });
+
+        if (approvalError) {
+            throw approvalError;
+        }
+
+
+        /* ==============================
+           UPDATE ORIGINAL MATCH STATUS
+        ============================== */
+
+        const {
+            error: statusError
+        } =
+            await supabaseClient
+                .from("matches")
+                .update({
+                    status: "approved"
+                })
+                .eq(
+                    "id",
+                    matchId
+                );
+
+        if (statusError) {
+
+            console.error(
+                "MATCH STATUS UPDATE ERROR:",
+                statusError
+            );
+
+            /*
+             * The approved_matches record was already
+             * created, so we don't treat this as a
+             * complete failure.
+             */
+        }
+
+
+        /* ==============================
+           UPDATE BUTTON
+        ============================== */
+
+        button.disabled = true;
+
+        button.textContent =
+            "✓ Match Approved";
+
+        button.style.background =
+            "#c89d4c";
+
+        button.style.color =
+            "white";
+
+        button.style.cursor =
+            "default";
+
+
+        /* ==============================
+           UPDATE MATCH CARD
+        ============================== */
+
+        const card =
+            button.closest(".match-card");
+
+        if (card) {
+
+            const label =
+                card.querySelector(
+                    ".match-status-label"
+                );
+
+            if (label) {
+
+                label.textContent =
+                    "APPROVED MATCH";
+
+                label.style.color =
+                    "#173c2b";
+
+            }
+
+            const footer =
+                card.querySelector(
+                    ".match-card-footer"
+                );
+
+            if (footer) {
+
+                footer.innerHTML = `
+                    This match has been
+                    <strong>approved</strong>.
+                    You can now prepare the
+                    email drafts below.
+                `;
+
+            }
+
+        }
+
+    } catch (error) {
+
+        console.error(
+            "APPROVE MATCH ERROR:",
+            error
+        );
+
+        button.disabled =
+            false;
+
+        button.textContent =
+            "Approve Match →";
+
+        alert(
+            error.message ||
+            "Unable to approve this match."
+        );
+
+    }
+
+}
+
 
 function renderMatches(matches) {
 
-if (
-    !Array.isArray(matches) ||
-    matches.length === 0
-) {
+    if (
+        !Array.isArray(matches) ||
+        matches.length === 0
+    ) {
 
-    matchesContainer.className =
-        "matches-placeholder";
+        matchesContainer.className =
+            "matches-placeholder";
 
-    matchesContainer.innerHTML = `
-        <span>♡</span>
-        No eligible matches were generated.
-    `;
+        matchesContainer.innerHTML = `
+            <span>♡</span>
+            No eligible matches were generated.
+        `;
 
-    return;
+        return;
 
-}
+    }
 
-matchesContainer.className = "";
+    matchesContainer.className = "";
 
-matchesContainer.innerHTML =
-    matches.map(
-        match => {
+    matchesContainer.innerHTML =
+        matches.map(
+            match => {
 
-            const score =
-                Number(
-                    match.compatibility_score
-                );
+                const score =
+                    Number(
+                        match.compatibility_score
+                    );
 
-            const scoreText =
-                Number.isFinite(score)
-                    ? score.toFixed(1)
-                    : "—";
+                const scoreText =
+                    Number.isFinite(score)
+                        ? score.toFixed(1)
+                        : "—";
 
-            return `
+                const isApproved =
+                    match.status === "approved";
 
-                <div class="match-card">
+                return `
 
-                    <div
-                        style="
-                            font-family:Arial,sans-serif;
-                            font-size:11px;
-                            font-weight:bold;
-                            letter-spacing:2px;
-                            text-transform:uppercase;
-                            color:#9c7438;
-                            margin-bottom:10px;
-                        "
-                    >
-                        PROPOSED MATCH
-                    </div>
+                    <div class="match-card">
 
-                    <div class="match-card-header">
+                        <div
+                            class="match-status-label"
+                            style="
+                                font-family:Arial,sans-serif;
+                                font-size:11px;
+                                font-weight:bold;
+                                letter-spacing:2px;
+                                text-transform:uppercase;
+                                color:${isApproved ? "#173c2b" : "#9c7438"};
+                                margin-bottom:10px;
+                            "
+                        >
+                            ${isApproved
+                                ? "APPROVED MATCH"
+                                : "PROPOSED MATCH"
+                            }
+                        </div>
 
-                        <div class="match-card-names">
+                        <div class="match-card-header">
 
-                            ${escapeHtml(
-                                match.person_a_name
+                            <div class="match-card-names">
+
+                                ${escapeHtml(
+                                    match.person_a_name
+                                )}
+
+                                <span>×</span>
+
+                                ${escapeHtml(
+                                    match.person_b_name
+                                )}
+
+                            </div>
+
+                            <div class="match-score">
+
+                                ${scoreText}%
+
+                            </div>
+
+                        </div>
+
+                        <div class="score-grid">
+
+                            ${scoreBox(
+                                "Goals",
+                                match.relationship_goals_score
                             )}
 
-                            <span>×</span>
+                            ${scoreBox(
+                                "Faith",
+                                match.faith_score
+                            )}
 
-                            ${escapeHtml(
-                                match.person_b_name
+                            ${scoreBox(
+                                "Communication",
+                                match.communication_score
+                            )}
+
+                            ${scoreBox(
+                                "Lifestyle",
+                                match.social_lifestyle_score
+                            )}
+
+                            ${scoreBox(
+                                "Pace",
+                                match.relationship_pace_score
+                            )}
+
+                            ${scoreBox(
+                                "Personality",
+                                match.personality_score
+                            )}
+
+                            ${scoreBox(
+                                "Weekend",
+                                match.weekend_score
                             )}
 
                         </div>
 
-                        <div class="match-score">
+                        <div class="admin-actions">
 
-                            ${scoreText}%
+                            <button
+                                type="button"
+                                class="admin-button ${
+                                    isApproved
+                                        ? "secondary-admin-button"
+                                        : "primary-admin-button"
+                                } approve-match-button"
+                                data-match-id="${escapeHtml(
+                                    match.id
+                                )}"
+                                ${isApproved ? "disabled" : ""}
+                            >
+                                ${
+                                    isApproved
+                                        ? "✓ Match Approved"
+                                        : "Approve Match →"
+                                }
+                            </button>
+
+                        </div>
+
+                        <div class="match-card-footer">
+
+                            ${
+                                isApproved
+                                    ? `
+                                        This match has been
+                                        <strong>approved</strong>.
+                                        You can now prepare
+                                        the email drafts below.
+                                    `
+                                    : `
+                                        This is a proposed match.
+                                        It has not been approved
+                                        and no email has been sent.
+                                    `
+                            }
 
                         </div>
 
                     </div>
 
-                    <div class="score-grid">
+                `;
 
-                        ${scoreBox(
-                            "Goals",
-                            match.relationship_goals_score
-                        )}
+            }
+        ).join("");
 
-                        ${scoreBox(
-                            "Faith",
-                            match.faith_score
-                        )}
 
-                        ${scoreBox(
-                            "Communication",
-                            match.communication_score
-                        )}
+    /* ==============================
+       APPROVE BUTTON LISTENERS
+    ============================== */
 
-                        ${scoreBox(
-                            "Lifestyle",
-                            match.social_lifestyle_score
-                        )}
+    const approveButtons =
+        matchesContainer.querySelectorAll(
+            ".approve-match-button"
+        );
 
-                        ${scoreBox(
-                            "Pace",
-                            match.relationship_pace_score
-                        )}
+    approveButtons.forEach(
+        button => {
 
-                        ${scoreBox(
-                            "Personality",
-                            match.personality_score
-                        )}
+            button.addEventListener(
+                "click",
+                () => {
 
-                        ${scoreBox(
-                            "Weekend",
-                            match.weekend_score
-                        )}
+                    approveMatch(
+                        button.dataset.matchId,
+                        button
+                    );
 
-                    </div>
-
-                    <div class="match-card-footer">
-
-                        This is a proposed match.
-                        It has not been approved and
-                        no email has been sent.
-
-                    </div>
-
-                </div>
-
-            `;
+                }
+            );
 
         }
-    ).join("");
+    );
 
 }
+
 /* ==============================
    START MATCHING
 ============================== */

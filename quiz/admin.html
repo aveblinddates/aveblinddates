@@ -1492,208 +1492,265 @@ const emailPreviewContainer =
     }
 
     /* ==============================
-       APPROVE MATCH
-    ============================== */
+   APPROVE MATCH
+============================== */
 
-    matchesContainer.addEventListener(
-        "click",
-        async function(event) {
+matchesContainer.addEventListener(
+    "click",
+    async function(event) {
 
-            const button =
-                event.target.closest(
-                    ".approve-match-button"
-                );
+        const button =
+            event.target.closest(
+                ".approve-match-button"
+            );
 
-            if (!button) {
-                return;
-            }
+        if (!button) {
+            return;
+        }
 
-            const personAId =
-                button.dataset.personA;
+        const personAId =
+            button.dataset.personA;
 
-            const personBId =
-                button.dataset.personB;
+        const personBId =
+            button.dataset.personB;
 
-            const confirmed =
-                confirm(
-                    "Approve this match? This will save the match for the email stage, but will NOT send any emails."
-                );
+        const confirmed =
+            confirm(
+                "Approve this match? This will save the match for the email stage, but will NOT send any emails."
+            );
 
-            if (!confirmed) {
-                return;
-            }
+        if (!confirmed) {
+            return;
+        }
 
-            button.disabled =
-                true;
+        button.disabled = true;
 
-            button.textContent =
-                "Approving...";
+        button.textContent =
+            "Checking...";
 
-            try {
+        try {
 
-                const compatibilityScore =
-                    Number(
-                        button.dataset.score
-                    );
+            /* ==============================
+               CHECK IF ALREADY APPROVED
+            ============================== */
 
-                const relationshipGoalsScore =
-                    Number(
-                        button.dataset.goals
-                    );
-
-                const faithScore =
-                    Number(
-                        button.dataset.faith
-                    );
-
-                const communicationScore =
-                    Number(
-                        button.dataset.communication
-                    );
-
-                const socialLifestyleScore =
-                    Number(
-                        button.dataset.lifestyle
-                    );
-
-                const relationshipPaceScore =
-                    Number(
-                        button.dataset.pace
-                    );
-
-                const personalityScore =
-                    Number(
-                        button.dataset.personality
-                    );
-
-                const weekendScore =
-                    Number(
-                        button.dataset.weekend
-                    );
-
-                if (
-                    !Number.isFinite(
-                        compatibilityScore
+            const {
+                data: existingMatch,
+                error: checkError
+            } =
+                await supabaseClient
+                    .from("approved_matches")
+                    .select("id")
+                    .eq(
+                        "person_a_id",
+                        personAId
                     )
-                ) {
+                    .eq(
+                        "person_b_id",
+                        personBId
+                    )
+                    .maybeSingle();
 
-                    throw new Error(
-                        "Compatibility score is missing."
-                    );
+            if (checkError) {
 
-                }
-
-                const {
-                    data,
-                    error
-                } =
-                    await supabaseClient
-                        .from("approved_matches")
-                        .insert([{
-
-                            person_a_id:
-                                personAId,
-
-                            person_b_id:
-                                personBId,
-
-                            compatibility_score:
-                                compatibilityScore,
-
-                            relationship_goals_score:
-                                relationshipGoalsScore,
-
-                            faith_score:
-                                faithScore,
-
-                            communication_score:
-                                communicationScore,
-
-                            social_lifestyle_score:
-                                socialLifestyleScore,
-
-                            relationship_pace_score:
-                                relationshipPaceScore,
-
-                            personality_score:
-                                personalityScore,
-
-                            weekend_score:
-                                weekendScore
-
-                        }])
-                        .select();
-
-                if (error) {
-
-                    console.error(
-                        "APPROVAL ERROR:",
-                        error
-                    );
-
-                    alert(
-                        "Approval failed: " +
-                        (
-                            error.message ||
-                            "Unknown database error."
-                        )
-                    );
-
-                    button.disabled =
-                        false;
-
-                    button.textContent =
-                        "Approve Match →";
-
-                    return;
-
-                }
-
-                console.log(
-                    "MATCH APPROVED:",
-                    data
+                console.error(
+                    "APPROVAL CHECK ERROR:",
+                    checkError
                 );
+
+                throw new Error(
+                    checkError.message
+                );
+
+            }
+
+            /* ==============================
+               ALREADY APPROVED
+            ============================== */
+
+            if (existingMatch) {
 
                 button.textContent =
-                    "✓ Match Approved";
+                    "✓ Already Approved";
 
                 button.style.background =
                     "#24563e";
 
-                button.disabled =
-                    true;
-
                 matchingStatus.textContent =
-                    "Match approved";
+                    "Match already approved";
 
                 matchingStatusDescription.textContent =
-                    "The match has been saved for the email preparation stage. No emails have been sent.";
+                    "This match was previously approved and is already saved for the email preparation stage.";
 
-            } catch (error) {
-
-                console.error(
-                    "APPROVAL EXCEPTION:",
-                    error
-                );
-
-                alert(
-                    "Something went wrong: " +
-                    (
-                        error.message ||
-                        "Unknown error."
-                    )
-                );
-
-                button.disabled =
-                    false;
-
-                button.textContent =
-                    "Approve Match →";
+                return;
 
             }
 
+            /* ==============================
+               READ SCORES
+            ============================== */
+
+            button.textContent =
+                "Approving...";
+
+            const compatibilityScore =
+                Number(
+                    button.dataset.score
+                );
+
+            const relationshipGoalsScore =
+                Number(
+                    button.dataset.goals
+                );
+
+            const faithScore =
+                Number(
+                    button.dataset.faith
+                );
+
+            const communicationScore =
+                Number(
+                    button.dataset.communication
+                );
+
+            const socialLifestyleScore =
+                Number(
+                    button.dataset.lifestyle
+                );
+
+            const relationshipPaceScore =
+                Number(
+                    button.dataset.pace
+                );
+
+            const personalityScore =
+                Number(
+                    button.dataset.personality
+                );
+
+            const weekendScore =
+                Number(
+                    button.dataset.weekend
+                );
+
+            if (
+                !Number.isFinite(
+                    compatibilityScore
+                )
+            ) {
+
+                throw new Error(
+                    "Compatibility score is missing."
+                );
+
+            }
+
+            /* ==============================
+               INSERT APPROVED MATCH
+            ============================== */
+
+            const {
+                data,
+                error
+            } =
+                await supabaseClient
+                    .from("approved_matches")
+                    .insert([{
+
+                        person_a_id:
+                            personAId,
+
+                        person_b_id:
+                            personBId,
+
+                        compatibility_score:
+                            compatibilityScore,
+
+                        relationship_goals_score:
+                            relationshipGoalsScore,
+
+                        faith_score:
+                            faithScore,
+
+                        communication_score:
+                            communicationScore,
+
+                        social_lifestyle_score:
+                            socialLifestyleScore,
+
+                        relationship_pace_score:
+                            relationshipPaceScore,
+
+                        personality_score:
+                            personalityScore,
+
+                        weekend_score:
+                            weekendScore
+
+                    }])
+                    .select();
+
+            if (error) {
+
+                console.error(
+                    "APPROVAL ERROR:",
+                    error
+                );
+
+                throw new Error(
+                    error.message ||
+                    "Unknown database error."
+                );
+
+            }
+
+            console.log(
+                "MATCH APPROVED:",
+                data
+            );
+
+            /* ==============================
+               SUCCESS
+            ============================== */
+
+            button.textContent =
+                "✓ Match Approved";
+
+            button.style.background =
+                "#24563e";
+
+            matchingStatus.textContent =
+                "Match approved";
+
+            matchingStatusDescription.textContent =
+                "The match has been saved for the email preparation stage. No emails have been sent.";
+
+        } catch (error) {
+
+            console.error(
+                "APPROVAL EXCEPTION:",
+                error
+            );
+
+            alert(
+                "Approval failed: " +
+                (
+                    error.message ||
+                    "Unknown error."
+                )
+            );
+
+            button.disabled =
+                false;
+
+            button.textContent =
+                "Approve Match →";
+
         }
-    );
+
+    }
+);
+
 /* ==============================
    PREPARE EMAILS
 ============================== */

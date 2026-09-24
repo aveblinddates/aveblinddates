@@ -917,133 +917,53 @@ LOAD ELIGIBLE POOL
 
 async function loadPool() {
 
-participantCount.textContent =
-    "…";
+    participantCount.textContent = "…";
+    maleCount.textContent = "…";
+    femaleCount.textContent = "…";
 
-maleCount.textContent =
-    "…";
+    try {
 
-femaleCount.textContent =
-    "…";
+        const { data, error } =
+            await supabaseClient.rpc(
+                "get_admin_pool_stats"
+            );
 
-/*
-   IMPORTANT:
+        if (error) {
+            throw error;
+        }
 
-   Use the SAME eligibility rules as the SQL
-   matching system.
+        if (!data || data.length === 0) {
+            throw new Error(
+                "No pool statistics were returned."
+            );
+        }
 
-   This prevents the dashboard from showing
-   a different participant count than matching.
-*/
+        const stats = data[0];
 
-const start =
-    new Date();
+        participantCount.textContent =
+            Number(stats.participant_count);
 
-start.setDate(1);
+        maleCount.textContent =
+            Number(stats.male_count);
 
-start.setHours(
-    0,
-    0,
-    0,
-    0
-);
+        femaleCount.textContent =
+            Number(stats.female_count);
 
-const end =
-    new Date(start);
+    } catch (error) {
 
-end.setMonth(
-    end.getMonth() + 1
-);
-
-const {
-    data,
-    error
-} =
-    await supabaseClient
-        .from("profiles")
-        .select(
-            "id, gender, your_age, min_age, max_age, created_at"
-        )
-        .gte(
-            "created_at",
-            start.toISOString()
-        )
-        .lt(
-            "created_at",
-            end.toISOString()
-        )
-        .in(
-            "gender",
-            [
-                "male",
-                "female"
-            ]
-        )
-        .not(
-            "your_age",
-            "is",
-            null
-        )
-        .not(
-            "min_age",
-            "is",
-            null
-        )
-        .not(
-            "max_age",
-            "is",
-            null
+        console.error(
+            "POOL STATS ERROR:",
+            error
         );
 
-if (error) {
+        participantCount.textContent = "—";
+        maleCount.textContent = "—";
+        femaleCount.textContent = "—";
 
-    console.error(
-        "POOL ERROR:",
-        error
-    );
-
-    participantCount.textContent =
-        "—";
-
-    maleCount.textContent =
-        "—";
-
-    femaleCount.textContent =
-        "—";
-
-    return;
+    }
 
 }
 
-const profiles =
-    data || [];
-
-const males =
-    profiles.filter(
-        profile =>
-            String(profile.gender)
-                .toLowerCase()
-            === "male"
-    );
-
-const females =
-    profiles.filter(
-        profile =>
-            String(profile.gender)
-                .toLowerCase()
-            === "female"
-    );
-
-participantCount.textContent =
-    profiles.length;
-
-maleCount.textContent =
-    males.length;
-
-femaleCount.textContent =
-    females.length;
-
-}
 /* =========================================================
 REFRESH POOL
 ========================================================= */

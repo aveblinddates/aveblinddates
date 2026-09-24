@@ -556,7 +556,10 @@ MOBILE
     Eligible female participants.
 </div>
 
-</div> </div> </section> <!-- ========================================================= MATCHING ========================================================= --> <section class="admin-section"> <div class="admin-section-title">
+</div> </div> </section> 
+    
+    <!-- ========================================================= MATCHING ========================================================= --> 
+    <section class="admin-section"> <div class="admin-section-title">
 <h2>
     Matching
 </h2>
@@ -1139,132 +1142,410 @@ matchesContainer.innerHTML =
     ).join("");
 
 }
-/* =========================================================
-GENERATE MATCHES
-========================================================= */
+/* ==============================
+   START MATCHING
+============================== */
 
 startMatchingButton.addEventListener(
-"click",
-async () => {
+    "click",
+    async function() {
 
-    hideMatchingError();
-
-    startMatchingButton.disabled =
-        true;
-
-    refreshPoolButton.disabled =
-        true;
-
-    startMatchingButton.textContent =
-        "Generating...";
-
-    matchingStatus.textContent =
-        "Generating matches";
-
-    matchingStatusDescription.textContent =
-        "Running the existing monthly matching function.";
-
-    matchesContainer.className =
-        "matches-placeholder";
-
-    matchesContainer.innerHTML = `
-        <span>♡</span>
-        Generating proposed matches...
-    `;
-
-    try {
-
-        /*
-         * IMPORTANT:
-         *
-         * This calls your EXISTING SQL function.
-         *
-         * We are not changing the algorithm here.
-         */
-
-        const result =
-            await supabaseClient.rpc(
-                "preview_monthly_pairs"
+        const confirmed =
+            confirm(
+                "Start the monthly matching run?\n\n" +
+                "This will generate proposed matches for the current participant pool."
             );
 
-        if (result.error) {
-
-            console.error(
-                "MATCHING RPC ERROR:",
-                result.error
-            );
-
-            throw new Error(
-                result.error.message ||
-                "The matching function failed."
-            );
-
+        if (!confirmed) {
+            return;
         }
 
-        const matches =
-            Array.isArray(result.data)
-                ? result.data
-                : [];
+        startMatchingButton.disabled =
+            true;
 
-        renderMatches(
-            matches
-        );
+        startMatchingButton.textContent =
+            "Matching...";
 
         matchingStatus.textContent =
-            "Matches generated";
+            "Running matching engine";
 
         matchingStatusDescription.textContent =
-            matches.length +
-            " proposed match" +
-            (
-                matches.length === 1
-                    ? ""
-                    : "es"
-            ) +
-            " generated.";
-
-    } catch (error) {
-
-        console.error(
-            "MATCHING ERROR:",
-            error
-        );
-
-        matchingStatus.textContent =
-            "Matching failed";
-
-        matchingStatusDescription.textContent =
-            "The matching function could not be completed.";
+            "Generating matches for the current monthly participant pool.";
 
         matchesContainer.className =
             "matches-placeholder";
 
         matchesContainer.innerHTML = `
-            <span>!</span>
-            Matching failed.
+
+            <span>♡</span>
+
+            Running the matching engine...
+
         `;
 
-        showMatchingError(
-            error.message ||
-            "Unknown matching error."
-        );
+        try {
 
-    } finally {
+            /* ==============================
+               RUN ACTUAL MATCHING ENGINE
+            ============================== */
 
-        startMatchingButton.disabled =
-            false;
+            const {
+                data: runId,
+                error: runError
+            } =
+                await supabaseClient
+                    .rpc(
+                        "run_monthly_matching"
+                    );
 
-        refreshPoolButton.disabled =
-            false;
+            if (runError) {
 
-        startMatchingButton.textContent =
-            "Generate Matches →";
+                console.error(
+                    "MATCHING RUN ERROR:",
+                    runError
+                );
+
+                throw new Error(
+                    runError.message ||
+                    "The matching engine failed."
+                );
+
+            }
+
+            if (!runId) {
+
+                throw new Error(
+                    "The matching engine completed but did not return a run ID."
+                );
+
+            }
+
+            console.log(
+                "MATCHING RUN CREATED:",
+                runId
+            );
+
+
+            /* ==============================
+               LOAD MATCHES FROM THIS RUN
+            ============================== */
+
+            const {
+                data: matches,
+                error: matchesError
+            } =
+                await supabaseClient
+                    .from("matches")
+                    .select(`
+                        id,
+                        matching_run_id,
+                        person_a_id,
+                        person_b_id,
+                        compatibility_score,
+                        relationship_goals_score,
+                        faith_score,
+                        communication_score,
+                        social_lifestyle_score,
+                        relationship_pace_score,
+                        personality_score,
+                        weekend_score,
+                        status
+                    `)
+                    .eq(
+                        "matching_run_id",
+                        runId
+                    )
+                    .order(
+                        "compatibility_score",
+                        {
+                            ascending: false
+                        }
+                    );
+
+            if (matchesError) {
+
+                console.error(
+                    "MATCH LOAD ERROR:",
+                    matchesError
+                );
+
+                throw new Error(
+                    matchesError.message ||
+                    "The matching run completed but the matches could not be loaded."
+                );
+
+            }
+
+
+            /* ==============================
+               GET PARTICIPANT IDS
+            ============================== */
+
+            const participantIds =
+                [];
+
+            (matches || []).forEach(
+                function(match) {
+
+                    if (
+                        !participantIds.includes(
+                            match.person_a_id
+                        )
+                    ) {
+
+                        participantIds.push(
+                            match.person_a_id
+                        );
+
+                    }
+
+                    if (
+                        !participantIds.includes(
+                            match.person_b_id
+                        )
+                    ) {
+
+                        participantIds.push(
+                            match.person_b_id
+                        );
+
+                    }
+
+                }
+            );
+
+
+            /* ==============================
+               LOAD PARTICIPANT NAMES
+            ============================== */
+
+            let profiles =
+                [];
+
+            if (
+                participantIds.length > 0
+            ) {
+
+                const {
+                    data: profileData,
+                    error: profileError
+                } =
+                    await supabaseClient
+                        .from("profiles")
+                        .select(
+                            "id, name"
+                        )
+                        .in(
+                            "id",
+                            participantIds
+                        );
+
+                if (profileError) {
+
+                    console.error(
+                        "PROFILE LOAD ERROR:",
+                        profileError
+                    );
+
+                    throw new Error(
+                        profileError.message ||
+                        "The matches were created but participant names could not be loaded."
+                    );
+
+                }
+
+                profiles =
+                    profileData || [];
+
+            }
+
+
+            /* ==============================
+               CREATE NAME LOOKUP
+            ============================== */
+
+            const profileMap =
+                new Map();
+
+            profiles.forEach(
+                function(profile) {
+
+                    profileMap.set(
+                        profile.id,
+                        profile.name
+                    );
+
+                }
+            );
+
+
+            /* ==============================
+               ADD NAMES TO MATCHES
+            ============================== */
+
+            const matchesWithNames =
+                (matches || []).map(
+                    function(match) {
+
+                        return {
+
+                            ...match,
+
+                            person_a_name:
+                                profileMap.get(
+                                    match.person_a_id
+                                ) ||
+                                "Unknown participant",
+
+                            person_b_name:
+                                profileMap.get(
+                                    match.person_b_id
+                                ) ||
+                                "Unknown participant"
+
+                        };
+
+                    }
+                );
+
+
+            /* ==============================
+               DISPLAY MATCHES
+            ============================== */
+
+            renderMatches(
+                matchesWithNames
+            );
+
+
+            /* ==============================
+               UPDATE STATUS
+            ============================== */
+
+            if (
+                matchesWithNames.length > 0
+            ) {
+
+                matchingStatus.textContent =
+                    "Matching completed";
+
+                matchingStatusDescription.textContent =
+                    matchesWithNames.length +
+                    " proposed match" +
+                    (
+                        matchesWithNames.length === 1
+                            ? ""
+                            : "es"
+                    ) +
+                    " generated and saved for manual review.";
+
+            } else {
+
+                matchingStatus.textContent =
+                    "No matches generated";
+
+                matchingStatusDescription.textContent =
+                    "The matching engine completed, but no eligible matches were created.";
+
+            }
+
+
+            /* ==============================
+               LOAD RUN SUMMARY
+            ============================== */
+
+            const {
+                data: runInfo,
+                error: runInfoError
+            } =
+                await supabaseClient
+                    .from("matching_runs")
+                    .select(`
+                        id,
+                        status,
+                        participant_count,
+                        match_count,
+                        started_at,
+                        completed_at
+                    `)
+                    .eq(
+                        "id",
+                        runId
+                    )
+                    .maybeSingle();
+
+            if (
+                !runInfoError &&
+                runInfo
+            ) {
+
+                matchingStatusDescription.textContent =
+                    runInfo.match_count +
+                    " proposed match" +
+                    (
+                        runInfo.match_count === 1
+                            ? ""
+                            : "es"
+                    ) +
+                    " generated for " +
+                    runInfo.participant_count +
+                    " eligible participant" +
+                    (
+                        runInfo.participant_count === 1
+                            ? ""
+                            : "s"
+                    ) +
+                    ".";
+
+            }
+
+        } catch (error) {
+
+            console.error(
+                "MATCHING EXCEPTION:",
+                error
+            );
+
+            matchingStatus.textContent =
+                "Matching failed";
+
+            matchingStatusDescription.textContent =
+                error.message ||
+                "Something went wrong while running the matching engine.";
+
+            matchesContainer.className =
+                "matches-placeholder";
+
+            matchesContainer.innerHTML = `
+
+                <span>!</span>
+
+                Matching failed.
+
+                <br><br>
+
+                ${escapeHtml(
+                    error.message ||
+                    "Unknown error."
+                )}
+
+            `;
+
+        } finally {
+
+            startMatchingButton.disabled =
+                false;
+
+            startMatchingButton.textContent =
+                "Start Matching →";
+
+        }
 
     }
-
-}
-
 );
+
+
+
 /* =========================================================
 PREPARE EMAILS
 ========================================================= */

@@ -1007,28 +1007,40 @@ return `
 
 }
 /* =========================================================
-RENDER MATCHES + APPROVAL
+RENDER MATCHES + APPROVAL / UNAPPROVAL
 ========================================================= */
 
-async function approveMatch(matchId, button) {
+
+/* =========================================================
+APPROVE MATCH
+========================================================= */
+
+async function approveMatch(
+    matchId,
+    button
+) {
 
     const confirmed =
         confirm(
             "Approve this match?\n\n" +
-            "Once approved, it will become available for email draft preparation."
+            "This will make the match available " +
+            "for email draft preparation."
         );
 
     if (!confirmed) {
         return;
     }
 
-    button.disabled = true;
-    button.textContent = "Approving...";
+    button.disabled =
+        true;
+
+    button.textContent =
+        "Approving...";
 
     try {
 
         /* ==============================
-           GET THE MATCH
+           LOAD MATCH
         ============================== */
 
         const {
@@ -1050,7 +1062,10 @@ async function approveMatch(matchId, button) {
                     personality_score,
                     weekend_score
                 `)
-                .eq("id", matchId)
+                .eq(
+                    "id",
+                    matchId
+                )
                 .single();
 
         if (matchError) {
@@ -1058,14 +1073,50 @@ async function approveMatch(matchId, button) {
         }
 
         if (!match) {
+
             throw new Error(
                 "The match could not be found."
             );
+
         }
 
 
         /* ==============================
-           SAVE APPROVED MATCH
+           CHECK IF ALREADY APPROVED
+        ============================== */
+
+        const {
+            data: existingApproval,
+            error: existingApprovalError
+        } =
+            await supabaseClient
+                .from("approved_matches")
+                .select("id")
+                .eq(
+                    "person_a_id",
+                    match.person_a_id
+                )
+                .eq(
+                    "person_b_id",
+                    match.person_b_id
+                )
+                .maybeSingle();
+
+        if (existingApprovalError) {
+            throw existingApprovalError;
+        }
+
+        if (existingApproval) {
+
+            throw new Error(
+                "This match has already been approved."
+            );
+
+        }
+
+
+        /* ==============================
+           CREATE APPROVAL RECORD
         ============================== */
 
         const {
@@ -1137,16 +1188,29 @@ async function approveMatch(matchId, button) {
 
         if (statusError) {
 
-            console.error(
-                "MATCH STATUS UPDATE ERROR:",
-                statusError
-            );
-
             /*
-             * The approved_matches record was already
-             * created, so we don't treat this as a
-             * complete failure.
+             * The approval record was created, but
+             * the original match could not be updated.
+             *
+             * Attempt to clean up the approval so the
+             * database does not get left in an
+             * inconsistent state.
              */
+
+            await supabaseClient
+                .from("approved_matches")
+                .delete()
+                .eq(
+                    "person_a_id",
+                    match.person_a_id
+                )
+                .eq(
+                    "person_b_id",
+                    match.person_b_id
+                );
+
+            throw statusError;
+
         }
 
 
@@ -1154,62 +1218,44 @@ async function approveMatch(matchId, button) {
            UPDATE BUTTON
         ============================== */
 
-        button.disabled = true;
+        button.disabled =
+            false;
 
         button.textContent =
-            "✓ Match Approved";
+            "Unapprove Match";
 
-        button.style.background =
-            "#c89d4c";
+        button.classList.remove(
+            "primary-admin-button"
+        );
 
-        button.style.color =
-            "white";
-
-        button.style.cursor =
-            "default";
+        button.classList.add(
+            "secondary-admin-button"
+        );
 
 
         /* ==============================
-           UPDATE MATCH CARD
+           UPDATE CARD
         ============================== */
 
-        const card =
-            button.closest(".match-card");
+        updateMatchCard(
+            button,
+            true
+        );
 
-        if (card) {
 
-            const label =
-                card.querySelector(
-                    ".match-status-label"
+        /* ==============================
+           CHANGE BUTTON ACTION
+        ============================== */
+
+        button.onclick =
+            function() {
+
+                unapproveMatch(
+                    matchId,
+                    button
                 );
 
-            if (label) {
-
-                label.textContent =
-                    "APPROVED MATCH";
-
-                label.style.color =
-                    "#173c2b";
-
-            }
-
-            const footer =
-                card.querySelector(
-                    ".match-card-footer"
-                );
-
-            if (footer) {
-
-                footer.innerHTML = `
-                    This match has been
-                    <strong>approved</strong>.
-                    You can now prepare the
-                    email drafts below.
-                `;
-
-            }
-
-        }
+            };
 
     } catch (error) {
 
@@ -1234,7 +1280,311 @@ async function approveMatch(matchId, button) {
 }
 
 
-function renderMatches(matches) {
+/* =========================================================
+UNAPPROVE MATCH
+========================================================= */
+
+async function unapproveMatch(
+    matchId,
+    button
+) {
+
+    const confirmed =
+        confirm(
+            "Unapprove this match?\n\n" +
+            "It will be removed from the approved matches " +
+            "and will no longer be included when preparing " +
+            "email drafts."
+        );
+
+    if (!confirmed) {
+        return;
+    }
+
+    button.disabled =
+        true;
+
+    button.textContent =
+        "Unapproving...";
+
+    try {
+
+        /* ==============================
+           LOAD ORIGINAL MATCH
+        ============================== */
+
+        const {
+            data: match,
+            error: matchError
+        } =
+            await supabaseClient
+                .from("matches")
+                .select(`
+                    id,
+                    person_a_id,
+                    person_b_id
+                `)
+                .eq(
+                    "id",
+                    matchId
+                )
+                .single();
+
+        if (matchError) {
+            throw matchError;
+        }
+
+        if (!match) {
+
+            throw new Error(
+                "The match could not be found."
+            );
+
+        }
+
+
+        /* ==============================
+           CHECK FOR EMAILS / SENT STATUS
+        ============================== */
+
+        const {
+            data: approval,
+            error: approvalLookupError
+        } =
+            await supabaseClient
+                .from("approved_matches")
+                .select(`
+                    id,
+                    status
+                `)
+                .eq(
+                    "person_a_id",
+                    match.person_a_id
+                )
+                .eq(
+                    "person_b_id",
+                    match.person_b_id
+                )
+                .maybeSingle();
+
+        if (approvalLookupError) {
+            throw approvalLookupError;
+        }
+
+        if (!approval) {
+
+            /*
+             * The approval record is already gone.
+             * We can safely make sure the original
+             * match is marked proposed.
+             */
+
+        } else if (
+            approval.status === "emailed"
+        ) {
+
+            throw new Error(
+                "This match has already been marked as emailed. " +
+                "It cannot be unapproved from the admin page."
+            );
+
+        }
+
+
+        /* ==============================
+           REMOVE APPROVAL RECORD
+        ============================== */
+
+        if (approval) {
+
+            const {
+                error: deleteError
+            } =
+                await supabaseClient
+                    .from("approved_matches")
+                    .delete()
+                    .eq(
+                        "id",
+                        approval.id
+                    );
+
+            if (deleteError) {
+                throw deleteError;
+            }
+
+        }
+
+
+        /* ==============================
+           RETURN MATCH TO PROPOSED
+        ============================== */
+
+        const {
+            error: statusError
+        } =
+            await supabaseClient
+                .from("matches")
+                .update({
+                    status: "proposed"
+                })
+                .eq(
+                    "id",
+                    matchId
+                );
+
+        if (statusError) {
+            throw statusError;
+        }
+
+
+        /* ==============================
+           UPDATE BUTTON
+        ============================== */
+
+        button.disabled =
+            false;
+
+        button.textContent =
+            "Approve Match →";
+
+        button.classList.remove(
+            "secondary-admin-button"
+        );
+
+        button.classList.add(
+            "primary-admin-button"
+        );
+
+
+        /* ==============================
+           UPDATE CARD
+        ============================== */
+
+        updateMatchCard(
+            button,
+            false
+        );
+
+
+        /* ==============================
+           CHANGE BUTTON ACTION
+        ============================== */
+
+        button.onclick =
+            function() {
+
+                approveMatch(
+                    matchId,
+                    button
+                );
+
+            };
+
+    } catch (error) {
+
+        console.error(
+            "UNAPPROVE MATCH ERROR:",
+            error
+        );
+
+        button.disabled =
+            false;
+
+        button.textContent =
+            "Unapprove Match";
+
+        alert(
+            error.message ||
+            "Unable to unapprove this match."
+        );
+
+    }
+
+}
+
+
+/* =========================================================
+UPDATE MATCH CARD AFTER APPROVAL CHANGE
+========================================================= */
+
+function updateMatchCard(
+    button,
+    approved
+) {
+
+    const card =
+        button.closest(
+            ".match-card"
+        );
+
+    if (!card) {
+        return;
+    }
+
+
+    /* ==============================
+       STATUS LABEL
+    ============================== */
+
+    const label =
+        card.querySelector(
+            ".match-status-label"
+        );
+
+    if (label) {
+
+        label.textContent =
+            approved
+                ? "APPROVED MATCH"
+                : "PROPOSED MATCH";
+
+        label.style.color =
+            approved
+                ? "#173c2b"
+                : "#9c7438";
+
+    }
+
+
+    /* ==============================
+       FOOTER
+    ============================== */
+
+    const footer =
+        card.querySelector(
+            ".match-card-footer"
+        );
+
+    if (footer) {
+
+        footer.innerHTML =
+            approved
+
+                ? `
+                    This match has been
+                    <strong>approved</strong>.
+                    Email drafts can now
+                    be prepared.
+                `
+
+                : `
+                    This is a proposed match.
+                    It has not been approved and
+                    no email has been sent.
+                `;
+
+    }
+
+}
+
+
+/* =========================================================
+RENDER MATCHES
+========================================================= */
+
+function renderMatches(
+    matches
+) {
 
     if (
         !Array.isArray(matches) ||
@@ -1253,7 +1603,8 @@ function renderMatches(matches) {
 
     }
 
-    matchesContainer.className = "";
+    matchesContainer.className =
+        "";
 
     matchesContainer.innerHTML =
         matches.map(
@@ -1274,7 +1625,9 @@ function renderMatches(matches) {
 
                 return `
 
-                    <div class="match-card">
+                    <div
+                        class="match-card"
+                    >
 
                         <div
                             class="match-status-label"
@@ -1284,19 +1637,29 @@ function renderMatches(matches) {
                                 font-weight:bold;
                                 letter-spacing:2px;
                                 text-transform:uppercase;
-                                color:${isApproved ? "#173c2b" : "#9c7438"};
+                                color:${
+                                    isApproved
+                                        ? "#173c2b"
+                                        : "#9c7438"
+                                };
                                 margin-bottom:10px;
                             "
                         >
-                            ${isApproved
-                                ? "APPROVED MATCH"
-                                : "PROPOSED MATCH"
+                            ${
+                                isApproved
+                                    ? "APPROVED MATCH"
+                                    : "PROPOSED MATCH"
                             }
                         </div>
 
-                        <div class="match-card-header">
 
-                            <div class="match-card-names">
+                        <div
+                            class="match-card-header"
+                        >
+
+                            <div
+                                class="match-card-names"
+                            >
 
                                 ${escapeHtml(
                                     match.person_a_name
@@ -1310,7 +1673,10 @@ function renderMatches(matches) {
 
                             </div>
 
-                            <div class="match-score">
+
+                            <div
+                                class="match-score"
+                            >
 
                                 ${scoreText}%
 
@@ -1318,7 +1684,10 @@ function renderMatches(matches) {
 
                         </div>
 
-                        <div class="score-grid">
+
+                        <div
+                            class="score-grid"
+                        >
 
                             ${scoreBox(
                                 "Goals",
@@ -1357,7 +1726,10 @@ function renderMatches(matches) {
 
                         </div>
 
-                        <div class="admin-actions">
+
+                        <div
+                            class="admin-actions"
+                        >
 
                             <button
                                 type="button"
@@ -1369,32 +1741,39 @@ function renderMatches(matches) {
                                 data-match-id="${escapeHtml(
                                     match.id
                                 )}"
-                                ${isApproved ? "disabled" : ""}
                             >
+
                                 ${
                                     isApproved
-                                        ? "✓ Match Approved"
+                                        ? "Unapprove Match"
                                         : "Approve Match →"
                                 }
+
                             </button>
 
                         </div>
 
-                        <div class="match-card-footer">
+
+                        <div
+                            class="match-card-footer"
+                        >
 
                             ${
                                 isApproved
+
                                     ? `
                                         This match has been
                                         <strong>approved</strong>.
-                                        You can now prepare
-                                        the email drafts below.
+                                        Email drafts can now
+                                        be prepared.
                                     `
+
                                     : `
                                         This is a proposed match.
                                         It has not been approved
                                         and no email has been sent.
                                     `
+
                             }
 
                         </div>
@@ -1408,7 +1787,7 @@ function renderMatches(matches) {
 
 
     /* ==============================
-       APPROVE BUTTON LISTENERS
+       BUTTON LISTENERS
     ============================== */
 
     const approveButtons =
@@ -1419,22 +1798,47 @@ function renderMatches(matches) {
     approveButtons.forEach(
         button => {
 
-            button.addEventListener(
-                "click",
-                () => {
+            const matchId =
+                button.dataset.matchId;
 
-                    approveMatch(
-                        button.dataset.matchId,
-                        button
+            const isApproved =
+                button.textContent
+                    .trim()
+                    .startsWith(
+                        "Unapprove"
                     );
 
-                }
-            );
+            if (isApproved) {
+
+                button.onclick =
+                    function() {
+
+                        unapproveMatch(
+                            matchId,
+                            button
+                        );
+
+                    };
+
+            } else {
+
+                button.onclick =
+                    function() {
+
+                        approveMatch(
+                            matchId,
+                            button
+                        );
+
+                    };
+
+            }
 
         }
     );
 
 }
+
 
 /* ==============================
    START MATCHING

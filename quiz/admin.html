@@ -781,65 +781,67 @@
 
         </section>
 
-        <!-- ==============================
-             EMAILS
-        ============================== -->
+       <!-- ==============================
+     EMAILS
+============================== -->
 
-        <section class="admin-section">
+<section class="admin-section">
 
-            <div class="admin-section-title">
+    <div class="admin-section-title">
 
-                <h2>
-                    Emails
-                </h2>
+        <h2>
+            Emails
+        </h2>
 
-            </div>
+    </div>
 
-            <p class="section-description">
-                Email preparation and sending will be
-                connected after the matching system has
-                been tested. No participant emails can
-                be sent from this version of the dashboard.
-            </p>
+    <p class="section-description">
+        Prepare personalized emails for approved matches.
+        Preparing emails does not send anything. All emails
+        must be reviewed before sending is enabled.
+    </p>
 
-            <div class="status-box">
+    <div class="status-box">
 
-                <div class="status-label">
-                    Email Status
-                </div>
+        <div class="status-label">
+            Email Status
+        </div>
 
-                <div class="status-value">
-                    Not Ready
-                </div>
+        <div
+            id="emailStatus"
+            class="status-value"
+        >
+            Not Prepared
+        </div>
 
-                <div class="status-description">
-                    Complete and approve the matching system
-                    before enabling personalized email delivery.
-                </div>
+        <div
+            id="emailStatusDescription"
+            class="status-description"
+        >
+            No email drafts have been prepared yet.
+        </div>
 
-            </div>
+    </div>
 
-            <div class="admin-actions">
+    <div class="admin-actions">
 
-                <button
-                    type="button"
-                    class="admin-button secondary-admin-button"
-                    disabled
-                >
-                    Prepare Emails
-                </button>
+        <button
+            id="prepareEmailsButton"
+            type="button"
+            class="admin-button primary-admin-button"
+        >
+            Prepare Emails →
+        </button>
 
-                <button
-                    type="button"
-                    class="admin-button primary-admin-button"
-                    disabled
-                >
-                    Send All Emails
-                </button>
+    </div>
 
-            </div>
+    <div
+        id="emailPreviewContainer"
+        style="margin-top: 30px;"
+    ></div>
 
-        </section>
+</section>
+
 
         <!-- ==============================
              SAFETY NOTICE
@@ -970,6 +972,25 @@
         document.getElementById(
             "refreshPoolButton"
         );
+const emailStatus =
+    document.getElementById(
+        "emailStatus"
+    );
+
+const emailStatusDescription =
+    document.getElementById(
+        "emailStatusDescription"
+    );
+
+const prepareEmailsButton =
+    document.getElementById(
+        "prepareEmailsButton"
+    );
+
+const emailPreviewContainer =
+    document.getElementById(
+        "emailPreviewContainer"
+    );
 
     /* ==============================
        ESCAPE HTML
@@ -1673,6 +1694,309 @@
 
         }
     );
+/* ==============================
+   PREPARE EMAILS
+============================== */
+
+async function prepareEmails() {
+
+    emailStatus.textContent =
+        "Preparing...";
+
+    emailStatusDescription.textContent =
+        "Loading approved matches and generating email drafts.";
+
+    emailPreviewContainer.innerHTML = "";
+
+    prepareEmailsButton.disabled = true;
+
+    prepareEmailsButton.textContent =
+        "Preparing...";
+
+    try {
+
+        const {
+            data,
+            error
+        } =
+            await supabaseClient.rpc(
+                "preview_approved_match_emails"
+            );
+
+        if (error) {
+
+            console.error(
+                "EMAIL PREPARATION ERROR:",
+                error
+            );
+
+            emailStatus.textContent =
+                "Preparation Failed";
+
+            emailStatusDescription.textContent =
+                error.message ||
+                "Unable to prepare emails.";
+
+            prepareEmailsButton.disabled = false;
+
+            prepareEmailsButton.textContent =
+                "Prepare Emails →";
+
+            return;
+
+        }
+
+        const emails =
+            data || [];
+
+        if (emails.length === 0) {
+
+            emailStatus.textContent =
+                "No Emails";
+
+            emailStatusDescription.textContent =
+                "There are no approved matches ready for email preparation.";
+
+            prepareEmailsButton.disabled = false;
+
+            prepareEmailsButton.textContent =
+                "Prepare Emails →";
+
+            return;
+
+        }
+
+        emailStatus.textContent =
+            "Ready for Review";
+
+        emailStatusDescription.textContent =
+            emails.length +
+            " email draft pair" +
+            (emails.length === 1 ? "" : "s") +
+            " prepared. Nothing has been sent.";
+
+        emails.forEach(
+            function(email) {
+
+                const card =
+                    document.createElement(
+                        "div"
+                    );
+
+                card.style.background =
+                    "#f7f3eb";
+
+                card.style.border =
+                    "1px solid rgba(23, 60, 43, .12)";
+
+                card.style.padding =
+                    "30px";
+
+                card.style.marginBottom =
+                    "20px";
+
+                card.innerHTML = `
+
+                    <div
+                        style="
+                            font-family: Arial, sans-serif;
+                            font-size: 11px;
+                            font-weight: bold;
+                            letter-spacing: 2px;
+                            text-transform: uppercase;
+                            color: #9c7438;
+                            margin-bottom: 20px;
+                        "
+                    >
+                        EMAIL DRAFTS
+                    </div>
+
+                    <div
+                        style="
+                            font-family: Arial, sans-serif;
+                            font-size: 14px;
+                            color: #66736b;
+                            margin-bottom: 25px;
+                        "
+                    >
+                        Compatibility:
+                        <strong>
+                            ${Number(
+                                email.compatibility_score
+                            ).toFixed(1)}%
+                        </strong>
+                    </div>
+
+                    <div
+                        style="
+                            border-top: 1px solid rgba(23, 60, 43, .12);
+                            padding-top: 25px;
+                            margin-bottom: 30px;
+                        "
+                    >
+
+                        <h3
+                            style="
+                                color: #173c2b;
+                                margin-bottom: 8px;
+                            "
+                        >
+                            ${escapeHtml(
+                                email.person_a_name
+                            )}
+                        </h3>
+
+                        <p
+                            style="
+                                font-family: Arial, sans-serif;
+                                font-size: 13px;
+                                color: #66736b;
+                                margin-bottom: 15px;
+                            "
+                        >
+                            To:
+                            ${escapeHtml(
+                                email.person_a_email
+                            )}
+                        </p>
+
+                        <p
+                            style="
+                                font-family: Arial, sans-serif;
+                                font-size: 13px;
+                                font-weight: bold;
+                                color: #173c2b;
+                            "
+                        >
+                            ${escapeHtml(
+                                email.person_a_email_subject
+                            )}
+                        </p>
+
+                        <pre
+                            style="
+                                white-space: pre-wrap;
+                                font-family: Arial, sans-serif;
+                                font-size: 14px;
+                                line-height: 1.7;
+                                color: #17251d;
+                                background: white;
+                                padding: 20px;
+                                margin-top: 15px;
+                                border: 1px solid rgba(23, 60, 43, .10);
+                            "
+                        >${escapeHtml(
+                            email.person_a_email_body
+                        )}</pre>
+
+                    </div>
+
+                    <div
+                        style="
+                            border-top: 1px solid rgba(23, 60, 43, .12);
+                            padding-top: 25px;
+                        "
+                    >
+
+                        <h3
+                            style="
+                                color: #173c2b;
+                                margin-bottom: 8px;
+                            "
+                        >
+                            ${escapeHtml(
+                                email.person_b_name
+                            )}
+                        </h3>
+
+                        <p
+                            style="
+                                font-family: Arial, sans-serif;
+                                font-size: 13px;
+                                color: #66736b;
+                                margin-bottom: 15px;
+                            "
+                        >
+                            To:
+                            ${escapeHtml(
+                                email.person_b_email
+                            )}
+                        </p>
+
+                        <p
+                            style="
+                                font-family: Arial, sans-serif;
+                                font-size: 13px;
+                                font-weight: bold;
+                                color: #173c2b;
+                            "
+                        >
+                            ${escapeHtml(
+                                email.person_b_email_subject
+                            )}
+                        </p>
+
+                        <pre
+                            style="
+                                white-space: pre-wrap;
+                                font-family: Arial, sans-serif;
+                                font-size: 14px;
+                                line-height: 1.7;
+                                color: #17251d;
+                                background: white;
+                                padding: 20px;
+                                margin-top: 15px;
+                                border: 1px solid rgba(23, 60, 43, .10);
+                            "
+                        >${escapeHtml(
+                            email.person_b_email_body
+                        )}</pre>
+
+                    </div>
+
+                `;
+
+                emailPreviewContainer.appendChild(
+                    card
+                );
+
+            }
+        );
+
+        prepareEmailsButton.disabled = false;
+
+        prepareEmailsButton.textContent =
+            "Prepare Emails Again →";
+
+    } catch (error) {
+
+        console.error(
+            "EMAIL PREPARATION ERROR:",
+            error
+        );
+
+        emailStatus.textContent =
+            "Preparation Failed";
+
+        emailStatusDescription.textContent =
+            "Something went wrong while preparing the emails.";
+
+        prepareEmailsButton.disabled = false;
+
+        prepareEmailsButton.textContent =
+            "Prepare Emails →";
+
+    }
+
+}
+prepareEmailsButton.addEventListener(
+    "click",
+    function() {
+
+        prepareEmails();
+
+    }
+);
 
     /* ==============================
        START MATCHING

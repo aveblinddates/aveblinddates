@@ -1391,35 +1391,27 @@ refreshPoolButton.addEventListener(
 
 /* ==============================
    START MATCHING
-============================== */
+   ============================== */
 
 startMatchingButton.addEventListener(
     "click",
     async function() {
 
-        startMatchingButton.disabled =
-            true;
+        startMatchingButton.disabled = true;
 
         startMatchingButton.textContent =
-            "Matching...";
-
+            "Generating Matches...";
 
         matchingStatus.textContent =
-            "Generating proposed matches";
-
+            "Matching in progress";
 
         matchingStatusDescription.textContent =
-            "The matching engine is reviewing the current monthly pool.";
-
+            "The current monthly participant pool is being evaluated for eligible matches.";
 
         matchesContainer.innerHTML = `
-
             <span>♡</span>
-
             Generating proposed matches...
-
         `;
-
 
         try {
 
@@ -1427,107 +1419,208 @@ startMatchingButton.addEventListener(
                 data,
                 error
             } =
-                await supabaseClient
-                    .rpc(
-                        "preview_monthly_pairs"
-                    );
-
+                await supabaseClient.rpc(
+                    "preview_monthly_pairs"
+                );
 
             if (error) {
 
                 console.error(
-                    "MATCHING RPC ERROR:",
+                    "MATCHING ERROR:",
                     error
                 );
-
 
                 matchingStatus.textContent =
                     "Matching error";
 
-
                 matchingStatusDescription.textContent =
-                    error.message ||
-                    "The matching engine could not be run.";
-
+                    "The matching function could not be completed.";
 
                 matchesContainer.innerHTML = `
-
                     <span>!</span>
-
-                    We couldn't generate the proposed matches.
-
+                    Something went wrong while generating matches.
                 `;
 
                 return;
 
             }
 
+            const matches =
+                data || [];
 
-            if (
-                !data ||
-                data.length === 0
-            ) {
+            if (matches.length === 0) {
 
                 matchingStatus.textContent =
-                    "No matches found";
-
+                    "No eligible matches";
 
                 matchingStatusDescription.textContent =
                     "There are currently no eligible pairs in the monthly pool.";
 
-
                 matchesContainer.innerHTML = `
-
                     <span>♡</span>
-
-                    No eligible matches were found.
-
+                    No eligible matches found.
                 `;
 
                 return;
 
             }
 
-
             matchingStatus.textContent =
-                data.length +
-                (
-                    data.length === 1
-                        ? " proposed match"
-                        : " proposed matches"
-                );
-
+                `${matches.length} proposed match${matches.length === 1 ? "" : "es"}`;
 
             matchingStatusDescription.textContent =
-                "Review the proposed matches below. Nothing has been approved or emailed.";
+                "These matches are proposals only. Nothing has been approved or emailed.";
 
+            matchesContainer.innerHTML = "";
 
-            renderMatches(
-                data
+            matches.forEach(
+                function(match) {
+
+                    const matchCard =
+                        document.createElement("div");
+
+                    matchCard.style.textAlign =
+                        "left";
+
+                    matchCard.style.padding =
+                        "30px";
+
+                    matchCard.style.background =
+                        "#f7f3eb";
+
+                    matchCard.style.border =
+                        "1px solid rgba(23, 60, 43, .12)";
+
+                    matchCard.style.marginBottom =
+                        "20px";
+
+                    const score =
+                        Number(
+                            match.compatibility_score
+                        ).toFixed(1);
+
+                    matchCard.innerHTML = `
+
+                        <div style="
+                            font-family: Arial, sans-serif;
+                            font-size: 11px;
+                            font-weight: bold;
+                            letter-spacing: 2px;
+                            text-transform: uppercase;
+                            color: #9c7438;
+                            margin-bottom: 10px;
+                        ">
+                            PROPOSED MATCH
+                        </div>
+
+                        <h3 style="
+                            margin: 0 0 10px;
+                            color: #173c2b;
+                            font-size: 28px;
+                        ">
+                            ${escapeHtml(match.person_a_name)}
+                            ×
+                            ${escapeHtml(match.person_b_name)}
+                        </h3>
+
+                        <div style="
+                            font-size: 34px;
+                            color: #173c2b;
+                            margin-bottom: 20px;
+                        ">
+                            ${score}%
+                            <span style="
+                                font-family: Arial, sans-serif;
+                                font-size: 13px;
+                                color: #66736b;
+                            ">
+                                compatibility
+                            </span>
+                        </div>
+
+                        <div style="
+                            display: grid;
+                            grid-template-columns:
+                                repeat(2, minmax(0, 1fr));
+                            gap: 10px;
+                            font-family: Arial, sans-serif;
+                            font-size: 13px;
+                            color: #536158;
+                        ">
+
+                            <div>
+                                <strong>Goals:</strong>
+                                ${Number(match.relationship_goals_score).toFixed(1)}%
+                            </div>
+
+                            <div>
+                                <strong>Faith:</strong>
+                                ${Number(match.faith_score).toFixed(1)}%
+                            </div>
+
+                            <div>
+                                <strong>Communication:</strong>
+                                ${Number(match.communication_score).toFixed(1)}%
+                            </div>
+
+                            <div>
+                                <strong>Lifestyle:</strong>
+                                ${Number(match.social_lifestyle_score).toFixed(1)}%
+                            </div>
+
+                            <div>
+                                <strong>Pace:</strong>
+                                ${Number(match.relationship_pace_score).toFixed(1)}%
+                            </div>
+
+                            <div>
+                                <strong>Personality:</strong>
+                                ${Number(match.personality_score).toFixed(1)}%
+                            </div>
+
+                            <div>
+                                <strong>Weekend:</strong>
+                                ${Number(match.weekend_score).toFixed(1)}%
+                            </div>
+
+                        </div>
+
+                        <div style="
+                            margin-top: 25px;
+                            padding-top: 20px;
+                            border-top: 1px solid rgba(23, 60, 43, .12);
+                            font-family: Arial, sans-serif;
+                            font-size: 13px;
+                            color: #66736b;
+                        ">
+                            Status: Awaiting administrator approval
+                        </div>
+
+                    `;
+
+                    matchesContainer.appendChild(
+                        matchCard
+                    );
+
+                }
             );
 
         } catch (error) {
 
             console.error(
-                "MATCHING ERROR:",
+                "MATCHING EXCEPTION:",
                 error
             );
-
 
             matchingStatus.textContent =
                 "Matching error";
 
-
             matchingStatusDescription.textContent =
-                "Something went wrong while generating matches.";
-
+                "An unexpected error occurred while generating matches.";
 
             matchesContainer.innerHTML = `
-
                 <span>!</span>
-
-                Something went wrong while generating the matches.
-
+                Something went wrong while generating matches.
             `;
 
         } finally {
@@ -1543,6 +1636,21 @@ startMatchingButton.addEventListener(
     }
 );
 
+
+/* ==============================
+   ESCAPE HTML
+   ============================== */
+
+function escapeHtml(value) {
+
+    return String(value ?? "")
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+
+}
 
 /* ==============================
    RENDER MATCHES
